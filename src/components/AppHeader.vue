@@ -40,7 +40,7 @@ export default{
                             <a class="no-style" href="https://www.lanazione.it/">Area Riservata</a>
                         </li>
                         <li class="nav-link">
-                            <a class="no-style" href="http://localhost:5174/#join_us">Collabora con noi</a>
+                            <a class="no-style" href="#join_us">Collabora con noi</a>
                         </li>
                     </ul>
                 </div>
