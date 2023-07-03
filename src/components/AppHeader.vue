@@ -33,6 +33,15 @@ export default{
                             <router-link :to="{ name: item.routeName }" class="nav-link active" aria-current="page">{{
                                 item.label }}</router-link>
                         </li>
+                        <li>
+                            
+                        </li>
+                        <li class="nav-link">
+                            <a class="no-style" href="https://www.lanazione.it/">Area Riservata</a>
+                        </li>
+                        <li class="nav-link">
+                            <a class="no-style" href="http://localhost:5174/#join_us">Collabora con noi</a>
+                        </li>
                     </ul>
                 </div>
             </div>
