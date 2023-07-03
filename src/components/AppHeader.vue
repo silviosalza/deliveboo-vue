@@ -1,5 +1,5 @@
 <script>
-export default{
+export default {
     name: 'AppHeader',
     data() {
         return {
@@ -14,37 +14,60 @@ export default{
                 },
             ]
         }
-}
+    }
 }
 </script>
 
 <template>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Deliveboo</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
+        <nav class="navbar navbar-expand-lg h-100">
+            <div class="container d-flex justify-content-between align-items-center h-100">
+
+                <div class="logo">
+                    <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png"
+                            alt=""></a>
+                </div>
+
+                <div id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item" v-for="item in menuItems">
-                            <router-link :to="{ name: item.routeName }" class="nav-link active" aria-current="page">{{
+                            <router-link :to="{ name: item.routeName }" aria-current="page">{{
                                 item.label }}</router-link>
                         </li>
-                        <li>
-                            
+                        <li class="nav-item">
+                            <a class="active" href="#join_us">Collabora con noi</a>
                         </li>
-                        <li class="nav-link">
-                            <a class="no-style" href="https://www.lanazione.it/">Area Riservata</a>
-                        </li>
-                        <li class="nav-link">
-                            <a class="no-style" href="#join_us">Collabora con noi</a>
+                        <li class="nav-item">
+                            <a class="active" href="https://www.lanazione.it/">Area Riservata</a>
                         </li>
                     </ul>
                 </div>
+
+
             </div>
         </nav>
     </header>
 </template>
+
+
+<style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
+
+
+header {
+    height: 120px;
+    background-color: $app_color;
+    color: $black_text;
+    font-weight: 900;
+    font-size: 1.5rem;
+
+    li {
+        margin-left: 2rem;
+    }
+}
+
+.logo_header {
+    height: 80px;
+}
+</style>

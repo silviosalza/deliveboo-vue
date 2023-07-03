@@ -23,5 +23,8 @@ export default{
 
 <style lang="scss">
 @use "./styles/general.scss" as *;
+@use "./styles/utilities/variables" as *;
+
+
 
 </style>
