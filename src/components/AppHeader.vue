@@ -28,6 +28,26 @@ export default {
                             alt=""></a>
                 </div>
 
+                <div class="btn-group dropstart d-sm-none">
+                    <button class="btn btn-secondary btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item" v-for="item in menuItems">
+                            <router-link :to="{ name: item.routeName }" aria-current="page">{{
+                            item.label }}</router-link>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a class="active" href="#join_us">Collabora</a>
+                        </li>
+
+                        <li class="dropdown-item">
+                            <a class="active" href="http://localhost:8000/">Area Riservata</a>
+                        </li>
+                    </ul>
+                </div>
+
                 <div id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item" v-for="item in menuItems">
@@ -68,6 +88,29 @@ header {
 }
 
 .logo_header {
+    height: 55px;
+}
+
+#navbarNav {
+    display: none;
+}
+
+// MEDIA QUERIES
+@include media-breakpoint-up(sm) {
+  header {
+    height: 450px; //TEST
+  }
+
+  .logo_header {
     height: 80px;
+  }
+
+  #navbarNav {
+    display: block;
+
+    .btn-group {
+        display: none;
+    }
+  }
 }
 </style>
