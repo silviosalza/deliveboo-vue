@@ -21,12 +21,12 @@
 
             <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>VEGAN</b></button>
 
-            <button type="button" class="btn btn-warning w-100 rounded-0"><b>CERCA</b></button>
+            <button type="button" class="btn btn-warning w-30 rounded-0 m-auto"><b>CERCA</b></button>
         </div>
 
         <div class="container jumbo-bottom-container pb-4">
-            <h4 class="bg-light mb-0 py-1">IL TUO CIBO PREFERITO</h4>
-            <h4 class="bg-warning mb-0 py-1">CON UN TOCCO DEL TUO DITO</h4>
+            <h5 class="bg-light mb-0 py-1">IL TUO CIBO PREFERITO</h5>
+            <h5 class="bg-warning mb-0 py-1">CON UN TOCCO DEL TUO DITO</h5>
         </div>
     </div>
 
