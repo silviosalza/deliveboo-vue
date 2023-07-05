@@ -20,8 +20,8 @@ export default {
 
 <template>
     <header>
-        <nav class="navbar navbar-expand-lg h-100">
-            <div class="container d-flex justify-content-between align-items-center h-100 ph-3 bg-warning">
+        <nav class="navbar navbar-expand-lg h-100 bg-warning">
+            <div class="container d-flex justify-content-between align-items-center h-100 ph-3">
 
                 <div class="logo">
                     <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
@@ -31,17 +31,17 @@ export default {
                     <button class="btn btn-lg border border-2 border-dark rounded py-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item" v-for="item in menuItems">
+                    <ul class="dropdown-menu bg-dark">
+                        <li class="dropdown-item text-warning" v-for="item in menuItems">
                             <router-link :to="{ name: item.routeName }" aria-current="page">{{
                             item.label }}</router-link>
                         </li>
 
-                        <li class="dropdown-item">
+                        <li class="dropdown-item text-warning">
                             <a class="active" href="#join_us">Collabora</a>
                         </li>
 
-                        <li class="dropdown-item">
+                        <li class="dropdown-item text-warning">
                             <a class="active" href="http://localhost:8000/">Area Riservata</a>
                         </li>
                     </ul>
@@ -81,7 +81,7 @@ header {
 
     li {
         // margin-left: 2rem;
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 }
 
@@ -100,16 +100,19 @@ header {
 // MEDIA QUERIES
 @include media-breakpoint-up(sm) {
   header {
-    height: 450px; //TEST
+    //height: 450px; //TEST
   }
 
   .logo_header {
-    height: 80px;
+    height: 65px;
   }
 
   #navbarNav {
     display: block;
 
+    .navbar-nav > li {
+        margin-left: 10px;
+    }
     .btn-group {
         display: none;
         width: unset;
