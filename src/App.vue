@@ -6,25 +6,20 @@ import AppHeader from './components/AppHeader.vue';
 
 
 
-export default{
-    components: { Homepage, RestaurantList, RestaurantMenu, AppHeader }
+export default {
+  components: { Homepage, RestaurantList, RestaurantMenu, AppHeader }
 }
 
 </script>
 
 <template>
-  <AppHeader/>
+  <AppHeader />
   <!-- <HomePage/> -->
   <!-- <ProjectsList/> -->
   <router-view></router-view>
-
-
 </template>
 
 <style lang="scss">
 @use "./styles/general.scss" as *;
 @use "./styles/utilities/variables" as *;
-
-
-
 </style>

@@ -1,231 +1,229 @@
-//CON UN BOTTONE CATTURO CON IL CONSOLE LOG L'ID,IL NOME, L'IMMAGINE E IL PREZZO DEL PIATTO
+var cartId = "cart";
 
-// var cartId = "cart";
 
+var localAdapter = {
 
-// var localAdapter = {
+    saveCart: function (object) {
 
-//     saveCart: function (object) {
+        var stringified = JSON.stringify(object);
+        localStorage.setItem(cartId, stringified);
+        return true;
 
-//         var stringified = JSON.stringify(object);
-//         localStorage.setItem(cartId, stringified);
-//         return true;
+    },
+    getCart: function () {
 
-//     },
-//     getCart: function () {
+        return JSON.parse(localStorage.getItem(cartId));
 
-//         return JSON.parse(localStorage.getItem(cartId));
+    },
+    clearCart: function () {
 
-//     },
-//     clearCart: function () {
+        localStorage.removeItem(cartId);
 
-//         localStorage.removeItem(cartId);
+    }
 
-//     }
+};
 
-// };
+var ajaxAdapter = {
 
-// var ajaxAdapter = {
+    saveCart: function (object) {
 
-//     saveCart: function (object) {
+        var stringified = JSON.stringify(object);
+        // do an ajax request here
 
-//         var stringified = JSON.stringify(object);
-//         // do an ajax request here
+    },
+    getCart: function () {
 
-//     },
-//     getCart: function () {
+        // do an ajax request -- recognize user by cookie / ip / session
+        return JSON.parse(data);
 
-//         // do an ajax request -- recognize user by cookie / ip / session
-//         return JSON.parse(data);
+    },
+    clearCart: function () {
 
-//     },
-//     clearCart: function () {
+        //do an ajax request here
 
-//         //do an ajax request here
+    }
 
-//     }
+};
 
-// };
+var storage = localAdapter;
 
-// var storage = localAdapter;
+var helpers = {
 
-// var helpers = {
+    getHtml: function (id) {
 
-//     getHtml: function (id) {
+        return document.getElementById(id).innerHTML;
 
-//         return document.getElementById(id).innerHTML;
+    },
+    setHtml: function (id, html) {
 
-//     },
-//     setHtml: function (id, html) {
+        document.getElementById(id).innerHTML = html;
+        return true;
 
-//         document.getElementById(id).innerHTML = html;
-//         return true;
+    },
+    itemData: function (object) {
 
-//     },
-//     itemData: function (object) {
+        var count = object.querySelector(".count"),
+            patt = new RegExp("^[1-9]([0-9]+)?$");
+        count.value = (patt.test(count.value) === true) ? parseInt(count.value) : 1;
 
-//         var count = object.querySelector(".count"),
-//             patt = new RegExp("^[1-9]([0-9]+)?$");
-//         count.value = (patt.test(count.value) === true) ? parseInt(count.value) : 1;
+        var item = {
 
-//         var item = {
+            name: object.getAttribute('data-name'),
+            price: object.getAttribute('data-price'),
+            id: object.getAttribute('data-id'),
+            count: count.value,
+            total: parseInt(object.getAttribute('data-price')) * parseInt(count.value)
 
-//             name: object.getAttribute('data-name'),
-//             price: object.getAttribute('data-price'),
-//             id: object.getAttribute('data-id'),
-//             count: count.value,
-//             total: parseInt(object.getAttribute('data-price')) * parseInt(count.value)
+        };
+        return item;
 
-//         };
-//         return item;
+    },
+    updateView: function () {
 
-//     },
-//     updateView: function () {
+        var items = cart.getItems(),
+            template = this.getHtml('cartT'),
+            compiled = _.template(template, {
+                items: items
+            });
+        this.setHtml('cartItems', compiled);
+        this.updateTotal();
 
-//         var items = cart.getItems(),
-//             template = this.getHtml('cartT'),
-//             compiled = _.template(template, {
-//                 items: items
-//             });
-//         this.setHtml('cartItems', compiled);
-//         this.updateTotal();
+    },
+    emptyView: function () {
 
-//     },
-//     emptyView: function () {
+        this.setHtml('cartItems', '<p>Nothing to see here</p>');
+        this.updateTotal();
 
-//         this.setHtml('cartItems', '<p>Nothing to see here</p>');
-//         this.updateTotal();
+    },
+    updateTotal: function () {
 
-//     },
-//     updateTotal: function () {
+        this.setHtml('totalPrice', cart.total + '$');
 
-//         this.setHtml('totalPrice', cart.total + '$');
+    }
 
-//     }
+};
 
-// };
+var cart = {
 
-// var cart = {
+    count: 0,
+    total: 0,
+    items: [],
+    getItems: function () {
 
-//     count: 0,
-//     total: 0,
-//     items: [],
-//     getItems: function () {
+        return this.items;
 
-//         return this.items;
+    },
+    setItems: function (items) {
 
-//     },
-//     setItems: function (items) {
+        this.items = items;
+        for (var i = 0; i < this.items.length; i++) {
+            var _item = this.items[i];
+            this.total += _item.total;
+        }
 
-//         this.items = items;
-//         for (var i = 0; i < this.items.length; i++) {
-//             var _item = this.items[i];
-//             this.total += _item.total;
-//         }
+    },
+    clearItems: function () {
 
-//     },
-//     clearItems: function () {
+        this.items = [];
+        this.total = 0;
+        storage.clearCart();
+        helpers.emptyView();
 
-//         this.items = [];
-//         this.total = 0;
-//         storage.clearCart();
-//         helpers.emptyView();
+    },
+    addItem: function (item) {
 
-//     },
-//     addItem: function (item) {
+        if (this.containsItem(item.id) === false) {
 
-//         if (this.containsItem(item.id) === false) {
+            this.items.push({
+                id: item.id,
+                name: item.name,
+                price: item.price,
+                count: item.count,
+                total: item.price * item.count
+            });
 
-//             this.items.push({
-//                 id: item.id,
-//                 name: item.name,
-//                 price: item.price,
-//                 count: item.count,
-//                 total: item.price * item.count
-//             });
+            storage.saveCart(this.items);
 
-//             storage.saveCart(this.items);
 
+        } else {
 
-//         } else {
+            this.updateItem(item);
 
-//             this.updateItem(item);
+        }
+        this.total += item.price * item.count;
+        this.count += item.count;
+        helpers.updateView();
 
-//         }
-//         this.total += item.price * item.count;
-//         this.count += item.count;
-//         helpers.updateView();
+    },
+    containsItem: function (id) {
 
-//     },
-//     containsItem: function (id) {
+        if (this.items === undefined) {
+            return false;
+        }
 
-//         if (this.items === undefined) {
-//             return false;
-//         }
+        for (var i = 0; i < this.items.length; i++) {
 
-//         for (var i = 0; i < this.items.length; i++) {
+            var _item = this.items[i];
 
-//             var _item = this.items[i];
+            if (id == _item.id) {
+                return true;
+            }
 
-//             if (id == _item.id) {
-//                 return true;
-//             }
+        }
+        return false;
 
-//         }
-//         return false;
+    },
+    updateItem: function (object) {
 
-//     },
-//     updateItem: function (object) {
+        for (var i = 0; i < this.items.length; i++) {
 
-//         for (var i = 0; i < this.items.length; i++) {
+            var _item = this.items[i];
 
-//             var _item = this.items[i];
+            if (object.id === _item.id) {
 
-//             if (object.id === _item.id) {
+                _item.count = parseInt(object.count) + parseInt(_item.count);
+                _item.total = parseInt(object.total) + parseInt(_item.total);
+                this.items[i] = _item;
+                storage.saveCart(this.items);
 
-//                 _item.count = parseInt(object.count) + parseInt(_item.count);
-//                 _item.total = parseInt(object.total) + parseInt(_item.total);
-//                 this.items[i] = _item;
-//                 storage.saveCart(this.items);
+            }
 
-//             }
+        }
 
-//         }
+    }
 
-//     }
+};
 
-// };
+document.addEventListener('DOMContentLoaded', function () {
 
-// document.addEventListener('DOMContentLoaded', function () {
+    if (storage.getCart()) {
 
-//     if (storage.getCart()) {
+        cart.setItems(storage.getCart());
+        helpers.updateView();
 
-//         cart.setItems(storage.getCart());
-//         helpers.updateView();
+    } else {
 
-//     } else {
+        helpers.emptyView();
 
-//         helpers.emptyView();
+    }
+    var products = document.querySelectorAll('.product button');
+    [].forEach.call(products, function (product) {
 
-//     }
-//     var products = document.querySelectorAll('.product button');
-//     [].forEach.call(products, function (product) {
+        product.addEventListener('click', function (e) {
+            console.log('ciao');
+            var item = helpers.itemData(this.parentNode);
+            cart.addItem(item);
 
-//         product.addEventListener('click', function (e) {
 
-//             var item = helpers.itemData(this.parentNode);
-//             cart.addItem(item);
+        });
 
+    });
 
-//         });
+    document.querySelector('#clear').addEventListener('click', function (e) {
 
-//     });
+        cart.clearItems();
 
-//     document.querySelector('#clear').addEventListener('click', function (e) {
+    });
 
-//         cart.clearItems();
 
-//     });
-
-
-// });
+});
