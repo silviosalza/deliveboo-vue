@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Homepage from "./pages/Homepage.vue";
-import RestaurantList from "./pages/RestaurantList.vue";
-import RestaurantMenu from "./pages/RestaurantMenu.vue";
+// import Homepage from "./pages/Homepage.vue";
+// import RestaurantList from "./pages/RestaurantList.vue";
+// import RestaurantMenu from "./pages/RestaurantMenu.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -9,18 +9,18 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: Homepage,
+            component: () => import("./pages/Homepage.vue"),
         },
         {
             path: '/restaurants',
             name: 'restaurants',
-            component: RestaurantList,
+            component: () => import("./pages/RestaurantList.vue"),
         },
         {
             //! DA CONTROLLARE
             path: '/restaurants/menu',
             name: 'menu',
-            component: RestaurantMenu,
+            component: import("./pages/RestaurantMenu.vue"),
         },
       
     ]

@@ -38,7 +38,7 @@ export default {
                             <a class="active" href="#join_us">Collabora con noi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="active" href="https://www.lanazione.it/">Area Riservata</a>
+                            <a class="active" href="http://localhost:8000/">Area Riservata</a>
                         </li>
                         <li class="nav-item">
                             <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"
