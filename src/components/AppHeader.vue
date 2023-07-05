@@ -21,15 +21,14 @@ export default {
 <template>
     <header>
         <nav class="navbar navbar-expand-lg h-100">
-            <div class="container d-flex justify-content-between align-items-center h-100">
+            <div class="container d-flex justify-content-between align-items-center h-100 ph-3 bg-warning">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png"
-                            alt=""></a>
+                    <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
-                    <button class="btn btn-secondary btn-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-lg border border-2 border-dark rounded py-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <ul class="dropdown-menu">
@@ -62,8 +61,6 @@ export default {
                         </li>
                     </ul>
                 </div>
-
-
             </div>
         </nav>
     </header>
@@ -83,7 +80,8 @@ header {
     font-size: 1.5rem;
 
     li {
-        margin-left: 2rem;
+        // margin-left: 2rem;
+        font-size: 1rem;
     }
 }
 
@@ -93,6 +91,10 @@ header {
 
 #navbarNav {
     display: none;
+}
+
+.navbar-nav {
+    flex-direction: row;
 }
 
 // MEDIA QUERIES
@@ -110,6 +112,7 @@ header {
 
     .btn-group {
         display: none;
+        width: unset;
     }
   }
 }
