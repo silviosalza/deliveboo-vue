@@ -35,7 +35,7 @@ export default {
                                 item.label }}</router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="active" href="#join_us">Collabora con noi</a>
+                            <a class="active" href="#join_us">Collabora</a>
                         </li>
                         <li class="nav-item">
                             <a class="active" href="http://localhost:8000/">Area Riservata</a>
