@@ -59,11 +59,26 @@ export default {
                         <li class="nav-item">
                             <a class="active" href="http://localhost:8000/">Area Riservata</a>
                         </li>
+                        <li class="nav-item">
+                            <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasEndLabel">Carrello</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            ...
+        </div>
+    </div>
 </template>
 
 
