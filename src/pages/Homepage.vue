@@ -12,8 +12,7 @@ export default {
     data(){
     return{
       restaurants:[],
-      
-   , AppMain }
+    }
   },
    methods: {
     getRestaurant(pageNumber = 1, category = 1){
@@ -112,6 +111,78 @@ export default {
         </div>
     </div>
 
+    <div class="container container_categories d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/sushiicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Sushi</div>
+            </router-link>
+        </div>
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/vegicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Veggy</div>
+            </router-link>
+        </div>
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/hawainicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Pokè</div>
+            </router-link>
+        </div>
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/desserticon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Dessert</div>
+            </router-link>
+        </div>
+    </div>
+</div>
     <div id="join_us">
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
             dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
