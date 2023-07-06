@@ -64,10 +64,16 @@ export default {
 }
 
 .jumbo-restaurants-btn-container > button {
-    width: calc(100% / 2 - 20px);
+    width: 100%;
 }
 
 /* MEDIA QUERIES */
+@include media-breakpoint-up(sm) {
+    .jumbo-restaurants-btn-container > button {
+        width: calc(100% / 2 - 20px);
+    }
+}
+
 @include media-breakpoint-up(md) {
     .jumbo-restaurants-btn-container > button {
         width: calc(100% / 4 - 20px);

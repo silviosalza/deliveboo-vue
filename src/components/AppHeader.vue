@@ -27,7 +27,7 @@ export default {
                     <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
                 </div>
 
-                <div class="btn-group dropstart d-sm-none">
+                <div class="btn-group dropdown d-sm-none">
                     <button class="btn btn-lg border border-2 border-dark rounded py-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-bars"></i>
                     </button>
@@ -48,7 +48,7 @@ export default {
                 </div>
 
                 <div id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item" v-for="item in menuItems">
                             <router-link :to="{ name: item.routeName }" aria-current="page">{{
                                 item.label }}</router-link>
