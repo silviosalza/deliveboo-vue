@@ -2,10 +2,11 @@
 
 import AppJumbotronHome from '../components/AppJumbotronHome.vue';
 
+import AppMain from '../components/AppMain.vue';
 
 
 export default {
-    components: { AppJumbotronHome }
+    components: { AppJumbotronHome, AppMain }
 }
 
 </script>
@@ -82,7 +83,7 @@ export default {
 
 
     <div id="join_us">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
             dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
             totam.
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
@@ -109,8 +110,6 @@ export default {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
             dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
             totam.
-
-        </p>
 
     </div>
 </template>

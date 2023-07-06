@@ -7,7 +7,7 @@ export default {
 <template>
     <footer>
         <div class="app">
-            <h3 class="">SCARICA LA NOSTRA APP E PORTACI SEMPRE CON TE!</h3>
+            <h3 class="fw-bold">SCARICA LA NOSTRA APP E PORTACI SEMPRE CON TE!</h3>
             <div class="img-app d-flex flex-colum align-items-center justify-content-center flex-sm-row">
                 <div class="img1">
                     <img src="../assets/img/App-Store.png" alt="app">
@@ -137,6 +137,10 @@ footer {
 
     .about {
         padding-right: 150px;
+    }
+
+    .app {
+        height: 150px;
     }
 }
 </style>
