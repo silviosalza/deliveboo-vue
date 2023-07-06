@@ -42,7 +42,7 @@ export default {
                         </li>
 
                         <li class="dropdown-item text-warning">
-                            <a class="active" href="http://localhost:8000/">Area Riservata</a>
+                            <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
                     </ul>
                 </div>
@@ -57,7 +57,7 @@ export default {
                             <a class="active" href="#join_us">Collabora</a>
                         </li>
                         <li class="nav-item">
-                            <a class="active" href="http://localhost:8000/">Area Riservata</a>
+                            <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
                         <li class="nav-item">
                             <button class="btn btn-dark" type="button" data-bs-toggle="offcanvas"

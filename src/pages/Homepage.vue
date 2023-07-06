@@ -1,46 +1,114 @@
+<script>
+
+import AppJumbotronHome from '../components/AppJumbotronHome.vue';
+
+
+
+export default {
+    components: { AppJumbotronHome }
+}
+
+</script>
+
+
+
 <template>
-    <div class="jumbotron">
-        <div class="container pt-4 d-flex flex-column justify-content-between ms-jumbo-search">
-            <h1 class="text-center ms-jumbo-title bg-warning py-1 m-0" style="--bs-bg-opacity: .7;">È PRONTO, TUTTI A TAVOLA!</h1>
+    <AppJumbotronHome />
+<div class="container d-flex justify-content-center">
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-3 col-sm-6">
+            <button type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Hover Me</div>
+            </button>
         </div>
-
-        <div class="container jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 gap-3">
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>PIZZA</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>SUSHI</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>HAMBURGER</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>VEGAN</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>PIZZA</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>SUSHI</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>HAMBURGER</b></button>
-
-            <button type="button" class="btn btn-light rounded-0 border border-dark border-2"><b>VEGAN</b></button>
-
-            <button type="button" class="btn btn-warning w-30 rounded-0 m-auto"><b>CERCA</b></button>
+        <div class="col-12 col-md-3 col-sm-6">
+            <button type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Hover Me</div>
+            </button>
         </div>
-
-        <div class="container jumbo-bottom-container pb-4">
-            <h5 class="bg-light mb-0 py-1">IL TUO CIBO PREFERITO</h5>
-            <h5 class="bg-warning mb-0 py-1">CON UN TOCCO DEL TUO DITO</h5>
+        <div class="col-12 col-md-3 col-sm-6" >
+            <button type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Hover Me</div>
+            </button>
+        </div>
+        <div class="col-12 col-md-3 col-sm-6">
+            <button type="button" class="btn cube cube-hover">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="text">Hover Me</div>
+            </button>
         </div>
     </div>
+</div>
+
+
+
+
 
 
     <div id="join_us">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis totam.
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
 
         </p>
 
@@ -49,34 +117,109 @@
 
 
 <style lang="scss">
-@use "../styles/general.scss" as *;
-@use "../styles/utilities/variables" as *;
-
-.jumbotron{
-    /* height: 60vh; */
-    background-image: url("../assets/img/Screenshot\ \(171\).png");
-    background-size: cover;
+.text {
+    color: #d4af37;
 }
 
-.ms-jumbo-search {
-
-    .ms-jumbo-title {
-        font-size: calc(1.1rem + 1.5vw);
-    }
+.btn {
+    display: block;
+    min-width: 150px;
+    padding: 0.7em 1em;
+    background: transparent;
+    outline: none;
+    border: 0;
+    letter-spacing: 0.1em;
+    font-family: monospace;
+    font-size: 17px;
+    font-weight: bold;
+    z-index: 1;
 }
 
-.ms-search-btn {
-    background-color: #edc900;
+.cube {
+    position: relative;
+    transition: all 0.5s;
 }
 
-.jumbo-restaurants-btn-container > button {
-    width: calc(100% / 2 - 20px);
+.cube .bg-top {
+    position: absolute;
+    height: 10px;
+    background: #d4af37;
+    bottom: 100%;
+    left: 5px;
+    right: -5px;
+    transform: skew(-45deg, 0);
+    margin: 0;
+    transition: all 0.4s;
 }
 
-/* MEDIA QUERIES */
-@include media-breakpoint-up(md) {
-    .jumbo-restaurants-btn-container > button {
-        width: calc(100% / 4 - 20px);
+.cube .bg-top .bg-inner {
+    bottom: 0;
+}
+
+.cube .bg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    background: #d4af37;
+    transition: all 0.4s;
+}
+
+.cube .bg-right {
+    position: absolute;
+    background: #d4af37;
+    top: -5px;
+    z-index: 0;
+    bottom: 5px;
+    width: 10px;
+    left: 100%;
+    transform: skew(0, -45deg);
+    transition: all 0.4s;
+}
+
+.cube .bg-right .bg-inner {
+    left: 0;
+}
+
+.cube .bg-inner {
+    background: #28282d;
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    top: 2px;
+    bottom: 2px;
+}
+
+.cube .text {
+    position: relative;
+    transition: all 0.4s;
+}
+
+.cube:hover .bg-inner {
+    background: #d4af37;
+    transition: all 0.4s;
+}
+
+.cube:hover .text {
+    color: #28282d;
+    transition: all 0.4s;
+}
+
+.cube:hover .bg-right,
+.cube:hover .bg,
+.cube:hover .bg-top {
+    background: #28282d;
+}
+
+.cube:active {
+    z-index: 9999;
+    animation: bounce .1s linear;
+}
+
+@keyframes bounce {
+    50% {
+        transform: scale(0.9);
     }
 }
 </style>
