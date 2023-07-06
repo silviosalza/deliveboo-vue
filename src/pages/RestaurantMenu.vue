@@ -1,10 +1,17 @@
 <script>
+import { charStore } from '../cart';
 export default {
     name: 'RestaurantMenu',
+    props: {
+        cartItems: Array
+    },
     data() {
         return {
             cartArray: [],
         }
+    },
+    mounted() {
+        charStore = this.cartArray;
     },
     methods: {
         prova() {
@@ -12,11 +19,10 @@ export default {
             let priceProd = document.querySelector('.product-price').innerHTML;
             let prodItem = {
                 name: nameProd,
-                price: +priceProd
+                price: priceProd
             };
             this.cartArray.push(prodItem);
             console.log('Nome: ', nameProd, ' prezzo: ', priceProd);
-            return this.cartArray;
         }
     }
 }

@@ -1,9 +1,11 @@
 <script>
-import '../main.js';
+import { charStore } from '../cart';
 export default {
     name: 'AppHeader',
-    props: {
-        cartItems: Array
+    computed: {
+        charListShow() {
+            return charStore.charList
+        }
     },
     data() {
         return {
@@ -63,7 +65,7 @@ export default {
         </div>
         <div class="offcanvas-body">
             <ul>
-                <li v-for="item in cartItems" :key="item.name">
+                <li v-for="item in charStore.charList" :key="item.name">
                     {{ item.name }} - Prezzo: {{ item.price }}
                 </li>
             </ul>

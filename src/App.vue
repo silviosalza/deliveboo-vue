@@ -7,16 +7,21 @@ import AppHeader from './components/AppHeader.vue';
 
 
 export default {
-  components: { Homepage, RestaurantList, RestaurantMenu, AppHeader }
+  components: { Homepage, RestaurantList, RestaurantMenu, AppHeader },
+  data() {
+    return {
+      cartItems: []
+    }
+  }
 }
 
 </script>
 
 <template>
-  <AppHeader :cartItems="cartArray" />
+  <AppHeader :cartItems="cartItems" />
   <!-- <HomePage/> -->
   <!-- <ProjectsList/> -->
-  <router-view></router-view>
+  <router-view :cartItems="cartItems"></router-view>
 </template>
 
 <style lang="scss">
