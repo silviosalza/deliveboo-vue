@@ -16,8 +16,6 @@ export default{
 
 
 <style scoped lang="scss">
-.card{
 
-}
 
 </style>

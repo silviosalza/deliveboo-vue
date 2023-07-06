@@ -96,10 +96,9 @@ export default {
 <template>
     <AppJumbotronSearch />
     <!-- <button @click="getCategory()">dammi tutte le categorie</button> -->
-    <div class="row row-cols-4">
+    <div class="rest_container d-flex row row-cols-4">
         <div class="checkbox_btn col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column"
             v-for="item, index in totalCategory" :key="index">
-
             <label for="{{ item.id }}"></label>
             <input type="checkbox" class="m-3" id="{{ item.id }}" @click="clickutente(item.id)" :checked="item.checked">
             <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :checked="item.checked">
@@ -129,11 +128,11 @@ export default {
 
 <style scoped lang="scss">
 .checkbox_btn {
-    max-width: 250px;
+    max-width: 100% / 4;
     min-width: 150px;
 }
 
-.restaurant_container{
-    height: 500px;
+.rest_container{
+    padding: 0 6rem;
 }
 </style>

@@ -38,14 +38,13 @@ export default {
 <template>
     <AppJumbotronHome />
 
-
     <div class="container container_categories d-flex justify-content-center">
         <div class="row d-flex justify-content-center">
             <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
                 <div class="text-center">
                     <img class="icon" src="../assets/img/burgericon.png" alt="">
                 </div>
-                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover" @click="clickutente(item.id)">
                     <div class="bg-top">
                         <div class="bg-inner"></div>
                     </div>
