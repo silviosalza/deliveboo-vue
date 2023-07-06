@@ -1,229 +1,103 @@
-var cartId = "cart";
-
-
-var localAdapter = {
-
-    saveCart: function (object) {
-
-        var stringified = JSON.stringify(object);
-        localStorage.setItem(cartId, stringified);
-        return true;
-
-    },
-    getCart: function () {
-
-        return JSON.parse(localStorage.getItem(cartId));
-
-    },
-    clearCart: function () {
-
-        localStorage.removeItem(cartId);
-
-    }
-
-};
-
-var ajaxAdapter = {
-
-    saveCart: function (object) {
-
-        var stringified = JSON.stringify(object);
-        // do an ajax request here
-
-    },
-    getCart: function () {
-
-        // do an ajax request -- recognize user by cookie / ip / session
-        return JSON.parse(data);
-
-    },
-    clearCart: function () {
-
-        //do an ajax request here
-
-    }
-
-};
-
-var storage = localAdapter;
-
-var helpers = {
-
-    getHtml: function (id) {
-
-        return document.getElementById(id).innerHTML;
-
-    },
-    setHtml: function (id, html) {
-
-        document.getElementById(id).innerHTML = html;
-        return true;
-
-    },
-    itemData: function (object) {
-
-        var count = object.querySelector(".count"),
-            patt = new RegExp("^[1-9]([0-9]+)?$");
-        count.value = (patt.test(count.value) === true) ? parseInt(count.value) : 1;
-
-        var item = {
-
-            name: object.getAttribute('data-name'),
-            price: object.getAttribute('data-price'),
-            id: object.getAttribute('data-id'),
-            count: count.value,
-            total: parseInt(object.getAttribute('data-price')) * parseInt(count.value)
-
-        };
-        return item;
-
-    },
-    updateView: function () {
-
-        var items = cart.getItems(),
-            template = this.getHtml('cartT'),
-            compiled = _.template(template, {
-                items: items
-            });
-        this.setHtml('cartItems', compiled);
-        this.updateTotal();
-
-    },
-    emptyView: function () {
-
-        this.setHtml('cartItems', '<p>Nothing to see here</p>');
-        this.updateTotal();
-
-    },
-    updateTotal: function () {
-
-        this.setHtml('totalPrice', cart.total + '$');
-
-    }
-
-};
-
-var cart = {
-
-    count: 0,
-    total: 0,
-    items: [],
-    getItems: function () {
-
-        return this.items;
-
-    },
-    setItems: function (items) {
-
-        this.items = items;
-        for (var i = 0; i < this.items.length; i++) {
-            var _item = this.items[i];
-            this.total += _item.total;
-        }
-
-    },
-    clearItems: function () {
-
-        this.items = [];
-        this.total = 0;
-        storage.clearCart();
-        helpers.emptyView();
-
-    },
-    addItem: function (item) {
-
-        if (this.containsItem(item.id) === false) {
-
-            this.items.push({
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                count: item.count,
-                total: item.price * item.count
-            });
-
-            storage.saveCart(this.items);
-
-
-        } else {
-
-            this.updateItem(item);
-
-        }
-        this.total += item.price * item.count;
-        this.count += item.count;
-        helpers.updateView();
-
-    },
-    containsItem: function (id) {
-
-        if (this.items === undefined) {
-            return false;
-        }
-
-        for (var i = 0; i < this.items.length; i++) {
-
-            var _item = this.items[i];
-
-            if (id == _item.id) {
-                return true;
-            }
-
-        }
-        return false;
-
-    },
-    updateItem: function (object) {
-
-        for (var i = 0; i < this.items.length; i++) {
-
-            var _item = this.items[i];
-
-            if (object.id === _item.id) {
-
-                _item.count = parseInt(object.count) + parseInt(_item.count);
-                _item.total = parseInt(object.total) + parseInt(_item.total);
-                this.items[i] = _item;
-                storage.saveCart(this.items);
-
-            }
-
-        }
-
-    }
-
-};
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    if (storage.getCart()) {
-
-        cart.setItems(storage.getCart());
-        helpers.updateView();
-
-    } else {
-
-        helpers.emptyView();
-
-    }
-    var products = document.querySelectorAll('.product button');
-    [].forEach.call(products, function (product) {
-
-        product.addEventListener('click', function (e) {
-            console.log('ciao');
-            var item = helpers.itemData(this.parentNode);
-            cart.addItem(item);
-
-
+let productsInCart = JSON.parse(localStorage.getItem('shoppingCart'));
+if (!productsInCart) {
+    productsInCart = [];
+}
+const parentElement = document.querySelector('#buyItems');
+const cartSumPrice = document.querySelector('#sum-prices');
+const products = document.querySelectorAll('.product-under');
+
+
+const countTheSumPrice = function () { // 4
+    let sum = 0;
+    productsInCart.forEach(item => {
+        sum += item.price;
+    });
+    return sum;
+}
+
+const updateShoppingCartHTML = function () {  // 3
+    localStorage.setItem('shoppingCart', JSON.stringify(productsInCart));
+    if (productsInCart.length > 0) {
+        let result = productsInCart.map(product => {
+            return `
+				<li class="buyItem">
+					<img src="${product.image}">
+					<div>
+						<h5>${product.name}</h5>
+						<h6>$${product.price}</h6>
+						<div>
+							<button class="button-minus" data-id=${product.id}>-</button>
+							<span class="countOfProduct">${product.count}</span>
+							<button class="button-plus" data-id=${product.id}>+</button>
+						</div>
+					</div>
+				</li>`
         });
+        parentElement.innerHTML = result.join('');
+        document.querySelector('.checkout').classList.remove('hidden');
+        cartSumPrice.innerHTML = '$' + countTheSumPrice();
 
+    }
+    else {
+        document.querySelector('.checkout').classList.add('hidden');
+        parentElement.innerHTML = '<h4 class="empty">Your shopping cart is empty</h4>';
+        cartSumPrice.innerHTML = '';
+    }
+}
+
+function updateProductsInCart(product) { // 2
+    for (let i = 0; i < productsInCart.length; i++) {
+        if (productsInCart[i].id == product.id) {
+            productsInCart[i].count += 1;
+            productsInCart[i].price = productsInCart[i].basePrice * productsInCart[i].count;
+            return;
+        }
+    }
+    productsInCart.push(product);
+}
+
+products.forEach(item => {   // 1
+    item.addEventListener('click', (e) => {
+        if (e.target.classList.contains('addToCart')) {
+            const productID = e.target.dataset.productId;
+            const productName = item.querySelector('.productName').innerHTML;
+            const productPrice = item.querySelector('.priceValue').innerHTML;
+            const productImage = item.querySelector('img').src;
+            let product = {
+                name: productName,
+                image: productImage,
+                id: productID,
+                count: 1,
+                price: +productPrice,
+                basePrice: +productPrice,
+            }
+            updateProductsInCart(product);
+            updateShoppingCartHTML();
+        }
     });
-
-    document.querySelector('#clear').addEventListener('click', function (e) {
-
-        cart.clearItems();
-
-    });
-
-
 });
+
+parentElement.addEventListener('click', (e) => { // Last
+    const isPlusButton = e.target.classList.contains('button-plus');
+    const isMinusButton = e.target.classList.contains('button-minus');
+    if (isPlusButton || isMinusButton) {
+        for (let i = 0; i < productsInCart.length; i++) {
+            if (productsInCart[i].id == e.target.dataset.id) {
+                if (isPlusButton) {
+                    productsInCart[i].count += 1
+                }
+                else if (isMinusButton) {
+                    productsInCart[i].count -= 1
+                }
+                productsInCart[i].price = productsInCart[i].basePrice * productsInCart[i].count;
+
+            }
+            if (productsInCart[i].count <= 0) {
+                productsInCart.splice(i, 1);
+            }
+        }
+        updateShoppingCartHTML();
+    }
+});
+
+updateShoppingCartHTML();
