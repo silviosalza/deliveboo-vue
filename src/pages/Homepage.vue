@@ -1,6 +1,3 @@
-<script>
-import '../main.js';
-</script>
 <template>
     <h1>Homepage</h1>
     <div id="join_us">
