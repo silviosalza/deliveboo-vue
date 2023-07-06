@@ -1,12 +1,12 @@
 <script>
 import axios from 'axios';
-import AppJumbotronHome from '../components/AppJumbotronHome.vue';
+import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
 import AppMain from '../components/AppMain.vue';
 import { RouterLink } from 'vue-router';
 
 
 export default {
-    components: { AppJumbotronHome, RouterLink, AppMain },
+    components: { AppJumbotronSearch, RouterLink, AppMain },
 
     data(){
     return{
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-    <AppJumbotronHome />
+    <AppJumbotronSearch />
 
     <div class="container container_categories d-flex justify-content-center">
         <div class="row d-flex justify-content-center">
