@@ -30,10 +30,8 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 .jumbotron {
-    /* height: 60vh; */
     background-image: url("../assets/img/Screenshot\ \(171\).png");
     background-size: cover;
-    height: 500px;
 }
 
 .ms-jumbo-search {

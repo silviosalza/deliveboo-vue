@@ -124,6 +124,7 @@ export default {
 .btn {
     display: block;
     min-width: 150px;
+    height: 100px;
     padding: 0.7em 1em;
     background: transparent;
     outline: none;
