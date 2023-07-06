@@ -18,10 +18,12 @@ export default{
      data(){
     return{
       restaurants:[],
+      myUrl:'http://localhost:8000'
       
     }
   },
   mounted(){
+    getRestaurant();
   },
   methods: {
     getRestaurant(pageNumber = 1, category){
@@ -31,7 +33,7 @@ export default{
 
         }
         
-      axios.get('http://localhost:8000/api/restaurants', {params}).then(resp => {
+      axios.get(`${myUrl}/api/restaurants`, {params}).then(resp => {
 
         console.log(resp);
         this.restaurants = resp.data.results.data;

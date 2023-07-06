@@ -11,6 +11,7 @@ export default {
     data(){
     return{
       restaurants:[],
+      myUrl:'http://localhost:8000'
       
     }
   },
@@ -18,15 +19,15 @@ export default {
     ;
   },
   methods: {
-    getRestaurant(pageNumber = 1, category){
+    getRestaurant(pageNumber = 1, category = 1){
         let params = {
             page: pageNumber,
             categories: category
 
         }
         
-      axios.get('http://localhost:8000/api/restaurants', {params}).then(resp => {
-
+      axios.get(`${myUrl}/api/restaurants`, {params}).then(resp => {
+        console.log('ciao');
         console.log(resp);
         this.restaurants = resp.data.results.data;
       })
