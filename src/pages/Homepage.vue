@@ -3,6 +3,7 @@ import axios from 'axios';
 import AppJumbotronHome from '../components/AppJumbotronHome.vue';
 
 import { RouterLink } from 'vue-router';
+import AppMain from '../components/AppMain.vue';
 
 
 export default {
@@ -11,7 +12,6 @@ export default {
     data(){
     return{
       restaurants:[],
-      
     }
   },
    methods: {
@@ -36,83 +36,82 @@ export default {
 
 </script>
 
-
-
 <template>
     <AppJumbotronHome />
-<div class="container container_categories d-flex justify-content-center">
-    <div class="row d-flex justify-content-center">
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/burgericon.png" alt="">
+    <div class="container container_categories d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/burgericon.png" alt="">
+                </div>
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Hamburger</div>
+                </router-link>
             </div>
-            <router-link :to="{ name: 'restaurants' }"  type="button" class="btn cube cube-hover" >
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/pastaicon.png" alt="">
                 </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Hamburger</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/pastaicon.png" alt="">
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Mediterranea</div>
+                </router-link>
             </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/orientalicon.png" alt="">
                 </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Mediterranea</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/orientalicon.png" alt="">
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Orientale</div>
+                </router-link>
             </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/pizzaicon.png" alt="">
                 </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Orientale</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/pizzaicon.png" alt="">
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Pizza</div>
+                </router-link>
             </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Pizza</div>
-            </router-link>
         </div>
     </div>
-</div>
-<div class="container container_categories d-flex justify-content-center">
+
+    <div class="container container_categories d-flex justify-content-center">
     <div class="row d-flex justify-content-center">
         <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
             <div class="text-center">
@@ -183,9 +182,38 @@ export default {
             </router-link>
         </div>
     </div>
-    
 </div>
+    <div id="join_us">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
+            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
+            totam.
 
+        </p>
+    </div>
 </template>
 
 
@@ -193,13 +221,16 @@ export default {
 .text {
     color: #d4af37;
 }
-.container_categories{
-    margin-top:1rem ;
-    .col-md-3{
+
+.container_categories {
+    margin-top: 1rem;
+
+    .col-md-3 {
         margin-top: 3rem;
     }
 }
-.icon{
+
+.icon {
     width: 150px;
     padding-bottom: 0.5rem;
 }
@@ -207,7 +238,7 @@ export default {
 .btn {
     display: block;
     min-width: 150px;
-    max-width: 250px;
+    height: 100px;
     padding: 0.7em 1em;
     background: transparent;
     outline: none;
