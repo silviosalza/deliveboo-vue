@@ -38,7 +38,7 @@ export default {
                         </li>
 
                         <li class="dropdown-item text-warning">
-                            <a class="active" href="#join_us">Collabora</a>
+                            <a class="active" href="#join_us">Collabora con noi</a>
                         </li>
 
                         <li class="dropdown-item text-warning">
@@ -54,7 +54,7 @@ export default {
                                 item.label }}</router-link>
                         </li>
                         <li class="nav-item ms-5">
-                            <a class="active" href="#join_us">Collabora</a>
+                            <a class="active" href="#join_us">Collabora con noi</a>
                         </li>
                         <li class="nav-item ms-5">
                             <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>

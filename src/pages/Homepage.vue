@@ -1,13 +1,12 @@
 <script>
 import axios from 'axios';
 import AppJumbotronHome from '../components/AppJumbotronHome.vue';
-
-import { RouterLink } from 'vue-router';
 import AppMain from '../components/AppMain.vue';
+import { RouterLink } from 'vue-router';
 
 
 export default {
-    components: { AppJumbotronHome, RouterLink },
+    components: { AppJumbotronHome, RouterLink, AppMain },
 
     data(){
     return{
@@ -38,6 +37,8 @@ export default {
 
 <template>
     <AppJumbotronHome />
+
+
     <div class="container container_categories d-flex justify-content-center">
         <div class="row d-flex justify-content-center">
             <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
@@ -183,41 +184,15 @@ export default {
         </div>
     </div>
 </div>
-    <div id="join_us">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
-            dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
-            totam.
 
-        </p>
-    </div>
+<AppMain />
 </template>
 
 
 <style lang="scss">
+
+
+//STILE BOTTONI
 .text {
     color: #d4af37;
 }

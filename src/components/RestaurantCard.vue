@@ -17,8 +17,6 @@ export default{
 
 <style scoped lang="scss">
 .card{
-    height: 300px;
-    margin-bottom: 2rem ;
 
 }
 

@@ -32,6 +32,7 @@ export default {
 .jumbotron {
     background-image: url("../assets/img/Screenshot\ \(171\).png");
     background-size: cover;
+    height: 600px;
 }
 
 .ms-jumbo-search {
