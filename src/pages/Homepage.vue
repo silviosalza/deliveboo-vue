@@ -8,7 +8,6 @@ import '../main.js';
             dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
             totam.
         </p>
-
     </div>
 </template>
 

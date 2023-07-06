@@ -45,6 +45,7 @@ export default {
                                 data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
+                            <p id="sum-prices"></p>
                         </li>
                     </ul>
                 </div>
@@ -57,21 +58,9 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="medium-4  columns">
-                <div class="cart">
-                    <h1>Cart items</h1>
-                    <div class="row">
-                        <div class="medium-6 columns">
-                            <button class="tiny secondary btn-danger" id="clear">Clear the cart</button>
-                        </div>
-                        <div class="medium-6 columns">
-                            <button class="tiny disabled" title="Work in progress">Checkout</button>
-                        </div>
-                    </div>
-                    <div id="cartItems">Loading cart...</div>
-                    Total price: <strong id="totalPrice">0 $</strong>
-                </div>
-            </div>
+            <ul id="bought-items">
+
+            </ul>
         </div>
     </div>
 </template>
