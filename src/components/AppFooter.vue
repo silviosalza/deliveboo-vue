@@ -1,0 +1,146 @@
+<script>
+export default {
+    name: 'AppFooter'
+}
+</script>
+
+<template>
+    <footer>
+        <div class="app">
+            <h3 class="fw-bold">SCARICA LA NOSTRA APP E PORTACI SEMPRE CON TE!</h3>
+            <div class="img-app d-flex flex-colum align-items-center justify-content-center flex-sm-row">
+                <div class="img1">
+                    <img src="../assets/img/App-Store.png" alt="app">
+                </div>
+                <div class="img2">
+                    <img src="../assets/img/gplay.png" alt="app">
+                </div>
+            </div>
+        </div>
+        <div class="about">
+            <div class="d-flex justify-content-around container-sm">
+                <div class="text-start">
+                    <ul>
+                        <li class="pb-1">
+                            <h5>Scopri Deliveboo</h5>
+                        </li>
+                        <li>Chi siamo</li>
+                        <li>Ristoranti</li>
+                        <li>Diventa nostro partner</li>
+                    </ul>
+                </div>
+                <div class="text-end text-sm-start ms-5 medium">
+                    <ul>
+                        <li class="pb-1">
+                            <h5>Note Legali</h5>
+                        </li>
+                        <li>Termini e Condizioni</li>
+                        <li>Informativa sulla privacy</li>
+                        <li>Metodi di pagamento</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div>
+                <ul class="icons d-flex justify-content-center gap-4">
+                    <li><i class="fa-brands fa-facebook-f"></i></li>
+                    <li><i class="fa-brands fa-twitter"></i></li>
+                    <li><i class="fa-brands fa-instagram"></i></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</template> 
+
+
+<style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
+
+footer {
+    background-color: $app_color;
+
+    img {
+        height: 35px;
+        margin: 10px;
+    }
+
+    h3 {
+        text-align: center;
+        margin: auto;
+        padding: 10px;
+    }
+    .img-app {
+        cursor: pointer;
+    }
+    .about {
+        background-color: $footer_color;
+        color: $white_text;
+        padding-top: 10px;
+    }
+
+    .icons {
+        padding-inline-start: 0;
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    ul {
+        padding-inline-start: 0;
+        padding: 10px;
+    }
+
+}
+
+// MEDIA QUERY
+
+@include media-breakpoint-up(sm) {
+    .app {
+        display: flex;
+        justify-content: center;
+        padding: 0 230px;
+    }
+
+    .img-app {
+        padding-left: 30px;
+    }
+
+    .icons {
+        padding-top: 30px;
+    }
+
+    .about {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .medium {
+        padding-right: 80px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .about {
+        padding-right: 40px;
+    }
+
+    .medium {
+        padding-left: 40px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    .medium {
+        padding-left: 50px;
+        padding-right: 150px;
+    }
+
+    .about {
+        padding-right: 150px;
+    }
+
+    .app {
+        height: 150px;
+    }
+}
+</style>

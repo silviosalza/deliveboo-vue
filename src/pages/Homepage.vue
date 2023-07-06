@@ -1,24 +1,123 @@
 <script>
-
+import axios from 'axios';
 import AppJumbotronHome from '../components/AppJumbotronHome.vue';
 
+import { RouterLink } from 'vue-router';
+import AppMain from '../components/AppMain.vue';
 
 
 export default {
-    components: { AppJumbotronHome }
+    components: { AppJumbotronHome, RouterLink },
+
+    data(){
+    return{
+      restaurants:[],
+    }
+  },
+   methods: {
+    getRestaurant(pageNumber = 1, category = 1){
+        let params = {
+            page: pageNumber,
+            categories: category
+
+        }
+        
+      axios.get(`http://localhost:8000/api/restaurants`, {params}).then(resp => {
+        console.log('ciao');
+        console.log(resp);
+        this.restaurants = resp.data.results.data;
+      })
+    }
+  },
+
+
 }
+
 
 </script>
 
-
-
 <template>
     <AppJumbotronHome />
-<div class="container d-flex justify-content-center">
+    <div class="container container_categories d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/burgericon.png" alt="">
+                </div>
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Hamburger</div>
+                </router-link>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/pastaicon.png" alt="">
+                </div>
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Mediterranea</div>
+                </router-link>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/orientalicon.png" alt="">
+                </div>
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Orientale</div>
+                </router-link>
+            </div>
+            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                <div class="text-center">
+                    <img class="icon" src="../assets/img/pizzaicon.png" alt="">
+                </div>
+                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="bg">
+                        <div class="bg-inner"></div>
+                    </div>
+                    <div class="text">Pizza</div>
+                </router-link>
+            </div>
+        </div>
+    </div>
 
+    <div class="container container_categories d-flex justify-content-center">
     <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-3 col-sm-6">
-            <button type="button" class="btn cube cube-hover">
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/sushiicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
                 <div class="bg-top">
                     <div class="bg-inner"></div>
                 </div>
@@ -28,11 +127,14 @@ export default {
                 <div class="bg">
                     <div class="bg-inner"></div>
                 </div>
-                <div class="text">Hover Me</div>
-            </button>
+                <div class="text">Sushi</div>
+            </router-link>
         </div>
-        <div class="col-12 col-md-3 col-sm-6">
-            <button type="button" class="btn cube cube-hover">
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/vegicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
                 <div class="bg-top">
                     <div class="bg-inner"></div>
                 </div>
@@ -42,11 +144,14 @@ export default {
                 <div class="bg">
                     <div class="bg-inner"></div>
                 </div>
-                <div class="text">Hover Me</div>
-            </button>
+                <div class="text">Veggy</div>
+            </router-link>
         </div>
-        <div class="col-12 col-md-3 col-sm-6" >
-            <button type="button" class="btn cube cube-hover">
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/hawainicon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
                 <div class="bg-top">
                     <div class="bg-inner"></div>
                 </div>
@@ -56,11 +161,14 @@ export default {
                 <div class="bg">
                     <div class="bg-inner"></div>
                 </div>
-                <div class="text">Hover Me</div>
-            </button>
+                <div class="text">Pokè</div>
+            </router-link>
         </div>
-        <div class="col-12 col-md-3 col-sm-6">
-            <button type="button" class="btn cube cube-hover">
+        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+            <div class="text-center">
+                <img class="icon" src="../assets/img/desserticon.png" alt="">
+            </div>
+            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
                 <div class="bg-top">
                     <div class="bg-inner"></div>
                 </div>
@@ -70,17 +178,11 @@ export default {
                 <div class="bg">
                     <div class="bg-inner"></div>
                 </div>
-                <div class="text">Hover Me</div>
-            </button>
+                <div class="text">Dessert</div>
+            </router-link>
         </div>
     </div>
 </div>
-
-
-
-
-
-
     <div id="join_us">
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia optio, numquam consequatur recusandae officiis
             dolorem fugit, vitae aperiam in veniam soluta minus id esse tenetur maiores. Dignissimos praesentium facilis
@@ -111,7 +213,6 @@ export default {
             totam.
 
         </p>
-
     </div>
 </template>
 
@@ -119,6 +220,19 @@ export default {
 <style lang="scss">
 .text {
     color: #d4af37;
+}
+
+.container_categories {
+    margin-top: 1rem;
+
+    .col-md-3 {
+        margin-top: 3rem;
+    }
+}
+
+.icon {
+    width: 150px;
+    padding-bottom: 0.5rem;
 }
 
 .btn {

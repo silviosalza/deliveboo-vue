@@ -24,7 +24,7 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="#"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
