@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <AppHeader :cartItems="cartArray" />
   <!-- <HomePage/> -->
   <!-- <ProjectsList/> -->
   <router-view></router-view>
