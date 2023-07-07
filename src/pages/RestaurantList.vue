@@ -92,7 +92,7 @@ export default {
              let params = null;
              if (pippo){
                  params = {
-                         restaurantId: pippo
+                         restaurant_id: pippo
                  }
              }
              console.log(pippo);

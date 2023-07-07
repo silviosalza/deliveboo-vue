@@ -18,24 +18,24 @@ export default {
 
     methods: {
         
-        getDishes(pippo){
-            let params = null;
-            if (pippo){
-                params = {
-                        restaurantId: pippo
-                }
-            }
-            console.log(pippo);
-            axios.get(`${this.myUrl}/api/dishes`, {params})
-                .then(response => {
-                    this.dishesArray = response.data.results;
-                    console.log(this.dishesArray);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+        // getDishes(pippo){
+        //     let params = null;
+        //     if (pippo){
+        //         params = {
+        //                 restaurantId: pippo
+        //         }
+        //     }
+        //     console.log(pippo);
+        //     axios.get(`${this.myUrl}/api/dishes`, {params})
+        //         .then(response => {
+        //             this.dishesArray = response.data.results;
+        //             console.log(this.dishesArray);
+        //         })
+        //         .catch(error => {
+        //             console.error(error);
+        //         });
 
-        }
+        // }
 
     }
 
@@ -45,7 +45,7 @@ export default {
 
 <template>
     <div class="restaurant_card d-flex justify-content-center align-items-center">
-        <div class="rest_name d-flex justify-content-center align-items-center " @click="getDishes(restaurant.id)">
+        <div class="rest_name d-flex justify-content-center align-items-center ">
             <h4>{{ restaurant.restaurant_name }}</h4>
             <div class="dishes" v-for="(element, index) in dishesArray" :key="index">
                 <p>{{ element.dish_name }}</p>
