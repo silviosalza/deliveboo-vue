@@ -18,7 +18,9 @@ export default {
             myUrl: 'http://localhost:8000',
             restaurants: [],
             totalCategory: [],
-            categoriesArray: [] //andranno inserite le categorie in maniera dinamica al click utente
+            categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
+            dishesArray: [],
+            restaurant_id : 0
         }
     },
     mounted() {
@@ -84,7 +86,26 @@ export default {
             }
 
             this.getRestaurant();
-        }
+        },
+
+         getDishes(pippo){
+             let params = null;
+             if (pippo){
+                 params = {
+                         restaurantId: pippo
+                 }
+             }
+             console.log(pippo);
+             axios.get(`${this.myUrl}/api/dishes`, {params})
+                 .then(response => {
+                     this.dishesArray = response.data.results;
+                     console.log(this.dishesArray);
+                 })
+                 .catch(error => {
+                     console.error(error);
+                 });
+
+         }
 
     }
 
@@ -118,10 +139,10 @@ export default {
             </div>
         </div>
 
-        <!-- <button @click="getRestaurant()">Test API</button> -->
+
         <div class="row rest_cards">
             <div class="col-6 col-md-3 col-sm-6 my-1" v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard :restaurant="element" @click="clickutente(element.id)" />
+                <RestaurantCard :restaurant="element" @click="getDishes(element.id)"/>
             </div>
         </div>
     </section>
@@ -135,6 +156,7 @@ export default {
 .checkbox_btn {
     max-width: 100% / 4;
     min-width: 150px;
+    margin: 0 6px;
 }
 
 .rest_cards {
