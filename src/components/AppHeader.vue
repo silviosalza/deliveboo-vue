@@ -83,7 +83,8 @@ export default {
         <div class="offcanvas-body">
             <ul>
                 <li v-for="(item, index) in store.cartArray">
-                    {{ item.name }} - Prezzo {{ item.price }}
+                    {{ item.name }} - Prezzo {{ item.price }}. <span> Il prodotto è stato preso {{ item.count }}
+                        volte</span>
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
