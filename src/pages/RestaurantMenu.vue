@@ -15,20 +15,17 @@ export default {
             let dishObject = {//dopodicchè creo un oggetto con nome del piatto, il suo prezzo e un counter che mi servirà
                 name: dishTitle,//per contare quante volte è stato inserito nel carrello un singolo piatto
                 price: dishPrice,
-                count: 0
+                count: 1
             }
             let dishFounded;
-            for (let i = 0; i < this.store.cartArray.length; i++) {
-                if (this.store.cartArray[i].name === dishTitle) {
-                    dishFounded = true;//indica che ha trovato un doppione del prodotto
-                    break;
-                }
-            }
-            if (dishFounded) {//se lo ha trovato
-                dishObject.count += 1;//incrementa il contatore del singolo prodotto di uno
+            if (this.store.cartArray.some(item => item.name === dishTitle)) {//se nel carrello è già presente il piatto
+                let findItems = this.store.cartArray.filter(item => item['name'] === dishTitle);//cerco l'oggetto che ha come nome dishTitle (findItems risulterà un array)
+                let itemFounded = findItems[0];//lo assegno alla variabile itemFounded
+                itemFounded.count += 1;//incremento di uno il count dell'elemento
+                findItems = [];//svuoto l'array
             } else {//altrimenti
-                this.store.cartArray.push(dishObject);//inseriscilo nell'array
-                this.store.totalProducts += 1;//incrementa i prodotti presi di uno
+                this.store.cartArray.push(dishObject);//lo inserisco nell'array
+                this.store.totalProducts += 1;//incremento i prodotti presi di uno
             }
             this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
         }

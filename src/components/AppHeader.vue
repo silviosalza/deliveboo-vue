@@ -68,6 +68,9 @@ export default {
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
+                            <div class="cart-counter">
+                                {{ store.totalProducts }}
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -77,7 +80,6 @@ export default {
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasEndLabel">Carrello</h5>
-            <p>Sono presenti {{ store.totalProducts }} prodotti.</p>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -88,6 +90,8 @@ export default {
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
+            <button class="btn btn-warning d-flex justify-content-center align-items-center"><i
+                    class="fa-solid fa-cart-shopping"></i> Vai al checkout</button>
         </div>
     </div>
 </template>
@@ -140,6 +144,23 @@ header {
 .navbar-nav {
     flex-direction: row;
     width: 504px;
+
+    .nav-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .cart-counter {
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
 
     .nav-item:hover {
         text-decoration: underline;
