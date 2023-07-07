@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js';
 export default {
     name: 'AppHeader',
     data() {
@@ -12,7 +13,8 @@ export default {
                     label: "Ricerca Avanzata",
                     routeName: "restaurants"
                 },
-            ]
+            ],
+            store
         }
     }
 }
@@ -24,17 +26,19 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png"
+                            alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
-                    <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <li class="dropdown-item text-warning" v-for="item in menuItems">
                             <router-link :to="{ name: item.routeName }" aria-current="page">{{
-                            item.label }}</router-link>
+                                item.label }}</router-link>
                         </li>
 
                         <li class="dropdown-item text-warning">
@@ -60,8 +64,8 @@ export default {
                             <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
                         <li class="nav-item ms-5">
-                            <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
+                            <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
                         </li>
@@ -73,10 +77,15 @@ export default {
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasEndLabel">Carrello</h5>
+            <p>Sono presenti {{ store.totalProducts }} prodotti.</p>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            ...
+            <ul>
+                <li v-for="(item, index) in store.cartArray">
+                    {{ item.name }} - Prezzo {{ item.price }}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -87,7 +96,7 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 @media (max-width: 575px) {
-    .container{
+    .container {
         max-width: 350px;
     }
 }
@@ -136,7 +145,7 @@ header {
 
     .cart-hover:hover {
         background-color: #212529;
-        color:#edc900;
+        color: #edc900;
         // border: 1px solid #212529;
     }
 }
@@ -147,33 +156,35 @@ header {
     header {
         height: 160px;
     }
-  .logo_header {
-    height: 65px;
-  }
 
-  .btn {
-    min-width: 50px;
-  }
-
-  .navbar > .container {
-    justify-content: center;
-  }
-
-  #navbarNav {
-    display: block;
-
-    .navbar-nav > li {
-        margin-left: 10px;
+    .logo_header {
+        height: 65px;
     }
-    .btn-group {
-        display: none;
-        width: unset;
+
+    .btn {
+        min-width: 50px;
     }
-  }
+
+    .navbar>.container {
+        justify-content: center;
+    }
+
+    #navbarNav {
+        display: block;
+
+        .navbar-nav>li {
+            margin-left: 10px;
+        }
+
+        .btn-group {
+            display: none;
+            width: unset;
+        }
+    }
 }
 
 @include media-breakpoint-up(md) {
-    .navbar > .container {
+    .navbar>.container {
         justify-content: space-between;
     }
 
@@ -193,7 +204,9 @@ header {
             font-size: 1rem;
         }
     }
-    .logo, .logo_header {
+
+    .logo,
+    .logo_header {
         height: 85px;
     }
 
@@ -201,6 +214,7 @@ header {
         width: 100%;
         display: flex;
         justify-content: end;
+
         .navbar-nav {
             width: 730px;
 

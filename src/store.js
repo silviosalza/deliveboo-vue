@@ -1,5 +1,5 @@
 import { reactive } from 'vue';
 export const store = reactive({
     cartArray: [],
-    idSingleDish: ""
+    totalProducts: 0
 })
