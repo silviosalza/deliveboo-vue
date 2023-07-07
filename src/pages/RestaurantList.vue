@@ -5,9 +5,11 @@ import RestaurantCard from '../components/RestaurantCard.vue';
 
 
 export default {
-    props: {
-        restaurant: Object,
-    },
+    // props: {
+    //     restaurant: Object,
+    //     categoryArray: Array,
+    // },
+
     components: {
         AppJumbotronSearch,
         RestaurantCard
@@ -142,7 +144,7 @@ export default {
 
         <div class="row rest_cards">
             <div class="col-6 col-md-3 col-sm-6 my-1" v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard :restaurant="element" @click="getDishes(element.id)"/>
+                <RestaurantCard :categoryIcon="totalCategory" :restaurant="element" @click="getDishes(element.id)"/>
             </div>
         </div>
     </section>

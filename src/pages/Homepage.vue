@@ -21,7 +21,7 @@ export default {
 
             }
 
-            axios.get(`http://localhost:8000/api/restaurants`, { params }).then(resp => {
+            axios.get(`${this.myUrl}/api/restaurants`, { params }).then(resp => {
                 console.log('ciao');
                 console.log(resp);
                 this.restaurants = resp.data.results.data;

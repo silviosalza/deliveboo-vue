@@ -5,13 +5,13 @@ export default {
     name: "RestaurantCard",
     props: {
         restaurant: Object,
+        categoryIcon: Array,
     },
     data() {
         return {
             myUrl: 'http://localhost:8000',
             restaurants: [],
             totalCategory: [],
-            categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
             dishesArray: []
         }
     },
@@ -47,8 +47,10 @@ export default {
     <div class="restaurant_card d-flex justify-content-center align-items-center">
         <div class="rest_name d-flex justify-content-center align-items-center ">
             <h4>{{ restaurant.restaurant_name }}</h4>
-            <div class="dishes" v-for="(element, index) in dishesArray" :key="index">
-                <p>{{ element.dish_name }}</p>
+            <!-- <img class="logo_rest" :src="`${myUrl}/storage/${restaurant.thumb}`" alt=""> -->
+            <div v-for="(element, index) in restaurant.categories" :key="index">
+                <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
+            
             </div>
         </div>
         
@@ -67,9 +69,15 @@ export default {
     .rest_name{
         backdrop-filter: blur(10px);
         width: 100%;
+        .rest_icon{
+            width: 50px;
+        }
         
     }
     
+}
+.logo_rest{
+    width: 150px;
 }
 
 
