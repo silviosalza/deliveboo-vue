@@ -2,11 +2,11 @@
 
 import AppJumbotronHome from '../components/AppJumbotronHome.vue';
 
-import AppMain from '../components/AppMain.vue';
+import AppAbout from '../components/AppAbout.vue';
 
 
 export default {
-    components: { AppJumbotronHome, AppMain }
+    components: { AppJumbotronHome, AppAbout }
 }
 
 </script>
