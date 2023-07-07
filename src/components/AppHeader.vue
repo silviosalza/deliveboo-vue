@@ -14,10 +14,20 @@ export default {
                     routeName: "restaurants"
                 },
             ],
-            store
+            store,
+            payFlag: false
+        }
+    },
+    mounted() {
+
+    },
+    methods: {
+        paymentSection() {
+            this.payFlag = true;
         }
     }
 }
+
 </script>
 
 <template>
@@ -91,12 +101,16 @@ export default {
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
             <div v-if="store.totalPrice > 0">
-                <button class="btn btn-warning d-flex justify-content-center align-items-center">
+                <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
                 </button>
             </div>
             <div v-else>
                 <h5>Non hai ancora effettuato un ordine.</h5>
+            </div>
+            <div v-if="payFlag">
+                <h5>Qui avverrà il pagamento</h5>
+
             </div>
         </div>
     </div>
