@@ -1,4 +1,5 @@
 <script>
+import { store } from '../store.js';
 export default {
     name: 'AppHeader',
     data() {
@@ -12,7 +13,8 @@ export default {
                     label: "Ricerca Avanzata",
                     routeName: "restaurants"
                 },
-            ]
+            ],
+            store
         }
     }
 }
@@ -24,17 +26,19 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png"
+                            alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
-                    <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <li class="dropdown-item text-warning" v-for="item in menuItems">
                             <router-link :to="{ name: item.routeName }" aria-current="page">{{
-                            item.label }}</router-link>
+                                item.label }}</router-link>
                         </li>
 
                         <li class="dropdown-item text-warning">
@@ -60,10 +64,13 @@ export default {
                             <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
                         <li class="nav-item ms-5">
-                            <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
+                            <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
+                            <div class="cart-counter">
+                                {{ store.totalProducts }}
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -76,7 +83,21 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            ...
+            <ul>
+                <li v-for="(item, index) in store.cartArray">
+                    {{ item.name }} - Prezzo {{ item.price }}. <span> Il prodotto è stato preso {{ item.count }}
+                        volte</span>
+                </li>
+            </ul>
+            <h4>Totale: {{ store.totalPrice }} €</h4>
+            <div v-if="store.totalPrice > 0">
+                <button class="btn btn-warning d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
+                </button>
+            </div>
+            <div v-else>
+                <h5>Non hai ancora effettuato un ordine.</h5>
+            </div>
         </div>
     </div>
 </template>
@@ -87,7 +108,7 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 @media (max-width: 575px) {
-    .container{
+    .container {
         max-width: 350px;
     }
 }
@@ -130,13 +151,30 @@ header {
     flex-direction: row;
     width: 504px;
 
+    .nav-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        .cart-counter {
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+    }
+
     .nav-item:hover {
         text-decoration: underline;
     }
 
     .cart-hover:hover {
         background-color: #212529;
-        color:#edc900;
+        color: #edc900;
         // border: 1px solid #212529;
     }
 }
@@ -147,33 +185,35 @@ header {
     header {
         height: 160px;
     }
-  .logo_header {
-    height: 65px;
-  }
 
-  .btn {
-    min-width: 50px;
-  }
-
-  .navbar > .container {
-    justify-content: center;
-  }
-
-  #navbarNav {
-    display: block;
-
-    .navbar-nav > li {
-        margin-left: 10px;
+    .logo_header {
+        height: 65px;
     }
-    .btn-group {
-        display: none;
-        width: unset;
+
+    .btn {
+        min-width: 50px;
     }
-  }
+
+    .navbar>.container {
+        justify-content: center;
+    }
+
+    #navbarNav {
+        display: block;
+
+        .navbar-nav>li {
+            margin-left: 10px;
+        }
+
+        .btn-group {
+            display: none;
+            width: unset;
+        }
+    }
 }
 
 @include media-breakpoint-up(md) {
-    .navbar > .container {
+    .navbar>.container {
         justify-content: space-between;
     }
 
@@ -193,7 +233,9 @@ header {
             font-size: 1rem;
         }
     }
-    .logo, .logo_header {
+
+    .logo,
+    .logo_header {
         height: 85px;
     }
 
@@ -201,6 +243,7 @@ header {
         width: 100%;
         display: flex;
         justify-content: end;
+
         .navbar-nav {
             width: 730px;
 
