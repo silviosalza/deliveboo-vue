@@ -18,6 +18,7 @@ export default {
             }
             this.store.cartArray.push(dishObject);
             this.store.totalProducts += 1;
+            this.store.totalPrice = this.store.totalPrice + parseFloat(dishPrice);
         }
     }
 }
@@ -26,7 +27,7 @@ export default {
     <h1>Ristorante Menu</h1>
     <div id="1">
         <h2 id="dish-title">Titolo Card</h2>
-        <h3 id="dish-price">5.00</h3>
+        <h3 id="dish-price">5.25</h3>
         <button class="btn btn-primary" @click="updateStore(1)">Test Bottone</button>
     </div>
 </template>

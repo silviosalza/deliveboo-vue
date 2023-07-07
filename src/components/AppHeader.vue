@@ -86,6 +86,7 @@ export default {
                     {{ item.name }} - Prezzo {{ item.price }}
                 </li>
             </ul>
+            <h4>Totale: {{ store.totalPrice }} €</h4>
         </div>
     </div>
 </template>
