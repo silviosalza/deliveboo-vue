@@ -90,8 +90,14 @@ export default {
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
-            <button class="btn btn-warning d-flex justify-content-center align-items-center"><i
-                    class="fa-solid fa-cart-shopping"></i> Vai al checkout</button>
+            <div v-if="store.totalPrice > 0">
+                <button class="btn btn-warning d-flex justify-content-center align-items-center">
+                    <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
+                </button>
+            </div>
+            <div v-else>
+                <h4>Non hai ancora effettuato un ordine.</h4>
+            </div>
         </div>
     </div>
 </template>
