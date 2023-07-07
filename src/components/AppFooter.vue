@@ -58,7 +58,6 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 footer {
-    background-color: $app_color;
 
     img {
         height: 35px;
