@@ -96,7 +96,7 @@ export default {
                 </button>
             </div>
             <div v-else>
-                <h4>Non hai ancora effettuato un ordine.</h4>
+                <h5>Non hai ancora effettuato un ordine.</h5>
             </div>
         </div>
     </div>
