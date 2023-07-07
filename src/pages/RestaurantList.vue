@@ -127,6 +127,8 @@ export default {
 
 
 <style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
 .checkbox_btn {
     max-width: 100% / 4;
     min-width: 150px;
