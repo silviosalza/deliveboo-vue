@@ -92,24 +92,24 @@ export default {
             this.getRestaurant();
         },
 
-         getDishes(pippo){
-             let params = null;
-             if (pippo){
-                 params = {
-                         restaurant_id: pippo
-                 }
-             }
-             console.log(pippo);
-             axios.get(`${this.myUrl}/api/dishes`, {params})
-                 .then(response => {
-                     this.dishesArray = response.data.results;
-                     console.log(this.dishesArray);
-                 })
-                 .catch(error => {
-                     console.error(error);
-                 });
+        //  getDishes(pippo){
+        //      let params = null;
+        //      if (pippo){
+        //          params = {
+        //                  restaurant_id: pippo
+        //          }
+        //      }
+        //      console.log(pippo);
+        //      axios.get(`${this.myUrl}/api/dishes`, {params})
+        //          .then(response => {
+        //              this.dishesArray = response.data.results;
+        //              console.log(this.dishesArray);
+        //          })
+        //          .catch(error => {
+        //              console.error(error);
+        //          });
 
-         }
+        //  }
 
     }
 

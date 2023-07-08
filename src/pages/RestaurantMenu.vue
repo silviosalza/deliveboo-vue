@@ -58,25 +58,28 @@ export default {
     },
     mounted() {
         const id = this.$route.params.id
-        this.getDishes(id)
+        if (id){
+
+            this.getDishes(id)
+        }
     }
 }
 
 </script>
 <template>
-    <h1>Ristorante Menu</h1>
+    <!-- <h1>Ristorante Menu</h1>
     <div id="1">
         <h2 id="dish-title">Titolo Card</h2>
         <h3 id="dish-price">5.25</h3>
         <button class="btn btn-primary" @click="updateStore(1)">Test Bottone</button>
-    </div>
+    </div> -->
 
-    <div v-for="(product, index) in dishesArray" :key="index" class="card" style="width: 18rem;">
+    <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id " style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{ product.dish_name }}</h5>
-            <p class="card-text">{{ product.price }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
+            <p id="dish-price" class="card-text">{{ product.price }}</p>
+            <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
         </div>
     </div>
 </template>
