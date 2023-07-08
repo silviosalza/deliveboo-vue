@@ -8,26 +8,26 @@ import { RouterLink } from 'vue-router';
 export default {
     components: { AppJumbotronSearch, RouterLink, AppMain },
 
-    data(){
-    return{
-      restaurants:[],
-    }
-  },
-   methods: {
-    getRestaurant(pageNumber = 1, category = 1){
-        let params = {
-            page: pageNumber,
-            categories: category
-
+    data() {
+        return {
+            restaurants: [],
         }
-        
-      axios.get(`http://localhost:8000/api/restaurants`, {params}).then(resp => {
-        console.log('ciao');
-        console.log(resp);
-        this.restaurants = resp.data.results.data;
-      })
-    }
-  },
+    },
+    methods: {
+        getRestaurant(pageNumber = 1, category = 1) {
+            let params = {
+                page: pageNumber,
+                categories: category
+
+            }
+
+            axios.get(`${this.myUrl}/api/restaurants`, { params }).then(resp => {
+                console.log('ciao');
+                console.log(resp);
+                this.restaurants = resp.data.results.data;
+            })
+        }
+    },
 
 
 }
@@ -38,153 +38,156 @@ export default {
 <template>
     <AppJumbotronSearch />
 
-    <div class="container container_categories d-flex justify-content-center">
-        <div class="row d-flex justify-content-center">
-            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                <div class="text-center">
-                    <img class="icon" src="../assets/img/burgericon.png" alt="">
+    <div class="container_categories">
+
+        <div class="container d-flex justify-content-center">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/burgericon.png" alt="">
+                    </div>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Hamburger</div>
+                    </router-link>
                 </div>
-                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover" @click="clickutente(item.id)">
-                    <div class="bg-top">
-                        <div class="bg-inner"></div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/pastaicon.png" alt="">
                     </div>
-                    <div class="bg-right">
-                        <div class="bg-inner"></div>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover" >
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Mediterranea</div>
+                    </router-link>
+                </div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/orientalicon.png" alt="">
                     </div>
-                    <div class="bg">
-                        <div class="bg-inner"></div>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Orientale</div>
+                    </router-link>
+                </div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/pizzaicon.png" alt="">
                     </div>
-                    <div class="text">Hamburger</div>
-                </router-link>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Pizza</div>
+                    </router-link>
+                </div>
             </div>
-            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                <div class="text-center">
-                    <img class="icon" src="../assets/img/pastaicon.png" alt="">
+        </div>
+
+        <div class="container d-flex justify-content-center">
+            <div class="row d-flex justify-content-center">
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/sushiicon.png" alt="">
+                    </div>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Sushi</div>
+                    </router-link>
                 </div>
-                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                    <div class="bg-top">
-                        <div class="bg-inner"></div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/vegicon.png" alt="">
                     </div>
-                    <div class="bg-right">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="bg">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="text">Mediterranea</div>
-                </router-link>
-            </div>
-            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                <div class="text-center">
-                    <img class="icon" src="../assets/img/orientalicon.png" alt="">
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Veggy</div>
+                    </router-link>
                 </div>
-                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                    <div class="bg-top">
-                        <div class="bg-inner"></div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/hawainicon.png" alt="">
                     </div>
-                    <div class="bg-right">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="bg">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="text">Orientale</div>
-                </router-link>
-            </div>
-            <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                <div class="text-center">
-                    <img class="icon" src="../assets/img/pizzaicon.png" alt="">
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Pokè</div>
+                    </router-link>
                 </div>
-                <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                    <div class="bg-top">
-                        <div class="bg-inner"></div>
+                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
+                    <div class="text-center">
+                        <img class="icon" src="../assets/img/desserticon.png" alt="">
                     </div>
-                    <div class="bg-right">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="bg">
-                        <div class="bg-inner"></div>
-                    </div>
-                    <div class="text">Pizza</div>
-                </router-link>
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Dessert</div>
+                    </router-link>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container container_categories d-flex justify-content-center">
-    <div class="row d-flex justify-content-center">
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/sushiicon.png" alt="">
-            </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Sushi</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/vegicon.png" alt="">
-            </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Veggy</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/hawainicon.png" alt="">
-            </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Pokè</div>
-            </router-link>
-        </div>
-        <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-            <div class="text-center">
-                <img class="icon" src="../assets/img/desserticon.png" alt="">
-            </div>
-            <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                <div class="bg-top">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg-right">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="bg">
-                    <div class="bg-inner"></div>
-                </div>
-                <div class="text">Dessert</div>
-            </router-link>
-        </div>
-    </div>
-</div>
-
-<AppMain />
+    <AppMain />
 </template>
 
 
@@ -192,5 +195,8 @@ export default {
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
 
+.container_categories {
 
+    margin: 3rem 0;
+}
 </style>

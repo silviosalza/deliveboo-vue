@@ -5,37 +5,19 @@ export default {
     name: "RestaurantCard",
     props: {
         restaurant: Object,
+        categoryIcon: Array,
     },
     data() {
         return {
             myUrl: 'http://localhost:8000',
             restaurants: [],
             totalCategory: [],
-            categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
             dishesArray: []
         }
     },
 
     methods: {
-        
-        // getDishes(pippo){
-        //     let params = null;
-        //     if (pippo){
-        //         params = {
-        //                 restaurantId: pippo
-        //         }
-        //     }
-        //     console.log(pippo);
-        //     axios.get(`${this.myUrl}/api/dishes`, {params})
-        //         .then(response => {
-        //             this.dishesArray = response.data.results;
-        //             console.log(this.dishesArray);
-        //         })
-        //         .catch(error => {
-        //             console.error(error);
-        //         });
 
-        // }
 
     }
 
@@ -43,36 +25,79 @@ export default {
 
 </script>
 
+
+
 <template>
-    <div class="restaurant_card d-flex justify-content-center align-items-center">
-        <div class="rest_name d-flex justify-content-center align-items-center ">
-            <h4>{{ restaurant.restaurant_name }}</h4>
-            <div class="dishes" v-for="(element, index) in dishesArray" :key="index">
-                <p>{{ element.dish_name }}</p>
+    <div class="card restaurant_card text-center">
+        <img src="../assets/img/homepage-bg.jpg" class="card-img-top" alt="...">
+        <h4 class="pt-2">{{ restaurant.restaurant_name }}</h4>
+        <div class="card-body d-flex justify-content-center">
+            <div v-for="(element, index) in restaurant.categories" :key="index">
+                <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
             </div>
         </div>
-        
+        <a href="#" class="button menu_text text-center">Menu</a>
     </div>
+
+
+
+
+    <!-- <div class="restaurant_card d-flex justify-content-center align-items-center">
+        <div class="rest_name d-flex justify-content-center align-items-center ">
+            <h4>{{ restaurant.restaurant_name }}</h4>
+            <div v-for="(element, index) in restaurant.categories" :key="index">
+                <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
+
+            </div>
+        </div>
+
+    </div> -->
 </template>
 
 
 
 <style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
 
-.restaurant_card{
-    background-image: url(../assets/img/photo-1504674900247-0877df9cc836.jpg);
-    background-size: cover;
-    height: 100px;
-    background-color: rgb(0, 0, 0, 0.5);
-    .rest_name{
-        backdrop-filter: blur(10px);
-        width: 100%;
-        
+.card {
+    height: 12rem;
+    width: 13rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+    &:hover{
+        transform: scale(1.1);
+        transition: all .2s ease-in-out;
     }
-    
+    .card-body{
+        padding: 0;
+    }
+
+
+    .rest_icon {
+        width: 50px;
+    }
+
+    .button {
+        height: 60px;
+        font-size: 0.8rem;
+        margin-top: 10px;
+        border: 1px solid rgb(224, 204, 24);
+        transition: all .2s;
+        box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+        letter-spacing: 0.1em;
+        font-family: monospace;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .button:hover {
+        box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
+        color: $app_color;
+    }
 }
 
-
-
-
+.logo_rest {
+    width: 150px;
+}
 </style>

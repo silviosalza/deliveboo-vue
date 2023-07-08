@@ -5,9 +5,11 @@ import RestaurantCard from '../components/RestaurantCard.vue';
 
 
 export default {
-    props: {
-        restaurant: Object,
-    },
+    // props: {
+    //     restaurant: Object,
+    //     categoryArray: Array,
+    // },
+
     components: {
         AppJumbotronSearch,
         RestaurantCard
@@ -24,7 +26,9 @@ export default {
         }
     },
     mounted() {
-        this.getCategory()
+        this.getRestaurant();
+        this.getCategory();
+        this.clickutente();
     },
 
     methods: {
@@ -141,8 +145,8 @@ export default {
 
 
         <div class="row rest_cards">
-            <div class="col-6 col-md-3 col-sm-6 my-1" v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard :restaurant="element" @click="getDishes(element.id)"/>
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center" v-for="(element, index) in restaurants" :key="index">
+                <RestaurantCard :categoryIcon="totalCategory" :restaurant="element" @click="getDishes(element.id)"/>
             </div>
         </div>
     </section>
@@ -154,7 +158,7 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 .checkbox_btn {
-    max-width: 100% / 4;
+    max-width: 200px;
     min-width: 150px;
     margin: 0 6px;
 }
