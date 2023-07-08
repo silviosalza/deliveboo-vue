@@ -34,16 +34,18 @@ export default {
                 if(this.store.cartArray.length === 0){
                     this.store.cartArray.push(dishObject);//lo inserisco nell'array
                     this.store.totalProducts += 1;//incremento i prodotti presi di uno
+                    this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
 
                 } else if(this.store.cartArray[0].restaurant_id === dishObject.restaurant_id){
                     this.store.cartArray.push(dishObject);//lo inserisco nell'array
                     this.store.totalProducts += 1;//incremento i prodotti presi di uno
+                    this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
 
                 } else{
                     alert('Non puoi aggiungere prodotti di un ristorante diverso')
                 }
             }
-            this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
+            
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
