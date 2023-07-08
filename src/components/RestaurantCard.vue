@@ -19,11 +19,9 @@ export default {
     methods: {
         eseguiGetDishes() {
       this.$emit('esegui-getDishes');
-    }
-
-
-    }
-
+    },
+    
+}
 }
 
 </script>
@@ -39,7 +37,7 @@ export default {
                 <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
             </div>
         </div>
-        <router-link :to="{ name: 'menu' }" class="button menu_text text-center" @click="eseguiGetDishes()">Menu</router-link>
+        <router-link :to="{ name: 'menu', params:{id:restaurant.id} }" class="button menu_text text-center" @click="eseguiGetDishes()">Menu</router-link>
     </div>
 
 

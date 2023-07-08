@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store';
 export default {
     name: 'RestaurantMenu',
@@ -6,7 +7,8 @@ export default {
         return {
             store,
             dishesArray: [],
-            
+            myUrl: 'http://localhost:8000',
+
         }
     },
     methods: {
@@ -32,9 +34,34 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
+        },
+        getDishes(pippo) {
+            let params = null;
+            if (pippo) {
+                params = {
+                    restaurant_id: pippo
+                }
+            }
+            console.log(pippo);
+            axios.get(`${this.myUrl}/api/dishes`, { params })
+                .then(response => {
+                    this.dishesArray = response.data.results;
+                    console.log(this.dishesArray);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+
         }
+
+    },
+    mounted() {
+        const id = this.$route.params.id
+        this.getDishes(id)
     }
 }
+
 </script>
 <template>
     <h1>Ristorante Menu</h1>
@@ -44,13 +71,12 @@ export default {
         <button class="btn btn-primary" @click="updateStore(1)">Test Bottone</button>
     </div>
 
-    <div  v-for="(product,index) in dishesArray" :key="index" class="card" style="width: 18rem;">
+    <div v-for="(product, index) in dishesArray" :key="index" class="card" style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">{{product.dish_name}}</h5>
-            <p class="card-text">{{product.price}}</p>
+            <h5 class="card-title">{{ product.dish_name }}</h5>
+            <p class="card-text">{{ product.price }}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
     </div>
-
 </template>
