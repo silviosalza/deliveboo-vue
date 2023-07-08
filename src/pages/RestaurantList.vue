@@ -145,7 +145,7 @@ export default {
 
 
         <div class="row rest_cards">
-            <div class="col-6 col-md-3 col-sm-6 my-1" v-for="(element, index) in restaurants" :key="index">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center" v-for="(element, index) in restaurants" :key="index">
                 <RestaurantCard :categoryIcon="totalCategory" :restaurant="element" @click="getDishes(element.id)"/>
             </div>
         </div>
@@ -158,7 +158,7 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 .checkbox_btn {
-    max-width: 100% / 4;
+    max-width: 200px;
     min-width: 150px;
     margin: 0 6px;
 }
