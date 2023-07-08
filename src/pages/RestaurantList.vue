@@ -26,7 +26,9 @@ export default {
         }
     },
     mounted() {
-        this.getCategory()
+        this.getRestaurant();
+        this.getCategory();
+        this.clickutente();
     },
 
     methods: {

@@ -46,8 +46,7 @@ export default {
                     <div class="text-center">
                         <img class="icon" src="../assets/img/burgericon.png" alt="">
                     </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover"
-                        @click="clickutente(item.id)">
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
                         <div class="bg-top">
                             <div class="bg-inner"></div>
                         </div>
@@ -64,7 +63,7 @@ export default {
                     <div class="text-center">
                         <img class="icon" src="../assets/img/pastaicon.png" alt="">
                     </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
+                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover" >
                         <div class="bg-top">
                             <div class="bg-inner"></div>
                         </div>
