@@ -7,6 +7,9 @@ export default {
             store
         }
     },
+    mounted() {
+        this.getCartItems();
+    },
     methods: {
         updateStore(data) {
             let divElement = document.getElementById(`${data}`);//punto di riferimento è l'id della card che sarà l'id del piatto
@@ -17,7 +20,6 @@ export default {
                 price: dishPrice,
                 count: 1
             }
-            let dishFounded;
             if (this.store.cartArray.some(item => item.name === dishTitle)) {//se nel carrello è già presente il piatto
                 let findItems = this.store.cartArray.filter(item => item['name'] === dishTitle);//cerco l'oggetto che ha come nome dishTitle (findItems risulterà un array)
                 let itemFounded = findItems[0];//lo assegno alla variabile itemFounded
@@ -28,6 +30,14 @@ export default {
                 this.store.totalProducts += 1;//incremento i prodotti presi di uno
             }
             this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
+            localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
+            localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
+            localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
+        },
+        getCartItems() {//con questa funzione inserisco i dati presenti nel localStorage nelle variabili corrispondenti
+            this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
+            this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
+            this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
         }
     }
 }
