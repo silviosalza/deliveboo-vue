@@ -24,6 +24,14 @@ export default {
     methods: {
         paymentSection() {
             this.payFlag = true;
+        },
+        clearCart() {
+            this.store.cartArray = [];
+            this.store.totalPrice = 0;
+            this.store.totalProducts = 0;
+            localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
+            localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
+            localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         }
     }
 }
@@ -100,9 +108,12 @@ export default {
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
-            <div v-if="store.totalPrice > 0">
+            <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
                 <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
+                </button>
+                <button class="btn btn-danger text-dark" @click="clearCart">
+                    Svuota carrello
                 </button>
             </div>
             <div v-else>
