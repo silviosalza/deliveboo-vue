@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-
+        this.getcartItems();
     },
     methods: {
         paymentSection() {
@@ -32,6 +32,11 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
+        },
+        getCartItems() {//con questa funzione inserisco i dati presenti nel localStorage nelle variabili corrispondenti
+            this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
+            this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
+            this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
         }
     }
 }
