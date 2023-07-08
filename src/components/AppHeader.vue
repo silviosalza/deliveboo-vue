@@ -14,10 +14,33 @@ export default {
                     routeName: "restaurants"
                 },
             ],
-            store
+            store,
+            payFlag: false
+        }
+    },
+    mounted() {
+        this.getcartItems();
+    },
+    methods: {
+        paymentSection() {
+            this.payFlag = true;
+        },
+        clearCart() {
+            this.store.cartArray = [];
+            this.store.totalPrice = 0;
+            this.store.totalProducts = 0;
+            localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
+            localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
+            localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
+        },
+        getCartItems() {//con questa funzione inserisco i dati presenti nel localStorage nelle variabili corrispondenti
+            this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
+            this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
+            this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
         }
     }
 }
+
 </script>
 
 <template>
@@ -90,13 +113,20 @@ export default {
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice }} €</h4>
-            <div v-if="store.totalPrice > 0">
-                <button class="btn btn-warning d-flex justify-content-center align-items-center">
+            <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
+                </button>
+                <button class="btn btn-danger text-dark" @click="clearCart">
+                    Svuota carrello
                 </button>
             </div>
             <div v-else>
                 <h5>Non hai ancora effettuato un ordine.</h5>
+            </div>
+            <div v-if="payFlag">
+                <h5>Qui avverrà il pagamento</h5>
+
             </div>
         </div>
     </div>
