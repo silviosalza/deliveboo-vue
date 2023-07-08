@@ -4,7 +4,9 @@ export default {
     name: 'RestaurantMenu',
     data() {
         return {
-            store
+            store,
+            dishesArray: [],
+            
         }
     },
     methods: {
@@ -41,4 +43,14 @@ export default {
         <h3 id="dish-price">5.25</h3>
         <button class="btn btn-primary" @click="updateStore(1)">Test Bottone</button>
     </div>
+
+    <div  v-for="(product,index) in dishesArray" :key="index" class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{product.dish_name}}</h5>
+            <p class="card-text">{{product.price}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
 </template>
