@@ -37,7 +37,7 @@ export default {
                 <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
             </div>
         </div>
-        <router-link :to="{ name: 'menu', params:{id:restaurant.id} }" class="button menu_text text-center" @click="eseguiGetDishes()">Menu</router-link>
+        <router-link :to="{ name: 'menu', params:{id:restaurant.id} }" class="button menu_text text-center" >Menu</router-link>
     </div>
 
 
