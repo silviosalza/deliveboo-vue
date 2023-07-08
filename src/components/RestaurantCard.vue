@@ -17,6 +17,9 @@ export default {
     },
 
     methods: {
+        eseguiGetDishes() {
+      this.$emit('esegui-getDishes');
+    }
 
 
     }
@@ -36,7 +39,7 @@ export default {
                 <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
             </div>
         </div>
-        <a href="#" class="button menu_text text-center">Menu</a>
+        <a href="#" class="button menu_text text-center" @click="eseguiGetDishes()">Menu</a>
     </div>
 
 

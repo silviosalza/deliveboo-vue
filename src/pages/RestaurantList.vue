@@ -146,7 +146,7 @@ export default {
 
         <div class="row rest_cards">
             <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center" v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard :categoryIcon="totalCategory" :restaurant="element" @click="getDishes(element.id)"/>
+                <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory" :restaurant="element"/>
             </div>
         </div>
     </section>
