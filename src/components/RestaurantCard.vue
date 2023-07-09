@@ -19,8 +19,7 @@ export default {
     methods: {
         eseguiGetDishes() {
       this.$emit('esegui-getDishes');
-    },
-    
+    },    
 }
 }
 
@@ -30,7 +29,12 @@ export default {
 
 <template>
     <div class="card restaurant_card text-center">
-        <img src="../assets/img/homepage-bg.jpg" class="card-img-top" alt="...">
+        <div v-if="restaurant.thumb">
+            <img  :src="`${myUrl}/storage/${restaurant.thumb}`" class="card-img-top" alt="..." >
+        </div>
+        <div v-else-if="!restaurant.thumb">
+            <img src="../assets/img/logo-white.png" class="card-img-top" alt="..." >
+        </div>
         <h4 class="pt-2">{{ restaurant.restaurant_name }}</h4>
         <div class="card-body d-flex justify-content-center">
             <div v-for="(element, index) in restaurant.categories" :key="index">
