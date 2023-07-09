@@ -29,11 +29,11 @@ export default {
 
 <template>
     <div class="card restaurant_card text-center">
-        <div v-if="restaurant.thumb">
-            <img  :src="`${myUrl}/storage/${restaurant.thumb}`" class="card-img-top" alt="..." >
-        </div>
-        <div v-else-if="!restaurant.thumb">
+        <div v-if="!restaurant.thumb">
             <img src="../assets/img/logo-white.png" class="card-img-top" alt="..." >
+        </div>
+        <div v-else>
+            <img  :src="`${myUrl}/storage/${restaurant.thumb}`" class="card-img-top" alt="..." >
         </div>
         <h4 class="pt-2">{{ restaurant.restaurant_name }}</h4>
         <div class="card-body d-flex justify-content-center">
