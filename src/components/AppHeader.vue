@@ -86,6 +86,7 @@ export default {
             <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.name }} - Prezzo {{ item.price }}. <span> Il prodotto è stato preso {{ item.count }}
@@ -202,6 +203,17 @@ header {
 .btn-close {
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.ms-cart-bg {
+    position: absolute;
+    left: 27%;
+    top: 41%;
+    color: #d0d1d3;
+    font-size: 5rem;
+    border: 3px solid #d0d1d3;
+    padding: 50px 50px 47px 43px;
+    border-radius: 50%;
 }
 
 // MEDIA QUERIES
