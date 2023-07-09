@@ -112,7 +112,7 @@ export default {
                         volte</span>
                 </li>
             </ul>
-            <h4>Totale: {{ store.totalPrice }} €</h4>
+            <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
                 <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout

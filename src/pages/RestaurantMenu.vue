@@ -55,30 +55,29 @@ export default {
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         },
         getDishes(pippo) {
-            let params = null;
+            let params;
             if (pippo) {
                 params = {
                     restaurant_id: pippo
                 }
+                console.log(pippo);
+                axios.get(`${this.myUrl}/api/dishes`, { params })
+                    .then(response => {
+                        this.dishesArray = response.data.results;
+                        console.log(this.dishesArray);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
             }
-            console.log(pippo);
-            axios.get(`${this.myUrl}/api/dishes`, { params })
-                .then(response => {
-                    this.dishesArray = response.data.results;
-                    console.log(this.dishesArray);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
 
 
         }
 
     },
-    mounted() {
-        const id = this.$route.params.id
-        if (id) {
-            this.getDishes(id)
+      mounted() {
+        if (this.$route.params.id) {
+            this.getDishes(this.$route.params.id)
         }
     }
 }
