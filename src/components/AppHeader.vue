@@ -81,9 +81,9 @@ export default {
         </nav>
     </header>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasEndLabel">Carrello</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas-header bg-warning bg-gradient">
+            <h5 class="offcanvas-title" id="offcanvasEndLabel"><b>Carrello</b></h5>
+            <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <ul>
@@ -99,7 +99,7 @@ export default {
                 </button>
             </div>
             <div v-else>
-                <h5>Non hai ancora effettuato un ordine.</h5>
+                <h5 class="text-danger">Non hai ancora effettuato un ordine.</h5>
             </div>
         </div>
     </div>
@@ -186,8 +186,22 @@ header {
     .cart-hover:hover {
         background-color: #212529;
         color: #edc900;
-        // border: 1px solid #212529;
     }
+
+}
+
+.offcanvas-header {
+    border-bottom: 1px solid #212529;
+}
+
+.offcanvas-body {
+    background-color: #dedede;
+    box-shadow: inset 0px 7px 20px 0px #bdbdbd;
+}
+
+.btn-close {
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 // MEDIA QUERIES
