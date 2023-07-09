@@ -54,7 +54,7 @@ export default {
 }
 .title_background{
     background-color: rgb(0, 0, 0, 0.5);
-    padding: 5rem;
+    padding: 5rem 1rem 8.5rem 1rem;
 }
 
 
@@ -72,7 +72,7 @@ export default {
 .title_text, .slideDown, .slideUp {
   position: relative;
   font-family: tahoma;
-  font-size: 3rem;
+  font-size: 2.3rem;
   opacity:0;
 }
 
@@ -132,11 +132,19 @@ export default {
     .btn {
         height: 70px;
     }
+
+    .slide-effect, .title_text, .slideDown, .slideUp {
+        font-size: 2.3rem;
+    }
 }
 
 @include media-breakpoint-up(md) {
     .jumbo-restaurants-btn-container>.ms-btn {
         width: calc(100% / 4 - 20px);
+    }
+
+    .slide-effect, .title_text, .slideDown, .slideUp {
+        font-size: 3rem;
     }
 }
 </style>
