@@ -12,7 +12,7 @@ export default {
     <div class="jumbotron d-flex flex-column justify-content-center py-5">
         
 
-        <div class="container jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 gap-3">
+        <div class="jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 mx-2 gap-3">
             <div class="slide-effect title_background">
                 <div class="title_text">Deliveboo:</div>
                 <div class="slideDown">Buono,</div>
@@ -54,7 +54,7 @@ export default {
 }
 .title_background{
     background-color: rgb(0, 0, 0, 0.5);
-    padding: 5rem;
+    padding: 5rem 0.3rem;
 }
 
 
@@ -72,7 +72,7 @@ export default {
 .title_text, .slideDown, .slideUp {
   position: relative;
   font-family: tahoma;
-  font-size: 3rem;
+  font-size: 2.3rem;
   opacity:0;
 }
 
@@ -132,11 +132,19 @@ export default {
     .btn {
         height: 70px;
     }
+
+    .slide-effect, .title_text, .slideDown, .slideUp {
+        font-size: 2.3rem;
+    }
 }
 
 @include media-breakpoint-up(md) {
     .jumbo-restaurants-btn-container>.ms-btn {
         width: calc(100% / 4 - 20px);
+    }
+
+    .slide-effect, .title_text, .slideDown, .slideUp {
+        font-size: 3rem;
     }
 }
 </style>

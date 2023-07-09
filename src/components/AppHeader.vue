@@ -48,29 +48,32 @@ export default {
                         <li class="dropdown-item text-warning">
                             <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
+
+                        <li class="dropdown-item text-warning">
+                            <a class="active" href="http://localhost:8000/" target="_blank" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Carrello</a>
+                        </li>
                     </ul>
                 </div>
 
                 <div id="navbarNav">
-                    <ul class="navbar-nav align-items-center justify-content-end m-0">
-                        <li class="nav-item ms-5" v-for="item in menuItems">
+                    <ul class="navbar-nav align-items-center justify-content-center gap-2">
+                        <li class="nav-item" v-for="item in menuItems">
                             <router-link :to="{ name: item.routeName }" aria-current="page">{{
                                 item.label }}</router-link>
                         </li>
-                        <li class="nav-item ms-5">
+                        <li class="nav-item">
                             <a class="active" href="#join_us">Collabora con noi</a>
                         </li>
-                        <li class="nav-item ms-5">
+                        <li class="nav-item">
                             <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
                         </li>
-                        <li class="nav-item ms-5">
+                        <li class="nav-item position-relative">
                             <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </button>
-                            <div class="cart-counter">
-                                {{ store.totalProducts }}
-                            </div>
+
+                            <div class="cart-counter"> {{ store.totalProducts }} </div>
                         </li>
                     </ul>
                 </div>
@@ -78,11 +81,12 @@ export default {
         </nav>
     </header>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasEndLabel">Carrello</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="offcanvas-header bg-warning bg-gradient">
+            <h5 class="offcanvas-title" id="offcanvasEndLabel"><b>Carrello</b></h5>
+            <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
+            <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.name }} - Prezzo {{ item.price }}. <span> Il prodotto è stato preso {{ item.count }}
@@ -96,7 +100,7 @@ export default {
                 </button>
             </div>
             <div v-else>
-                <h5>Non hai ancora effettuato un ordine.</h5>
+                <h5 class="text-danger">Non hai ancora effettuato un ordine.</h5>
             </div>
         </div>
     </div>
@@ -150,6 +154,7 @@ header {
 .navbar-nav {
     flex-direction: row;
     width: 504px;
+    margin: 0;
 
     .nav-item {
         display: flex;
@@ -158,6 +163,13 @@ header {
         gap: 10px;
 
         .cart-counter {
+            position: absolute;
+            right: -9px;
+            bottom: -12px;
+            background-color: #edc900;
+            color: black;
+            padding: 0 1px 0 0;
+            
             border: 1px solid black;
             display: flex;
             justify-content: center;
@@ -175,8 +187,33 @@ header {
     .cart-hover:hover {
         background-color: #212529;
         color: #edc900;
-        // border: 1px solid #212529;
     }
+
+}
+
+.offcanvas-header {
+    border-bottom: 1px solid #212529;
+}
+
+.offcanvas-body {
+    background-color: #dedede;
+    box-shadow: inset 0px 7px 20px 0px #bdbdbd;
+}
+
+.btn-close {
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.ms-cart-bg {
+    position: absolute;
+    left: 27%;
+    top: 41%;
+    color: #d0d1d3;
+    font-size: 5rem;
+    border: 3px solid #d0d1d3;
+    padding: 50px 50px 47px 43px;
+    border-radius: 50%;
 }
 
 // MEDIA QUERIES
@@ -194,15 +231,25 @@ header {
         min-width: 50px;
     }
 
-    .navbar>.container {
+    .navbar > .container {
         justify-content: center;
     }
 
     #navbarNav {
         display: block;
 
-        .navbar-nav>li {
-            margin-left: 10px;
+        .navbar-nav {
+            margin-top: 15px;
+            padding-bottom: 10px;
+        }
+
+        .navbar-nav > li {
+            padding: 0 5px;
+            width: calc(100% / 5);
+        }
+
+        .navbar-nav > li:last-child {
+            width: fit-content;
         }
 
         .btn-group {
@@ -217,11 +264,10 @@ header {
         justify-content: space-between;
     }
 
-    // .navbar-nav {
-    //         li {
-    //             width: calc(100% / 5);
-    //         }
-    //     }
+    .navbar-nav {
+            margin: 0;
+            padding-bottom: 0;
+        }
 }
 
 @include media-breakpoint-up(lg) {
@@ -230,7 +276,7 @@ header {
         height: 180px;
 
         li {
-            font-size: 1rem;
+            font-size: 1.08rem;
         }
     }
 
@@ -248,7 +294,7 @@ header {
             width: 730px;
 
             li {
-                text-align: end;
+                text-align: center;
             }
         }
     }

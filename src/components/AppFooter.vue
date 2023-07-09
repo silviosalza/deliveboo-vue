@@ -82,6 +82,7 @@ footer {
         padding-inline-start: 0;
         font-size: 1.4rem;
         cursor: pointer;
+        margin-bottom: 0;
     }
 
     ul {
