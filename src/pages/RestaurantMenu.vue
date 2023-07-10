@@ -108,20 +108,20 @@ export default {
 
 <template>
     <section class="d-flex flex-wrap">
-
-        <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
-
-            <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
-                alt="...">
-            <img v-else
-                src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+        <div class="container d-flex flex-wrap justify-content-center gap-3 my-3">
+            <div v-for="(product, index) in dishesArray" :key="index" class="card ms-card" :id="product.id">
+                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                    alt="...">
+                <img v-else
+                    src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
+                    class="card-img-top" alt="...">
+                <div class="card-body px-0 pt-0 bg-warning bg-gradient bg-opacity-75">
+                    <h5 id="dish-title" class="card-title p-3 text-center bg-dark bg-gradient text-warning"> {{ product.dish_name }} </h5>
+                    <p id="dish-price" class="card-text px-3">PREZZO: <span class="badge text-bg-dark">{{ product.price }}€</span></p>
+                    <p id="dish-restaurant-id" class="px-3">ID RISTORANTE: <span class="badge text-bg-dark">{{ product.restaurant_id }}</span></p>
+                    <p id="dish-id" class="px-3">ID PRODOTTO: <span class="badge text-bg-dark">{{ product.id }}</span></p>
+                    <button class="ms-test-btn btn btn-dark m-auto mt-4 mb-2" @click="updateStore(product.id)">Test Bottone</button>
+                </div>
             </div>
         </div>
     </section>
@@ -129,3 +129,43 @@ export default {
 <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
 
 </template>
+
+<style lang="scss">
+    @use "../styles/general.scss" as *;
+    @use "../styles/utilities/variables" as *;
+
+    .ms-card {
+        width: calc(100% / 4 - 20px);
+        cursor: pointer;
+        box-shadow: 0;
+        transition: box-shadow 0.3s;
+    }
+
+    .ms-card:hover {
+        box-shadow: #00000059 0px 5px 15px;
+    }
+
+    .badge {
+        font-size: 1rem;
+    }
+
+    .btn {
+        height: 45px;
+    }
+
+    .ms-test-btn {
+        opacity: 35%;
+        color: black;
+        border: 1px solid black;
+    }
+
+    .ms-test-btn:hover {
+        transition: opacity 0.3s;
+        transition: color 0.3s;
+        transition: border 0.3s;
+
+        opacity: 100%;
+        color: white;
+        border: 1px solid white;
+    }
+</style>
