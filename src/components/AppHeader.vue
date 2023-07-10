@@ -187,25 +187,6 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
-                <form>
-                    <hr />
-                    <div class="form-group">
-                        <label>Credit Card Number</label>
-                        <div id="creditCardNumber" class="form-control"></div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6">
-                                <label>Expire Date</label>
-                                <div id="expireDate" class="form-control"></div>
-                            </div>
-                            <div class="col-6">
-                                <label>CVV</label>
-                                <div id="cvv" class="form-control"></div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
                 <button class="btn btn-success" @click.prevent="payWithCreditCard">Paga</button>
             </div>
             <div>
