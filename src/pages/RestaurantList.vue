@@ -22,7 +22,7 @@ export default {
             totalCategory: [],
             categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
             dishesArray: [],
-            restaurant_id : 0
+            restaurant_id : 0,
         }
     },
     mounted() {

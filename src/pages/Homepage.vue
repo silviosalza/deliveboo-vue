@@ -3,6 +3,7 @@ import axios from 'axios';
 import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
 import AppMain from '../components/AppMain.vue';
 import { RouterLink } from 'vue-router';
+import { store } from '../store';
 
 
 export default {
@@ -11,6 +12,7 @@ export default {
     data() {
         return {
             restaurants: [],
+            store,
         }
     },
     methods: {
