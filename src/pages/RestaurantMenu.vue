@@ -111,7 +111,7 @@ export default {
 
         <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
 
-            <img v-if="true" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+            <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
                 alt="...">
             <img v-else
                 src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
