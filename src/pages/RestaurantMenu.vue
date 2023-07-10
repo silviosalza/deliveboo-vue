@@ -120,7 +120,7 @@ export default {
                     <p id="dish-price" class="card-text px-3">PREZZO: <span class="badge text-bg-dark">{{ product.price }}€</span></p>
                     <p id="dish-restaurant-id" class="px-3">ID RISTORANTE: <span class="badge text-bg-dark">{{ product.restaurant_id }}</span></p>
                     <p id="dish-id" class="px-3">ID PRODOTTO: <span class="badge text-bg-dark">{{ product.id }}</span></p>
-                    <button class="btn btn-dark m-auto border" @click="updateStore(product.id)">Test Bottone</button>
+                    <button class="ms-test-btn btn btn-dark m-auto mt-4 mb-2" @click="updateStore(product.id)">Test Bottone</button>
                 </div>
             </div>
         </div>
@@ -147,5 +147,25 @@ export default {
 
     .badge {
         font-size: 1rem;
+    }
+
+    .btn {
+        height: 45px;
+    }
+
+    .ms-test-btn {
+        opacity: 35%;
+        color: black;
+        border: 1px solid black;
+    }
+
+    .ms-test-btn:hover {
+        transition: opacity 0.3s;
+        transition: color 0.3s;
+        transition: border 0.3s;
+
+        opacity: 100%;
+        color: white;
+        border: 1px solid white;
     }
 </style>
