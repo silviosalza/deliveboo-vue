@@ -39,8 +39,8 @@ export default {
             }
 
             //SOLUZIONE ALLA CARLONA
-            this.store.cartArray = this.cartArray;
-            console.log(this.cartArray);
+            // this.store.cartArray = this.cartArray;
+            // console.log(this.cartArray);
 
             if (this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array
@@ -72,7 +72,6 @@ export default {
         },
         getDishes(page) {
             let params;
-
             console.log(this.restaurantId);
             if (page !== 0) {
                 params = {
@@ -90,42 +89,43 @@ export default {
                         console.log(this.pagesDishes.currentPage);
                         console.log(this.pagesDishes.lastPage);
                         console.log(this.totalDishes);
-
                     })
                     .catch(error => {
                         console.error(error);
                     });
             }
-
-
         }
-
     },
     mounted() {
         if (this.$route.params.id) {
-            this.getDishes(1)
-            this.restaurantId = this.$route.params.id;
+            this.getDishes();
         }
     }
 }
 
 </script>
+
+
 <template>
-<section class="d-flex flex-wrap">
+    <section class="d-flex flex-wrap">
 
-    <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
+        <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
 
-        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top" alt="...">
-        <img v-else src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-            <p id="dish-price" class="card-text">{{ product.price }}</p>
-            <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-            <p id="dish-id">{{ product.id }}</p>
-            <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+            <img v-if="true" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                alt="...">
+            <img v-else
+                src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
+                <p id="dish-price" class="card-text">{{ product.price }}</p>
+                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
+                <p id="dish-id">{{ product.id }}</p>
+                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-    <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
+<PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
+
 </template>
