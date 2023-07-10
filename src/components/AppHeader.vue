@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store.js';
+import braintree from 'braintree-web';
 export default {
     name: 'AppHeader',
     data() {
@@ -15,11 +16,15 @@ export default {
                 },
             ],
             store,
-            payFlag: false
+            payFlag: false,
+            hostedFieldInstance: false,
+            nonce: "",
+            error: ""
         }
     },
     mounted() {
         this.getCartItems();
+        this.paymentFunction();
     },
     methods: {
         paymentSection() {
@@ -29,6 +34,7 @@ export default {
             this.store.cartArray = [];
             this.store.totalPrice = 0;
             this.store.totalProducts = 0;
+            this.payFlag = false;
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
@@ -37,6 +43,57 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
+        },
+        paymentFunction() {
+            braintree.client.create({
+                authorization: "sandbox_ktrqpfdf_tfrvnyfh3xsz95xv"
+            })
+                .then(clientInstance => {
+                    let options = {
+                        client: clientInstance,
+                        styles: {
+                            input: {
+                                'font-size': '14px',
+                                'font-family': 'Open Sans'
+                            }
+                        },
+                        fields: {
+                            number: {
+                                selector: '#creditCardNumber',
+                                placeholder: 'Enter Credit Card'
+                            },
+                            cvv: {
+                                selector: '#cvv',
+                                placeholder: 'Enter CVV'
+                            },
+                            expirationDate: {
+                                selector: '#expireDate',
+                                placeholder: '00 / 0000'
+                            }
+                        }
+                    }
+                    return braintree.hostedFields.create(options)
+                })
+                .then(hostedFieldInstance => {
+                    this.hostedFieldInstance = hostedFieldInstance;
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+        payWithCreditCard() {
+            if (this.hostedFieldInstance) {
+                this.error = "";
+                this.nonce = "";
+                this.hostedFieldInstance.tokenize().then(payload => {
+                    console.log(payload);
+                    this.nonce = payload.nonce;
+                })
+                    .catch(err => {
+                        console.error(err);
+                        this.error = err.message;
+                    })
+            }
         }
     }
 }
@@ -116,7 +173,7 @@ export default {
                     {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
                 </li>
             </ul>
-            <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
+            <h4 id="amount">Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
                 <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
@@ -130,7 +187,30 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
-
+                <form>
+                    <hr />
+                    <div class="form-group">
+                        <label>Credit Card Number</label>
+                        <div id="creditCardNumber" class="form-control"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Expire Date</label>
+                                <div id="expireDate" class="form-control"></div>
+                            </div>
+                            <div class="col-6">
+                                <label>CVV</label>
+                                <div id="cvv" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <button class="btn btn-success" @click.prevent="payWithCreditCard">Paga</button>
+            </div>
+            <div>
+                <div class="alert alert-danger" role="alert"></div>
+                <div class="alert alert-success" role="alert"></div>
             </div>
         </div>
     </div>
@@ -153,7 +233,8 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
-    .cart_img{
+
+    .cart_img {
         height: 2rem;
     }
 
