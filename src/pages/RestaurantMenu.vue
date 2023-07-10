@@ -107,9 +107,9 @@ export default {
 
 
 <template>
-    <section class="d-flex flex-wrap">
+    <section class="d-flex flex-wrap gap-2 my-4 container">
 
-        <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
+        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id" style="width: 18rem;">
 
             <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
                 alt="...">
@@ -129,3 +129,10 @@ export default {
 <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
 
 </template>
+
+<style scoped lang="scss">
+
+.card-dish{
+    width: calc(100% / 4) ;
+}
+</style>
