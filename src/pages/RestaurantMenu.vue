@@ -1,15 +1,24 @@
 <script>
 import { store } from '../store';
 import axios from 'axios';
+import PaginationDish from '../components/PaginationDish.vue';
+
 export default {
     name: 'RestaurantMenu',
+    components:{
+        PaginationDish
+    },
     data() {
         return {
             store,
             dishesArray: [],
             myUrl: 'http://localhost:8000',
             cartArray: [],
-
+            pagesDishes: {
+                currentPage: 1,
+                lastPage: null,
+            },
+            totalDishes: 0,
 
         }
     },
@@ -56,8 +65,8 @@ export default {
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
 
             //SOLUZIONE ALLA CARLONA
-            // this.store.cartArray = this.cartArray;
-            // console.log(this.cartArray);
+            this.store.cartArray = this.cartArray;
+            console.log(this.cartArray);
         },
         getDishes(pippo) {
             let params;
@@ -68,8 +77,16 @@ export default {
                 console.log(pippo);
                 axios.get(`${this.myUrl}/api/dishes`, { params })
                     .then(response => {
-                        this.dishesArray = response.data.results;
+                        console.log(response);
+                        this.dishesArray = response.data.results.data;
+                        this.pagesDishes.currentPage = response.data.results.current_page;
+                        this.pagesDishes.lastPage = response.data.results.last_page;
+                        this.totalDishes = response.data.results.total;
                         console.log(this.dishesArray);
+                        console.log( this.pagesDishes.currentPage);
+                        console.log(this.pagesDishes.lastPage);
+                        console.log(this.totalDishes);
+
                     })
                     .catch(error => {
                         console.error(error);
@@ -89,14 +106,20 @@ export default {
 
 </script>
 <template>
-    <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-            <p id="dish-price" class="card-text">{{ product.price }}</p>
-            <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-            <p id="dish-id">{{ product.id }}</p>
-            <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+
+    <div class="d-flex flex-wrap justify-content-center">
+
+        <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
+                <p id="dish-price" class="card-text">{{ product.price }}</p>
+                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
+                <p id="dish-id">{{ product.id }}</p>
+                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+            </div>
         </div>
     </div>
+
+    <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
 </template>
