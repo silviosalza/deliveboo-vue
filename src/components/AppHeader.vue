@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        // this.getCartItems();
+        this.getCartItems();
     },
     methods: {
         paymentSection() {
