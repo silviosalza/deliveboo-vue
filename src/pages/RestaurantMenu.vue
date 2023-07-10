@@ -19,6 +19,7 @@ export default {
                 lastPage: null,
             },
             totalDishes: 0,
+            restaurantId: 0
 
         }
     },
@@ -40,7 +41,7 @@ export default {
             //SOLUZIONE ALLA CARLONA
             this.store.cartArray = this.cartArray;
             console.log(this.cartArray);
-            
+
             if (this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array
                 this.store.totalProducts += 1;//incremento i prodotti presi di uno
@@ -69,13 +70,15 @@ export default {
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         },
-        getDishes(pippo) {
+        getDishes(page) {
             let params;
-            if (pippo) {
+
+            console.log(this.restaurantId);
+            if (page !== 0) {
                 params = {
-                    restaurant_id: pippo
+                    page: page,
+                    restaurant_id: this.$route.params.id
                 }
-                console.log(pippo);
                 axios.get(`${this.myUrl}/api/dishes`, { params })
                     .then(response => {
                         console.log(response);
@@ -100,26 +103,29 @@ export default {
     },
     mounted() {
         if (this.$route.params.id) {
-            this.getDishes(this.$route.params.id)
+            this.getDishes(1)
+            this.restaurantId = this.$route.params.id;
         }
     }
 }
 
 </script>
 <template>
-    <div class="d-flex flex-wrap justify-content-center">
+<section class="d-flex flex-wrap">
 
-        <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
-            </div>
+    <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
+
+        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top" alt="...">
+        <img v-else src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
+            <p id="dish-price" class="card-text">{{ product.price }}</p>
+            <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
+            <p id="dish-id">{{ product.id }}</p>
+            <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
         </div>
     </div>
+</section>
 
     <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
 </template>
