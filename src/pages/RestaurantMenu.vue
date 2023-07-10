@@ -5,7 +5,7 @@ import PaginationDish from '../components/PaginationDish.vue';
 
 export default {
     name: 'RestaurantMenu',
-    components:{
+    components: {
         PaginationDish
     },
     data() {
@@ -36,6 +36,11 @@ export default {
                 restaurant_id: dishRestaurantId,
                 dish_id: dishId
             }
+
+            //SOLUZIONE ALLA CARLONA
+            this.store.cartArray = this.cartArray;
+            console.log(this.cartArray);
+            
             if (this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array
                 this.store.totalProducts += 1;//incremento i prodotti presi di uno
@@ -63,10 +68,6 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
-
-            //SOLUZIONE ALLA CARLONA
-            this.store.cartArray = this.cartArray;
-            console.log(this.cartArray);
         },
         getDishes(pippo) {
             let params;
@@ -83,7 +84,7 @@ export default {
                         this.pagesDishes.lastPage = response.data.results.last_page;
                         this.totalDishes = response.data.results.total;
                         console.log(this.dishesArray);
-                        console.log( this.pagesDishes.currentPage);
+                        console.log(this.pagesDishes.currentPage);
                         console.log(this.pagesDishes.lastPage);
                         console.log(this.totalDishes);
 
@@ -106,7 +107,6 @@ export default {
 
 </script>
 <template>
-
     <div class="d-flex flex-wrap justify-content-center">
 
         <div v-for="(product, index) in dishesArray" :key="index" class="card" :id="product.id" style="width: 18rem;">
