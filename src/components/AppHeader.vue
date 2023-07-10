@@ -73,7 +73,8 @@ export default {
                         </li>
 
                         <li class="dropdown-item text-warning">
-                            <a class="active" href="http://localhost:8000/" target="_blank" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Carrello</a>
+                            <a class="active" href="http://localhost:8000/" target="_blank" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Carrello</a>
                         </li>
                     </ul>
                 </div>
@@ -112,7 +113,7 @@ export default {
             <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
             <ul>
                 <li v-for="(item, index) in store.cartArray">
-                    {{ item.count }}  x  <span style="color: red;">{{ item.name }}</span> (  {{ item.price }} )
+                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
@@ -198,7 +199,7 @@ header {
             background-color: #edc900;
             color: black;
             padding: 0 1px 0 0;
-            
+
             border: 1px solid black;
             display: flex;
             justify-content: center;
@@ -260,7 +261,7 @@ header {
         min-width: 50px;
     }
 
-    .navbar > .container {
+    .navbar>.container {
         justify-content: center;
     }
 
@@ -272,12 +273,12 @@ header {
             padding-bottom: 10px;
         }
 
-        .navbar-nav > li {
+        .navbar-nav>li {
             padding: 0 5px;
             width: calc(100% / 5);
         }
 
-        .navbar-nav > li:last-child {
+        .navbar-nav>li:last-child {
             width: fit-content;
         }
 
@@ -294,9 +295,9 @@ header {
     }
 
     .navbar-nav {
-            margin: 0;
-            padding-bottom: 0;
-        }
+        margin: 0;
+        padding-bottom: 0;
+    }
 }
 
 @include media-breakpoint-up(lg) {
