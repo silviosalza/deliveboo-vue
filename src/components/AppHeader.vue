@@ -94,7 +94,7 @@ export default {
                         <li class="nav-item position-relative">
                             <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
                                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">
-                                <i class="fa-solid fa-cart-shopping"></i>
+                                <img class="cart_img" src="https://cdn-icons-png.flaticon.com/256/263/263142.png" alt="">
                             </button>
 
                             <div class="cart-counter"> {{ store.totalProducts }} </div>
@@ -153,6 +153,9 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
+    .cart_img{
+        height: 2rem;
+    }
 
     li {
         font-size: 0.8rem;
@@ -215,8 +218,7 @@ header {
     }
 
     .cart-hover:hover {
-        background-color: #212529;
-        color: #edc900;
+        transform: scale(1.1);
     }
 
 }
