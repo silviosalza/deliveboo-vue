@@ -110,7 +110,7 @@ export default {
             <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
+            <img class="cart_img ms-cart-bg" src="https://cdn-icons-png.flaticon.com/256/263/263142.png" alt="">
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
@@ -201,7 +201,7 @@ header {
             bottom: -12px;
             background-color: #edc900;
             color: black;
-            padding: 0 1px 0 0;
+            padding: 2px 1px 0 0;
 
             border: 1px solid black;
             display: flex;
@@ -239,13 +239,9 @@ header {
 
 .ms-cart-bg {
     position: absolute;
-    left: 27%;
-    top: 41%;
-    color: #d0d1d3;
-    font-size: 5rem;
-    border: 3px solid #d0d1d3;
-    padding: 50px 50px 47px 43px;
-    border-radius: 50%;
+    left: 13%;
+    top: 40%;
+    opacity: 15%;
 }
 
 // MEDIA QUERIES
