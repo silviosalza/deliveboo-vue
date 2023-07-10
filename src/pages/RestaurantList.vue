@@ -2,16 +2,13 @@
 import axios from 'axios';
 import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
 import RestaurantCard from '../components/RestaurantCard.vue';
-
+import Pagination from '../components/Pagination.vue';
 
 export default {
-    // props: {
-    //     restaurant: Object,
-    //     categoryArray: Array,
-    // },
 
     components: {
         AppJumbotronSearch,
+        Pagination,
         RestaurantCard
     },
 
@@ -22,7 +19,13 @@ export default {
             totalCategory: [],
             categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
             dishesArray: [],
-            restaurant_id : 0,
+            restaurant_id: 0,
+            pages: {
+                currentPage: 1,
+                lastPage: null,
+            },
+            totalRestaurants: 0,
+
         }
     },
     mounted() {
@@ -49,7 +52,13 @@ export default {
             axios.get(`${this.myUrl}/api/restaurants`, { params })
                 .then(response => {
                     this.restaurants = response.data.results.data;
+                    this.pages.currentPage = response.data.results.current_page;
+                    this.pages.lastPage = response.data.results.last_page;
+                    this.totalRestaurants = response.data.results.total;
                     console.log(this.restaurants);
+                    console.log(this.pages.currentPage);
+                    console.log(this.pages.lastPage);
+                    console.log(this.totalRestaurants);
                 })
                 .catch(error => {
                     console.error(error);
@@ -91,28 +100,13 @@ export default {
 
             this.getRestaurant();
         },
+        // changePage(pageNumber) {
+        //     if (pageNumber) {
+        //         this.getRestaurant(pageNumber);
+        //     }
 
-        //  getDishes(pippo){
-        //      let params = null;
-        //      if (pippo){
-        //          params = {
-        //                  restaurant_id: pippo
-        //          }
-        //      }
-        //      console.log(pippo);
-        //      axios.get(`${this.myUrl}/api/dishes`, {params})
-        //          .then(response => {
-        //              this.dishesArray = response.data.results;
-        //              console.log(this.dishesArray);
-        //          })
-        //          .catch(error => {
-        //              console.error(error);
-        //          });
-
-        //  }
-
+        // }
     }
-
 }
 
 </script>
@@ -120,7 +114,6 @@ export default {
 
 <template>
     <AppJumbotronSearch />
-    <!-- <button @click="getCategory()">dammi tutte le categorie</button> -->
     <section class="container">
 
         <div class="categ justify-content-center d-flex row row-cols-4">
@@ -145,11 +138,17 @@ export default {
 
 
         <div class="row rest_cards">
-            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center" v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory" :restaurant="element"/>
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
+                v-for="(element, index) in restaurants" :key="index">
+                <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
+                    :restaurant="element" />
             </div>
         </div>
     </section>
+
+    <!-- Handle pagination -->
+    <Pagination :pages="pages" @dati="getRestaurant" />
+    <!-- /Handle pagination -->
 </template>
 
 
