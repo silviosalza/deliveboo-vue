@@ -43,57 +43,6 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
-        },
-        paymentFunction() {
-            braintree.client.create({
-                authorization: "sandbox_ktrqpfdf_tfrvnyfh3xsz95xv"
-            })
-                .then(clientInstance => {
-                    let options = {
-                        client: clientInstance,
-                        styles: {
-                            input: {
-                                'font-size': '14px',
-                                'font-family': 'Open Sans'
-                            }
-                        },
-                        fields: {
-                            number: {
-                                selector: '#creditCardNumber',
-                                placeholder: 'Enter Credit Card'
-                            },
-                            cvv: {
-                                selector: '#cvv',
-                                placeholder: 'Enter CVV'
-                            },
-                            expirationDate: {
-                                selector: '#expireDate',
-                                placeholder: '00 / 0000'
-                            }
-                        }
-                    }
-                    return braintree.hostedFields.create(options)
-                })
-                .then(hostedFieldInstance => {
-                    this.hostedFieldInstance = hostedFieldInstance;
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        },
-        payWithCreditCard() {
-            if (this.hostedFieldInstance) {
-                this.error = "";
-                this.nonce = "";
-                this.hostedFieldInstance.tokenize().then(payload => {
-                    console.log(payload);
-                    this.nonce = payload.nonce;
-                })
-                    .catch(err => {
-                        console.error(err);
-                        this.error = err.message;
-                    })
-            }
         }
     }
 }
@@ -187,7 +136,6 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
-                <button class="btn btn-success" @click.prevent="payWithCreditCard">Paga</button>
             </div>
             <div>
                 <div class="alert alert-danger" role="alert"></div>
