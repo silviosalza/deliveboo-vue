@@ -39,4 +39,4 @@ updateStore(data) {
     localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
     localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
     localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
-},
+};
