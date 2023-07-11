@@ -13,13 +13,13 @@ export default {
             store,
             dishesArray: [],
             myUrl: 'http://localhost:8000',
-            cartArray: [],
+            // cartArray: [],
             pagesDishes: {
                 currentPage: 1,
                 lastPage: null,
             },
             totalDishes: 0,
-            restaurantId: 0
+            restaurantId:0,
 
         }
     },
