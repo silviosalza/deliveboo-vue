@@ -16,14 +16,15 @@ export default {
                 },
             ],
             store,
-            payFlag: false
+            payFlag: false,
+            hostedFieldInstance: false
         }
     },
     mounted() {
         this.getCartItems();
         //FUNZIONI PER IL PAGAMENTO
         braintree.client.create({
-            authorization: "YOUR_AUTHORIZATION_KEY"
+            authorization: "sandbox_ktrqpfdf_tfrvnyfh3xsz95xv"
         })
             .then(clientInstance => {
                 let options = {
@@ -52,19 +53,20 @@ export default {
                 return braintree.hostedFields.create(options)
             })
             .then(hostedFieldInstance => {
-                // @TODO - Use hostedFieldInstance to send data to Braintree
+                this.hostedFieldInstance = hostedFieldInstance;
             })
             .catch(err => {
             });
     },
     methods: {
-        paymentSection() {
+        paymentSection() {//per l'attivazione della sezione del pagamento con carta
             this.payFlag = true;
         },
-        clearCart() {
+        clearCart() {//pulire il carrello
             this.store.cartArray = [];
             this.store.totalPrice = 0;
             this.store.totalProducts = 0;
+            this.payFlag = false;
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
@@ -73,6 +75,15 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
+        },
+        payWithCreditCard() {//funzione dedicata per il pagamento con carta di credito
+            console.log('stai premendo questo bottone');
+            console.log(this.hostedFieldInstance);
+            if (this.hostedFieldInstance) {
+                this.hostedFieldInstance.tokenize().then(payload => {
+                    console.log(payload);
+                }).catch(err => { console.error(err) })
+            }
         }
     }
 }
@@ -166,24 +177,30 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
+                <!--FORM COMPILAZIONE UTENTE-->
+                <form method="post">
+
+                </form>
                 <!--FORM PAGAMENTO-->
                 <form action="">
                     <div class="form-group">
-                        <label>Credit Card Number</label>
+                        <label for="creditCardNumber">Credit Card Number</label>
                         <div id="creditCardNumber" class="form-control"></div>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-6">
-                                <label>Expire Date</label>
+                                <label for="expireDate">Expire Date</label>
                                 <div id="expireDate" class="form-control"></div>
                             </div>
                             <div class="col-6">
-                                <label>CVV</label>
+                                <label for="cvv">CVV</label>
                                 <div id="cvv" class="form-control"></div>
                             </div>
                         </div>
                     </div>
+                    <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit
+                        Card</button>
                 </form>
             </div>
         </div>
