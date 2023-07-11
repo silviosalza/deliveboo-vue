@@ -43,9 +43,9 @@ export default {
             </div>
             <div>
                 <ul class="icons d-flex justify-content-center gap-4">
-                    <li><i class="fa-brands fa-facebook-f"></i></li>
+                    <!-- <li><i class="fa-brands fa-facebook-f"></i></li>
                     <li><i class="fa-brands fa-twitter"></i></li>
-                    <li><i class="fa-brands fa-instagram"></i></li>
+                    <li><i class="fa-brands fa-instagram"></i></li> -->
                 </ul>
             </div>
         </div>

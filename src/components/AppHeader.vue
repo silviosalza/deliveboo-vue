@@ -109,7 +109,7 @@ export default {
             <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
+            <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
@@ -118,7 +118,7 @@ export default {
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
                 <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
-                    <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
+                    Vai al checkout
                 </button>
                 <button class="btn btn-danger text-dark" @click="clearCart">
                     Svuota carrello
