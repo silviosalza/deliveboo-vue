@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-// import Homepage from "./pages/Homepage.vue";
-// import RestaurantList from "./pages/RestaurantList.vue";
-// import RestaurantMenu from "./pages/RestaurantMenu.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -20,10 +17,10 @@ const router = createRouter({
 
             path: '/restaurants/menu/:id',
             name: 'menu',
-            component: import("./pages/RestaurantMenu.vue"),
+            component: () => import("./pages/RestaurantMenu.vue"),
         },
-      
-    ]
-    });
 
-    export {router};
+    ]
+});
+
+export { router };

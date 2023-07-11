@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        // this.getCartItems();
+        this.getCartItems();
     },
     methods: {
         paymentSection() {
@@ -37,8 +37,33 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
-        }
+        },
+
+        increaseQuantity(item) {
+            item.count += 1;
+            this.updateCart();
+            this.updateTotalPrice(item.price);
+        },
+        decreaseQuantity(item) {
+            if (item.count > 1) {
+                item.count -= 1;
+                this.updateCart();
+                this.updateTotalPrice(-item.price);
+            }
+        },
+        updateCart() {
+            const cartItems = JSON.stringify(this.store.cartArray);
+            localStorage.setItem('cart', cartItems);
+        },
+        updateTotalPrice(price) {
+            this.store.totalPrice += price;
+            localStorage.setItem('total', this.store.totalPrice);
+        },
+
+        prova() {
+        alert('ciao');
     }
+}
 }
 
 </script>
@@ -112,8 +137,18 @@ export default {
         <div class="offcanvas-body">
             <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
             <ul>
-                <li v-for="(item, index) in store.cartArray">
-                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
+                <li v-for="(item, index) in store.cartArray" class="d-flex my-3 gap-5">
+                    <div>
+                        {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
+                    </div>
+                    <div class="d-flex gap-3 align-items-center justify-content-center">
+                        <div class="plus" @click="increaseQuantity(item)">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                        <div class="minus" @click="decreaseQuantity(item)">
+                            <i class="fa-solid fa-minus"></i>
+                        </div>
+                    </div>
                 </li>
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
@@ -121,7 +156,7 @@ export default {
                 <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     <i class="fa-solid fa-cart-shopping"></i> Vai al checkout
                 </button>
-                <button class="btn btn-danger text-dark" @click="clearCart">
+                <button class="btn btn-danger svuota-carrello text-dark" @click="clearCart">
                     Svuota carrello
                 </button>
             </div>
@@ -153,7 +188,8 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
-    .cart_img{
+
+    .cart_img {
         height: 2rem;
     }
 
@@ -230,22 +266,34 @@ header {
 .offcanvas-body {
     background-color: #dedede;
     box-shadow: inset 0px 7px 20px 0px #bdbdbd;
-}
 
-.btn-close {
-    border: 1px solid black;
-    border-radius: 5px;
-}
+    .plus,
+    .minus {
+        display: flex;
+        background-color: green;
+        width: 25px;
+        height: 25px;
+        border-radius: 10px;
+        vertical-align: bottom;
+        align-items: center;
+        justify-content: center;
+    }
 
-.ms-cart-bg {
-    position: absolute;
-    left: 27%;
-    top: 41%;
-    color: #d0d1d3;
-    font-size: 5rem;
-    border: 3px solid #d0d1d3;
-    padding: 50px 50px 47px 43px;
-    border-radius: 50%;
+    .btn-close {
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+
+    .ms-cart-bg {
+        position: absolute;
+        left: 27%;
+        top: 41%;
+        color: #d0d1d3;
+        font-size: 5rem;
+        border: 3px solid #d0d1d3;
+        padding: 50px 50px 47px 43px;
+        border-radius: 50%;
+    }
 }
 
 // MEDIA QUERIES

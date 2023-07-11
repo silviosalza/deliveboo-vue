@@ -6,7 +6,7 @@ import PaginationDish from '../components/PaginationDish.vue';
 export default {
     name: 'RestaurantMenu',
     components: {
-        PaginationDish
+        PaginationDish,
     },
     data() {
         return {
@@ -19,76 +19,56 @@ export default {
                 lastPage: null,
             },
             totalDishes: 0,
-            restaurantId: 0
+            restaurantId: 0,
+            loading: false
 
         }
     },
     methods: {
-        updateStore(data) {
-            let divElement = document.getElementById(`${data}`);//punto di riferimento è l'id della card che sarà l'id del piatto
-            let dishTitle = divElement.querySelector('#dish-title').innerHTML;//dalla card ricavo il nome del piatto
-            let dishPrice = parseFloat(divElement.querySelector('#dish-price').innerHTML);//e il prezzo
-            let dishId = divElement.querySelector('#dish-id').innerHTML;//dalla card ricavo id del piatto
-            let dishRestaurantId = divElement.querySelector('#dish-restaurant-id').innerHTML;//dalla card ricavo id del ristorante
-            let dishObject = {//dopodicchè creo un oggetto con nome del piatto, il suo prezzo e un counter che mi servirà
-                name: dishTitle,//per contare quante volte è stato inserito nel carrello un singolo piatto
-                price: dishPrice,
+        updateStore(product) {
+            const dishObject = {
+                name: product.dish_name,
+                price: parseFloat(product.price),
                 count: 1,
-                restaurant_id: dishRestaurantId,
-                dish_id: dishId
-            }
-
-            //SOLUZIONE ALLA CARLONA
-            // this.store.cartArray = this.cartArray;
-            // console.log(this.cartArray);
+                restaurant_id: product.restaurant_id,
+                dish_id: product.id
+            };
 
             if (this.store.cartArray.length === 0) {
-                this.store.cartArray.push(dishObject);//lo inserisco nell'array
-                this.store.totalProducts += 1;//incremento i prodotti presi di uno
-                this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
-
-            } else {//altrimenti
-
-                if (this.store.cartArray.some(item => item.name === dishTitle)) {
-                    //se nel carrello è già presente il piatto
-                    let findItems = this.store.cartArray.filter(item => item['name'] === dishTitle);//cerco l'oggetto che ha come nome dishTitle (findItems risulterà un array)
-                    let itemFounded = findItems[0];//lo assegno alla variabile itemFounded
-                    itemFounded.count += 1;//incremento di uno il count dell'elemento
-                    findItems = [];//svuoto l'array
-                    this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
-
+                this.store.cartArray.push(dishObject);
+                this.store.totalProducts += 1;
+                this.store.totalPrice += dishObject.price;
+            } else {
+                const foundItem = this.store.cartArray.find(item => item.name === dishObject.name);
+                if (foundItem) {
+                    foundItem.count += 1;
                 } else if (this.store.cartArray[0].restaurant_id === dishObject.restaurant_id) {
-                    this.store.cartArray.push(dishObject);//lo inserisco nell'array
-                    this.store.totalProducts += 1;//incremento i prodotti presi di uno
-                    this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
+                    this.store.cartArray.push(dishObject);
+                    this.store.totalProducts += 1;
+                    this.store.totalPrice += dishObject.price;
                 } else {
-                    alert('Non puoi aggiungere prodotti di un ristorante diverso')
+                    alert('Non puoi aggiungere prodotti di un ristorante diverso');
                 }
             }
-
             localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         },
         getDishes(page) {
-            let params;
-            console.log(this.restaurantId);
+            
             if (page !== 0) {
-                params = {
+                const params = {
                     page: page,
                     restaurant_id: this.$route.params.id
-                }
+                };
+
                 axios.get(`${this.myUrl}/api/dishes`, { params })
                     .then(response => {
-                        console.log(response);
                         this.dishesArray = response.data.results.data;
                         this.pagesDishes.currentPage = response.data.results.current_page;
                         this.pagesDishes.lastPage = response.data.results.last_page;
                         this.totalDishes = response.data.results.total;
-                        console.log(this.dishesArray);
-                        console.log(this.pagesDishes.currentPage);
-                        console.log(this.pagesDishes.lastPage);
-                        console.log(this.totalDishes);
+
                     })
                     .catch(error => {
                         console.error(error);
@@ -101,38 +81,42 @@ export default {
             this.getDishes();
         }
     }
-}
-
+};
 </script>
 
 
 <template>
+
     <section class="d-flex flex-wrap gap-2 my-4 container">
-
-        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id" style="width: 18rem;">
-
+        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id"
+            style="width: 18rem;">
             <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
                 alt="...">
             <img v-else
                 src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
                 class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+                <h5 class="card-title">{{ product.dish_name }}</h5>
+                <p class="card-text">{{ product.price }}</p>
+                <button class="btn-primary" @click="updateStore(product)">Test Bottone</button>
             </div>
         </div>
     </section>
 
-<PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
-
+    <!-- handle pagination -->
+    <PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
 </template>
 
 <style scoped lang="scss">
+.loading {
+    height: 60vh;
 
-.card-dish{
-    width: calc(100% / 4) ;
+    .load {
+        padding-top: 350px;
+    }
+}
+
+.card-dish {
+    width: calc(100% / 4);
 }
 </style>
