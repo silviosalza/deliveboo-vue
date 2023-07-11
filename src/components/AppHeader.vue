@@ -15,7 +15,10 @@ export default {
         }
     },
     mounted() {
-        this.getCartItems();
+        setTimeout(() => {
+            this.getCartItems();
+        }, 1500);
+            
     },
     methods: {
         paymentSection() {
@@ -137,12 +140,12 @@ export default {
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
-                <div class="d-flex gap-3 align-items-center justify-content-center">
-                    <div class="plus" @click="increaseQuantity(item)"> + </div>
-                    <div class="minus" @click="decreaseQuantity(item)"> - </div>
-                    <div class="trash" @click="erase(item)">&#128465; </div>
-                </div>
-            </li>
+                    <div class="d-flex gap-3 align-items-center justify-content-center">
+                        <div class="plus" @click="increaseQuantity(item)"> + </div>
+                        <div class="minus" @click="decreaseQuantity(item)"> - </div>
+                        <div class="trash" @click="erase(item)">&#128465; </div>
+                    </div>
+                </li>
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
@@ -176,6 +179,9 @@ export default {
 }
 
 header {
+    position: sticky;
+    top:0;
+    z-index: 333;
     height: 120px;
     background-color: $app_color;
     color: $black_text;
@@ -268,22 +274,27 @@ header {
 .offcanvas-body {
     background-color: #dedede;
     box-shadow: inset 0px 7px 20px 0px #bdbdbd;
-}
 
-.btn-close {
-    border: 1px solid black;
-    border-radius: 5px;
-}
+    .plus,
+    .minus,
+    .trash{
+        cursor: pointer;
+    }
+    .btn-close {
+        border: 1px solid black;
+        border-radius: 5px;
+    }
 
-.ms-cart-bg {
-    position: absolute;
-    left: 27%;
-    top: 41%;
-    color: #d0d1d3;
-    font-size: 5rem;
-    border: 3px solid #d0d1d3;
-    padding: 50px 50px 47px 43px;
-    border-radius: 50%;
+    .ms-cart-bg {
+        position: absolute;
+        left: 27%;
+        top: 41%;
+        color: #d0d1d3;
+        font-size: 5rem;
+        border: 3px solid #d0d1d3;
+        padding: 50px 50px 47px 43px;
+        border-radius: 50%;
+    }
 }
 
 // MEDIA QUERIES
@@ -368,4 +379,5 @@ header {
             }
         }
     }
-}</style>
+}
+</style>

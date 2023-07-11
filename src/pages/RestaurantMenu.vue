@@ -44,8 +44,8 @@ export default {
             }
 
             //SOLUZIONE ALLA CARLONA
-            // this.store.cartArray = this.cartArray;
-            // console.log(this.cartArray);
+            this.store.cartArray = this.cartArray;
+            console.log(this.cartArray);
 
             if (this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array
@@ -118,31 +118,56 @@ export default {
 <template>
     <AppJumbotronSearch />
     <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
-    <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
-    <div v-if="loading">
-        <Loader />
-    </div>
+        <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
+
+        <!-- Loading page -->
+        <div v-if="loading">
+            <Loader />
+        </div>
+
+        <!-- Card Ristoranti -->
         <div v-else class="container d-flex flex-wrap gap-2 my-4 justify-content-center">
             <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-6"
                 :id="product.id">
 
-                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
-                    alt="...">
-                <img v-else src="../assets/img/logo-white.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
-                    <div class="d-flex justify-content-center price">
-                        <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
-                        <span>€</span>
+                <!-- Gestione visibilità -->
+                <div v-if="product.is_available">
+                    <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                        alt="...">
+                    <img v-else src="../assets/img/logo-white.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                        <div class="d-flex justify-content-center price">
+                            <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                            <span>€</span>
+                        </div>
+                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                        <p id="dish-id" class="d-none">{{ product.id }}</p>
+                        <div class="d-flex justify-content-center">
+                            <span class="button d-flex align-items-center px-4"
+                                @click="updateStore(product.id)">Aggiungi</span>
+                        </div>
                     </div>
-                    <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                    <p id="dish-id" class="d-none">{{ product.id }}</p>
-                    <div class="d-flex justify-content-center">
-                        <span class="button d-flex align-items-center px-4" @click="updateStore(product.id)">Aggiungi</span>
+                </div>
+                <!--/ Gestione visibilità -->
+
+                <div v-else>
+                    <img src="https://edicolablack.altervista.org/wp-content/uploads/2019/11/ProdottoEsaurito.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                        <div class="d-flex justify-content-center price">
+                            <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                            <span>€</span>
+                        </div>
+                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                        <p id="dish-id" class="d-none">{{ product.id }}</p>
+                        <div class="d-flex justify-content-center">
+                            <span class="button d-flex align-items-center px-4 text-decoration-line-through">Aggiungi</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
 
     <PaginationDish v-if="!loading" :pagesDishes="pagesDishes" @dati="getDishes" />
@@ -154,7 +179,7 @@ export default {
 
 
 .card {
-    
+
     img {
         height: 200px;
         object-fit: cover;
