@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store.js';
+import braintree from 'braintree-web';
 export default {
     name: 'AppHeader',
     data() {
@@ -20,6 +21,41 @@ export default {
     },
     mounted() {
         this.getCartItems();
+        //FUNZIONI PER IL PAGAMENTO
+        braintree.client.create({
+            authorization: "YOUR_AUTHORIZATION_KEY"
+        })
+            .then(clientInstance => {
+                let options = {
+                    client: clientInstance,
+                    styles: {
+                        input: {
+                            'font-size': '14px',
+                            'font-family': 'Open Sans'
+                        }
+                    },
+                    fields: {
+                        number: {
+                            selector: '#creditCardNumber',
+                            placeholder: 'Enter Credit Card'
+                        },
+                        cvv: {
+                            selector: '#cvv',
+                            placeholder: 'Enter CVV'
+                        },
+                        expirationDate: {
+                            selector: '#expireDate',
+                            placeholder: '00 / 0000'
+                        }
+                    }
+                }
+                return braintree.hostedFields.create(options)
+            })
+            .then(hostedFieldInstance => {
+                // @TODO - Use hostedFieldInstance to send data to Braintree
+            })
+            .catch(err => {
+            });
     },
     methods: {
         paymentSection() {
@@ -49,7 +85,8 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png"
+                            alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
@@ -129,7 +166,25 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
-
+                <!--FORM PAGAMENTO-->
+                <form action="">
+                    <div class="form-group">
+                        <label>Credit Card Number</label>
+                        <div id="creditCardNumber" class="form-control"></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Expire Date</label>
+                                <div id="expireDate" class="form-control"></div>
+                            </div>
+                            <div class="col-6">
+                                <label>CVV</label>
+                                <div id="cvv" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
