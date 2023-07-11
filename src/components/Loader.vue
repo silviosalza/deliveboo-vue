@@ -1,7 +1,7 @@
 <script>
 
 export default {
-    name: 'Loeader'
+    name: 'Loader'
 }
 </script>
 
@@ -34,6 +34,7 @@ export default {
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
+    z-index: 999;
 
     h1 {
         text-align: center;
@@ -486,5 +487,6 @@ export default {
     100% {
         transform: scale(1.0) translate(5px, 85px);
     }
-}</style>
+}
+</style>
 

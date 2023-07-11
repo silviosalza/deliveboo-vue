@@ -2,11 +2,13 @@
 import { store } from '../store';
 import axios from 'axios';
 import PaginationDish from '../components/PaginationDish.vue';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'RestaurantMenu',
     components: {
-        PaginationDish
+        PaginationDish,
+        Loader
     },
     data() {
         return {
@@ -19,8 +21,9 @@ export default {
                 lastPage: null,
             },
             totalDishes: 0,
-            restaurantId:0,
-
+            restaurantId: 0,
+            loading: false,
+            isError: false
         }
     },
     methods: {
@@ -72,6 +75,7 @@ export default {
         },
         getDishes(page) {
             let params;
+            this.loading = true;
             console.log(this.restaurantId);
             if (page !== 0) {
                 params = {
@@ -89,9 +93,12 @@ export default {
                         console.log(this.pagesDishes.currentPage);
                         console.log(this.pagesDishes.lastPage);
                         console.log(this.totalDishes);
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.error(error);
+                        this.loading = false;
+                        this.isError = true;
                     });
             }
         }
@@ -108,31 +115,33 @@ export default {
 
 <template>
     <section class="d-flex flex-wrap gap-2 my-4 container">
+        <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
+        <div v-if="loading">
+            <Loader />
+        </div>
+        <div v-else>
+            <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id"
+                style="width: 18rem;">
 
-        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id" style="width: 18rem;">
-
-            <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
-                alt="...">
-            <img v-else
-                src="../assets/img/logo-white.png"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                    alt="...">
+                <img v-else src="../assets/img/logo-white.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
+                    <p id="dish-price" class="card-text">{{ product.price }}</p>
+                    <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
+                    <p id="dish-id">{{ product.id }}</p>
+                    <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+                </div>
             </div>
         </div>
     </section>
 
-<PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
-
+    <PaginationDish v-if="!loading" :pagesDishes="pagesDishes" @dati="getDishes" />
 </template>
 
 <style scoped lang="scss">
-
-.card-dish{
-    width: calc(100% / 4) ;
+.card-dish {
+    width: calc(100% / 4);
 }
 </style>
