@@ -86,21 +86,19 @@ export default {
 
 
 <template>
+
     <section class="d-flex flex-wrap gap-2 my-4 container">
-
-        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id" style="width: 18rem;">
-
+        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id"
+            style="width: 18rem;">
             <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
                 alt="...">
             <img v-else
                 src="https://cdn3.vectorstock.com/i/1000x1000/31/47/404-error-page-not-found-design-template-vector-21393147.jpg"
                 class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+                <h5 class="card-title">{{ product.dish_name }}</h5>
+                <p class="card-text">{{ product.price }}</p>
+                <button class="btn-primary" @click="updateStore(product)">Test Bottone</button>
             </div>
         </div>
     </section>
@@ -110,8 +108,15 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.loading {
+    height: 60vh;
 
-.card-dish{
-    width: calc(100% / 4) ;
+    .load {
+        padding-top: 350px;
+    }
+}
+
+.card-dish {
+    width: calc(100% / 4);
 }
 </style>

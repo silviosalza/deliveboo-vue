@@ -135,7 +135,7 @@ export default {
             <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <img class="cart_img ms-cart-bg" src="https://cdn-icons-png.flaticon.com/256/263/263142.png" alt="">
+            <i class="fa-solid fa-cart-shopping ms-cart-bg"></i>
             <ul>
                 <li v-for="(item, index) in store.cartArray" class="d-flex my-3 gap-5">
                     <div>
@@ -237,7 +237,7 @@ header {
             bottom: -12px;
             background-color: #edc900;
             color: black;
-            padding: 2px 1px 0 0;
+            padding: 0 1px 0 0;
 
             border: 1px solid black;
             display: flex;
