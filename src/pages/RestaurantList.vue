@@ -1,118 +1,118 @@
 <script>
-import axios from 'axios';
-import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
-import RestaurantCard from '../components/RestaurantCard.vue';
-import Pagination from '../components/Pagination.vue';
+// import axios from 'axios';
+// import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
+// import RestaurantCard from '../components/RestaurantCard.vue';
+// import Pagination from '../components/Pagination.vue';
 
-export default {
+// export default {
 
-    components: {
-        AppJumbotronSearch,
-        Pagination,
-        RestaurantCard
-    },
+//     components: {
+//         AppJumbotronSearch,
+//         Pagination,
+//         RestaurantCard
+//     },
 
-    data() {
-        return {
-            myUrl: 'http://localhost:8000',
-            restaurants: [],
-            totalCategory: [],
-            categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
-            dishesArray: [],
-            restaurant_id: 0,
-            pages: {
-                currentPage: 1,
-                lastPage: null,
-            },
-            totalRestaurants: 0,
+//     data() {
+//         return {
+//             myUrl: 'http://localhost:8000',
+//             restaurants: [],
+//             totalCategory: [],
+//             categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
+//             dishesArray: [],
+//             restaurant_id: 0,
+//             pages: {
+//                 currentPage: 1,
+//                 lastPage: null,
+//             },
+//             totalRestaurants: 0,
 
-        }
-    },
-    mounted() {
-        this.getRestaurant();
-        this.getCategory();
-        this.clickutente();
-    },
+//         }
+//     },
+//     mounted() {
+//         this.getRestaurant();
+//         this.getCategory();
+//         this.clickutente();
+//     },
 
-    methods: {
-        getRestaurant(pageNumber = 1) {
-            console.log(this.categoriesArray);
-            let params;
-            if (this.categoriesArray) {
-                params = {
-                    page: pageNumber,
-                    categories: this.categoriesArray // Supponendo che category sia un singolo ID di categoria
-                };
-            } else {
-                params = {
-                    page: pageNumber
-                }
-            }
+//     methods: {
+//         getRestaurant(pageNumber = 1) {
+//             console.log(this.categoriesArray);
+//             let params;
+//             if (this.categoriesArray) {
+//                 params = {
+//                     page: pageNumber,
+//                     categories: this.categoriesArray // Supponendo che category sia un singolo ID di categoria
+//                 };
+//             } else {
+//                 params = {
+//                     page: pageNumber
+//                 }
+//             }
 
-            axios.get(`${this.myUrl}/api/restaurants`, { params })
-                .then(response => {
-                    this.restaurants = response.data.results.data;
-                    this.pages.currentPage = response.data.results.current_page;
-                    this.pages.lastPage = response.data.results.last_page;
-                    this.totalRestaurants = response.data.results.total;
-                    console.log(this.restaurants);
-                    console.log(this.pages.currentPage);
-                    console.log(this.pages.lastPage);
-                    console.log(this.totalRestaurants);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        },
-        getCategory() {
-            axios
-                .get(`${this.myUrl}/api/categories`)
-                .then(resp => {
-                    this.totalCategory = resp.data.results;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+//             axios.get(`${this.myUrl}/api/restaurants`, { params })
+//                 .then(response => {
+//                     this.restaurants = response.data.results.data;
+//                     this.pages.currentPage = response.data.results.current_page;
+//                     this.pages.lastPage = response.data.results.last_page;
+//                     this.totalRestaurants = response.data.results.total;
+//                     console.log(this.restaurants);
+//                     console.log(this.pages.currentPage);
+//                     console.log(this.pages.lastPage);
+//                     console.log(this.totalRestaurants);
+//                 })
+//                 .catch(error => {
+//                     console.error(error);
+//                 });
+//         },
+//         getCategory() {
+//             axios
+//                 .get(`${this.myUrl}/api/categories`)
+//                 .then(resp => {
+//                     this.totalCategory = resp.data.results;
+//                 })
+//                 .catch(error => {
+//                     console.error(error);
+//                 });
 
-        },
+//         },
 
-        clickutente(categoryId) {
-            this.totalCategory.forEach(item => {
-                if (item.id === categoryId) {
-                    item.checked = !item.checked; // Inverte lo stato "checked"
-                    if (item.checked) {
-                        this.categoriesArray.push(categoryId);
-                    } else {
-                        const index = this.categoriesArray.indexOf(categoryId);
-                        if (index > -1) {
-                            this.categoriesArray.splice(index, 1);
-                        }
-                    }
-                }
-            });
+//         clickutente(categoryId) {
+//             this.totalCategory.forEach(item => {
+//                 if (item.id === categoryId) {
+//                     item.checked = !item.checked; // Inverte lo stato "checked"
+//                     if (item.checked) {
+//                         this.categoriesArray.push(categoryId);
+//                     } else {
+//                         const index = this.categoriesArray.indexOf(categoryId);
+//                         if (index > -1) {
+//                             this.categoriesArray.splice(index, 1);
+//                         }
+//                     }
+//                 }
+//             });
 
-            if (this.categoriesArray.length === 0) {
-                // Se tutte le caselle di controllo sono deselezionate, mostra tutte le checkbox
-                this.totalCategory.forEach(item => {
-                    item.checked = false;
-                });
-            }
+//             if (this.categoriesArray.length === 0) {
+//                 // Se tutte le caselle di controllo sono deselezionate, mostra tutte le checkbox
+//                 this.totalCategory.forEach(item => {
+//                     item.checked = false;
+//                 });
+//             }
 
-            this.getRestaurant();
-        },
+//             this.getRestaurant();
+//         },
         // changePage(pageNumber) {
         //     if (pageNumber) {
         //         this.getRestaurant(pageNumber);
         //     }
 
         // }
-    }
-}
+//     }
+// }
 
 </script>
 
 
-<template>
+<!-- <template>
     <AppJumbotronSearch />
     <section class="container">
 
@@ -144,16 +144,16 @@ export default {
                     :restaurant="element" />
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Handle pagination -->
-    <Pagination :pages="pages" @dati="getRestaurant" />
+    <!-- <Pagination :pages="pages" @dati="getRestaurant" /> -->
     <!-- /Handle pagination -->
 </template>
 
 
 <style scoped lang="scss">
-@use "../styles/general.scss" as *;
+/* @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
 
 .checkbox_btn {
@@ -165,5 +165,5 @@ export default {
 .rest_cards {
     margin-top: 4rem;
     margin-bottom: 4rem;
-}
+} */
 </style>

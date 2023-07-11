@@ -4,191 +4,157 @@ import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
 import AppMain from '../components/AppMain.vue';
 import { RouterLink } from 'vue-router';
 import { store } from '../store';
+import RestaurantCard from '../components/RestaurantCard.vue';
+import Pagination from '../components/Pagination.vue';
 
 
 export default {
-    components: { AppJumbotronSearch, RouterLink, AppMain },
+    components: {
+        AppJumbotronSearch,
+        RouterLink,
+        AppMain,
+        Pagination,
+        RestaurantCard,
+    },
 
     data() {
         return {
             restaurants: [],
             store,
+            myUrl: 'http://localhost:8000',
+            totalCategory: [],
+            categoriesArray: [], //andranno inserite le categorie in maniera dinamica al click utente
+            dishesArray: [],
+            restaurant_id: 0,
+            pages: {
+                currentPage: 1,
+                lastPage: null,
+            },
+            totalRestaurants: 0,
         }
     },
     methods: {
-        getRestaurant(pageNumber = 1, category = 1) {
-            let params = {
-                page: pageNumber,
-                categories: category
 
+        getRestaurant(pageNumber = 1) {
+            console.log(this.categoriesArray);
+            let params;
+            if (this.categoriesArray) {
+                params = {
+                    page: pageNumber,
+                    categories: this.categoriesArray // Supponendo che category sia un singolo ID di categoria
+                };
+            } else {
+                params = {
+                    page: pageNumber
+                }
             }
 
-            axios.get(`${this.myUrl}/api/restaurants`, { params }).then(resp => {
-                console.log('ciao');
-                console.log(resp);
-                this.restaurants = resp.data.results.data;
-            })
-        }
+            axios.get(`${this.myUrl}/api/restaurants`, { params })
+                .then(response => {
+                    this.restaurants = response.data.results.data;
+                    this.pages.currentPage = response.data.results.current_page;
+                    this.pages.lastPage = response.data.results.last_page;
+                    this.totalRestaurants = response.data.results.total;
+                    console.log(this.restaurants);
+                    console.log(this.pages.currentPage);
+                    console.log(this.pages.lastPage);
+                    console.log(this.totalRestaurants);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        getCategory() {
+            axios
+                .get(`${this.myUrl}/api/categories`)
+                .then(resp => {
+                    this.totalCategory = resp.data.results;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+        },
+
+        clickutente(categoryId) {
+            this.totalCategory.forEach(item => {
+                if (item.id === categoryId) {
+                    item.checked = !item.checked; // Inverte lo stato "checked"
+                    if (item.checked) {
+                        this.categoriesArray.push(categoryId);
+                    } else {
+                        const index = this.categoriesArray.indexOf(categoryId);
+                        if (index > -1) {
+                            this.categoriesArray.splice(index, 1);
+                        }
+                    }
+                }
+            });
+
+            if (this.categoriesArray.length === 0) {
+                // Se tutte le caselle di controllo sono deselezionate, mostra tutte le checkbox
+                this.totalCategory.forEach(item => {
+                    item.checked = false;
+                });
+            }
+
+            this.getRestaurant();
+        },
     },
 
-
+    mounted() {
+        this.getCategory();
+        this.clickutente();
+    }
 }
-
-
 </script>
 
 <template>
     <AppJumbotronSearch />
+    <!-- test restaurant list in homepage -->
 
-    <div class="container_categories">
 
-        <div class="container d-flex justify-content-center">
-            <div class="row d-flex justify-content-center">
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/burgericon.png" alt="">
-                    </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Hamburger</div>
-                    </router-link>
+    <section class="checkbox_container my-5 ">
+
+        <div class="categ justify-content-center d-flex row row-cols-4">
+            <div class="checkbox_btn col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column"
+                v-for="item, index in totalCategory" :key="index">
+                <label for="{{ item.id }}"></label>
+                <!-- <input type="checkbox" class="m-3" id="{{ item.id }}" @click="clickutente(item.id)" :checked="item.checked"> -->
+                <div class="text-center">
+                    <img class="icon" :src="item.icon" alt="">
                 </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/pastaicon.png" alt="">
+                <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :checked="item.checked">
+                    <div class="bg-top">
+                        <div class="bg-inner"></div>
                     </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover" >
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Mediterranea</div>
-                    </router-link>
-                </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/orientalicon.png" alt="">
+                    <div class="bg-right">
+                        <div class="bg-inner"></div>
                     </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Orientale</div>
-                    </router-link>
-                </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/pizzaicon.png" alt="">
+                    <div class="bg">
+                        <div class="bg-inner"></div>
                     </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Pizza</div>
-                    </router-link>
-                </div>
+                    <div class="text">{{ item.category_name }}</div>
+                </button>
             </div>
         </div>
+    </section>
 
-        <div class="container d-flex justify-content-center">
-            <div class="row d-flex justify-content-center">
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/sushiicon.png" alt="">
-                    </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Sushi</div>
-                    </router-link>
-                </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/vegicon.png" alt="">
-                    </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Veggy</div>
-                    </router-link>
-                </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/hawainicon.png" alt="">
-                    </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Pokè</div>
-                    </router-link>
-                </div>
-                <div class="col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column">
-                    <div class="text-center">
-                        <img class="icon" src="../assets/img/desserticon.png" alt="">
-                    </div>
-                    <router-link :to="{ name: 'restaurants' }" type="button" class="btn cube cube-hover">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Dessert</div>
-                    </router-link>
-                </div>
-            </div>
+<div class="container mt-5">
+
+    <div class="row rest_cards">
+        <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
+            v-for="(element, index) in restaurants" :key="index">
+            <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
+                :restaurant="element" />
         </div>
     </div>
 
+</div>
+
+    <!-- Handle pagination -->
+    <Pagination :pages="pages" @dati="getRestaurant" />
+    <!-- /Handle pagination -->
     <AppMain />
 </template>
 
@@ -201,4 +167,14 @@ export default {
 
     margin: 3rem 0;
 }
+
+.checkbox_btn {
+    max-width: 200px;
+    min-width: 150px;
+    margin: 0;
+}
+.rest_cards{
+     margin-top: 7rem;
+ }
+
 </style>

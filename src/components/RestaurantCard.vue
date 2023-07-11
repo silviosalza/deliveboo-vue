@@ -68,10 +68,10 @@ export default {
 .card {
     height: 12rem;
     width: 13rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 11rem;
     box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
     &:hover{
-        transform: scale(1.1);
+        transform: scale(1.02);
         transition: all .2s ease-in-out;
     }
     .card-body{

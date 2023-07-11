@@ -9,10 +9,6 @@ export default {
                     label: "Home",
                     routeName: "home"
                 },
-                {
-                    label: "Ricerca Avanzata",
-                    routeName: "restaurants"
-                },
             ],
             store,
             payFlag: false

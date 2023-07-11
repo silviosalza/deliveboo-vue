@@ -17,7 +17,7 @@ export default {
         <ul class="pagination">
 
             <li class="page-item" :class="{ 'disabled': pages.currentPage === 1 }">
-                <a class="page-link" href="#" @click.prevent="$emit('dati', pages.currentPage - 1)">Previous</a>
+                <a class="page-link" href="#" @click.prevent="$emit('dati', pages.currentPage - 1)">&#xab;</a>
             </li>
 
             <li class="page-item" :class="{ 'active': pageNum === pages.currentPage }"
@@ -26,7 +26,7 @@ export default {
             </li>
 
             <li class="page-item" :class="{ 'disabled': pages.currentPage == pages.lastPage }">
-                <a class="page-link" href="#" @click.prevent="$emit('dati', pages.currentPage + 1)">Next</a>
+                <a class="page-link" href="#" @click.prevent="$emit('dati', pages.currentPage + 1)">&#xbb;</a>
             </li>
 
         </ul>
@@ -35,19 +35,23 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
 .pagination {
     .page-link {
-        color: #eead15;
-        background-color: #5100ffdc;
-        border-color: #533e80;
+        color: $app_color;
+        background-color: #28282d;
+        border: solid 20px #28282d;
+        font-size: 1.2rem;
+        font-weight: 700;
     }
 
     .page-link.active,
     .active>.page-link {
         z-index: 3;
-        color: #444b55;
-        background-color: #0ede2a;
-        border-color: #0ede2a;
+        color: #000000;
+        background-color: $app_color;
+        border-color: $app_color;
     }
 }
 </style>
