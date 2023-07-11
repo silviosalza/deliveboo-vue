@@ -51,7 +51,7 @@ export default {
                 <div class="btn-group dropstart d-sm-none">
                     <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fa-solid fa-bars"></i>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png" class="burger-menu" alt="">
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <li class="dropdown-item text-warning" v-for="item in menuItems">
@@ -148,6 +148,13 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
+    .burger-menu{
+        width: 35px;
+        &:hover{
+            transform: scale(1.4);
+            transition: all 200ms linear;
+        }
+    }
 
     .cart_img {
         height: 2rem;

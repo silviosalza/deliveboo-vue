@@ -114,13 +114,13 @@ export default {
 
 
 <template>
-    <section class="d-flex flex-wrap gap-2 my-4 container">
-        <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
-        <div v-if="loading">
-            <Loader />
-        </div>
-        <div v-else>
-            <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-2"
+    <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
+    <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
+    <div v-if="loading">
+        <Loader />
+    </div>
+        <div v-else class="container d-flex flex-wrap gap-2 my-4 justify-content-center">
+            <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-6"
                 :id="product.id">
 
                 <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
@@ -151,6 +151,7 @@ export default {
 
 
 .card {
+    
     img {
         height: 200px;
         object-fit: cover;
