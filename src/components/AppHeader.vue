@@ -33,6 +33,32 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
+        },
+        updateCart() {
+            const cartItems = JSON.stringify(this.store.cartArray); localStorage.setItem('cart', cartItems);
+        },
+        updateTotalPrice(price) {
+            this.store.totalPrice += price; localStorage.setItem('total', this.store.totalPrice);
+        },
+        increaseQuantity(item) {
+            item.count += 1; this.updateCart(); this.updateTotalPrice(item.price);
+        },
+        decreaseQuantity(item) {
+            if (item.count > 1) {
+                item.count -= 1; this.updateCart(); this.updateTotalPrice(-item.price);
+            }
+        },
+        erase(item) {
+            const index = this.store.cartArray.indexOf(item);
+            if (index !== -1) {
+                this.store.cartArray.splice(index, 1); // Rimuovi l'elemento dal carrello
+                this.updateCart(); // Aggiorna il Local Storage
+                this.updateTotalPrice(-item.price); // Aggiorna il prezzo totale
+
+                if (this.store.cartArray.length === 0) {
+                    this.clearCart(); // Azzera il totale se il carrello è vuoto
+                }
+            }
         }
     }
 }
@@ -45,13 +71,15 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png"
+                            alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
                     <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png" class="burger-menu" alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png"
+                            class="burger-menu" alt="">
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <li class="dropdown-item text-warning" v-for="item in menuItems">
@@ -109,7 +137,12 @@ export default {
             <ul>
                 <li v-for="(item, index) in store.cartArray">
                     {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
-                </li>
+                <div class="d-flex gap-3 align-items-center justify-content-center">
+                    <div class="plus" @click="increaseQuantity(item)"> + </div>
+                    <div class="minus" @click="decreaseQuantity(item)"> - </div>
+                    <div class="trash" @click="erase(item)">&#128465; </div>
+                </div>
+            </li>
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
@@ -148,9 +181,11 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
-    .burger-menu{
+
+    .burger-menu {
         width: 35px;
-        &:hover{
+
+        &:hover {
             transform: scale(1.4);
             transition: all 200ms linear;
         }
@@ -333,5 +368,4 @@ header {
             }
         }
     }
-}
-</style>
+}</style>
