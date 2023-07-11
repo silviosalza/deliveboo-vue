@@ -3,12 +3,14 @@ import { store } from '../store';
 import axios from 'axios';
 import PaginationDish from '../components/PaginationDish.vue';
 import Loader from '../components/Loader.vue';
+import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
 
 export default {
     name: 'RestaurantMenu',
     components: {
         PaginationDish,
-        Loader
+        Loader,
+        AppJumbotronSearch,
     },
     data() {
         return {
@@ -114,6 +116,7 @@ export default {
 
 
 <template>
+    <AppJumbotronSearch />
     <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
     <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
     <div v-if="loading">
