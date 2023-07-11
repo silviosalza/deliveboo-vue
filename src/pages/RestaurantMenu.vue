@@ -107,9 +107,9 @@ export default {
 
 
 <template>
-    <section class="d-flex flex-wrap gap-2 my-4 container">
+    <section class="d-flex justify-content-center flex-wrap gap-2 my-4 container">
 
-        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish" :id="product.id" style="width: 18rem;">
+        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-2" :id="product.id">
 
             <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
                 alt="...">
@@ -117,11 +117,17 @@ export default {
                 src="../assets/img/logo-white.png"
                 class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 id="dish-title" class="card-title">{{ product.dish_name }}</h5>
-                <p id="dish-price" class="card-text">{{ product.price }}</p>
-                <p id="dish-restaurant-id">{{ product.restaurant_id }}</p>
-                <p id="dish-id">{{ product.id }}</p>
-                <button class="btn-primary" @click="updateStore(product.id)">Test Bottone</button>
+                <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                <div class="d-flex justify-content-center price">
+                    <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                    <span>€</span>
+                </div>
+                <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                <p id="dish-id" class="d-none">{{ product.id }}</p>
+                <div class="d-flex justify-content-center">
+                    <span class="button d-flex align-items-center px-4" @click="updateStore(product.id)">Aggiungi</span>
+
+                </div>
             </div>
         </div>
     </section>
@@ -131,8 +137,51 @@ export default {
 </template>
 
 <style scoped lang="scss">
+@use "../styles/general.scss" as *;
+@use "../styles/utilities/variables" as *;
 
-.card-dish{
-    width: calc(100% / 4) ;
+
+.card {
+    img{
+        height: 200px;
+        object-fit:cover;
+    }
+    .card-title,
+    .price{
+        font-size: 1.4rem;
+    }
+
+    height: 10rem;
+    width: 14rem;
+    margin-bottom: 13rem;
+    box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+    &:hover{
+        transform: scale(1.02);
+        transition: all .2s ease-in-out;
+    }
+    .card-body{
+        padding: 0;
+        background-color: rgb(237, 201, 0, 0.1);
+    }
 }
+
+.button {
+        cursor: pointer;
+        height: 60px;
+        margin-top: 10px;
+        border: 1px solid rgb(224, 204, 24);
+        transition: all .2s;
+        box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+        letter-spacing: 0.1em;
+        font-family: monospace;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+        .button:hover {
+        box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
+        color: $app_color;
+    }
+    }
+
+
 </style>
