@@ -9,7 +9,7 @@ export default {
     components: {
         AppJumbotronSearch,
         Pagination,
-        RestaurantCard,
+        RestaurantCard
     },
 
     data() {
@@ -115,7 +115,7 @@ export default {
 <template>
     <AppJumbotronSearch />
     <section class="container">
-        
+
         <div class="categ justify-content-center d-flex row row-cols-4">
             <div class="checkbox_btn col-6 col-md-1 col-sm-6 d-flex justify-content-center flex-column"
                 v-for="item, index in totalCategory" :key="index">
