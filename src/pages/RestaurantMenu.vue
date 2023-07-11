@@ -2,11 +2,13 @@
 import { store } from '../store';
 import axios from 'axios';
 import PaginationDish from '../components/PaginationDish.vue';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'RestaurantMenu',
     components: {
-        PaginationDish
+        PaginationDish,
+        Loader
     },
     data() {
         return {
@@ -19,8 +21,9 @@ export default {
                 lastPage: null,
             },
             totalDishes: 0,
-            restaurantId:0,
-
+            restaurantId: 0,
+            loading: false,
+            isError: false
         }
     },
     methods: {
@@ -72,6 +75,7 @@ export default {
         },
         getDishes(page) {
             let params;
+            this.loading = true;
             console.log(this.restaurantId);
             if (page !== 0) {
                 params = {
@@ -89,9 +93,12 @@ export default {
                         console.log(this.pagesDishes.currentPage);
                         console.log(this.pagesDishes.lastPage);
                         console.log(this.totalDishes);
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.error(error);
+                        this.loading = false;
+                        this.isError = true;
                     });
             }
         }
@@ -107,33 +114,35 @@ export default {
 
 
 <template>
-    <section class="d-flex justify-content-center flex-wrap gap-2 my-4 container">
+    <section class="d-flex flex-wrap gap-2 my-4 container">
+        <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
+        <div v-if="loading">
+            <Loader />
+        </div>
+        <div v-else>
+            <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-2"
+                :id="product.id">
 
-        <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-2" :id="product.id">
-
-            <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
-                alt="...">
-            <img v-else
-                src="../assets/img/logo-white.png"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
-                <div class="d-flex justify-content-center price">
-                    <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
-                    <span>€</span>
-                </div>
-                <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                <p id="dish-id" class="d-none">{{ product.id }}</p>
-                <div class="d-flex justify-content-center">
-                    <span class="button d-flex align-items-center px-4" @click="updateStore(product.id)">Aggiungi</span>
-
+                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                    alt="...">
+                <img v-else src="../assets/img/logo-white.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                    <div class="d-flex justify-content-center price">
+                        <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                        <span>€</span>
+                    </div>
+                    <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                    <p id="dish-id" class="d-none">{{ product.id }}</p>
+                    <div class="d-flex justify-content-center">
+                        <span class="button d-flex align-items-center px-4" @click="updateStore(product.id)">Aggiungi</span>
+                    </div>
                 </div>
             </div>
-        </div>
+            </div>
     </section>
 
-<PaginationDish :pagesDishes="pagesDishes" @dati="getDishes" />
-
+    <PaginationDish v-if="!loading" :pagesDishes="pagesDishes" @dati="getDishes" />
 </template>
 
 <style scoped lang="scss">
@@ -142,12 +151,13 @@ export default {
 
 
 .card {
-    img{
+    img {
         height: 200px;
-        object-fit:cover;
+        object-fit: cover;
     }
+
     .card-title,
-    .price{
+    .price {
         font-size: 1.4rem;
     }
 
@@ -155,17 +165,18 @@ export default {
     width: 14rem;
     margin-bottom: 13rem;
     box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
-    &:hover{
+
+    &:hover {
         transform: scale(1.02);
         transition: all .2s ease-in-out;
     }
-    .card-body{
+
+    .card-body {
         padding: 0;
         background-color: rgb(237, 201, 0, 0.1);
     }
-}
 
-.button {
+    .button {
         cursor: pointer;
         height: 60px;
         margin-top: 10px;
@@ -178,10 +189,9 @@ export default {
         font-weight: bold;
 
         .button:hover {
-        box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
-        color: $app_color;
+            box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
+            color: $app_color;
+        }
     }
-    }
-
-
+}
 </style>
