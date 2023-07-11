@@ -104,7 +104,7 @@ export default {
 
     mounted() {
         this.getCategory();
-        this.clickutente();
+        // this.clickutente();
     }
 }
 </script>
@@ -112,6 +112,21 @@ export default {
 <template>
     <AppJumbotronSearch />
     <!-- test restaurant list in homepage -->
+<div class="d-flex justify-content-center mt-5">
+    <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px;">
+                        <div class="bg-top">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg-right">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="bg">
+                            <div class="bg-inner"></div>
+                        </div>
+                        <div class="text">Scopri tutti i nostri ristoranti</div>
+                    </button>
+
+</div>
 
 
     <section class="checkbox_container my-5 ">
