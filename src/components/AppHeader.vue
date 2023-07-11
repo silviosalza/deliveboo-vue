@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        // this.getCartItems();
+        this.getCartItems();
     },
     methods: {
         paymentSection() {
@@ -49,8 +49,7 @@ export default {
             <div class="container d-flex align-items-center ph-3">
 
                 <div class="logo">
-                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png"
-                            alt=""></a>
+                    <a class="navbar-brand" href="/"><img class="logo_header" src="../assets/img/logo-no-background.png" alt=""></a>
                 </div>
 
                 <div class="btn-group dropstart d-sm-none">
@@ -153,7 +152,8 @@ header {
     color: $black_text;
     font-weight: 900;
     font-size: 1.5rem;
-    .cart_img{
+
+    .cart_img {
         height: 2rem;
     }
 
