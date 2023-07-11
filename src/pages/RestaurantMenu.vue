@@ -44,8 +44,8 @@ export default {
             }
 
             //SOLUZIONE ALLA CARLONA
-            // this.store.cartArray = this.cartArray;
-            // console.log(this.cartArray);
+            this.store.cartArray = this.cartArray;
+            console.log(this.cartArray);
 
             if (this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array

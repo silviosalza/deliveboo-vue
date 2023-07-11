@@ -15,7 +15,10 @@ export default {
         }
     },
     mounted() {
-        this.getCartItems();
+        setTimeout(() => {
+            this.getCartItems();
+        }, 1500);
+            
     },
     methods: {
         paymentSection() {

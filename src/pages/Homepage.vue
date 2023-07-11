@@ -105,6 +105,7 @@ export default {
     mounted() {
         this.getCategory();
         // this.clickutente();
+
     }
 }
 </script>
@@ -112,21 +113,21 @@ export default {
 <template>
     <AppJumbotronSearch />
     <!-- test restaurant list in homepage -->
-<div class="d-flex justify-content-center mt-5">
-    <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px;">
-                        <div class="bg-top">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg-right">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="bg">
-                            <div class="bg-inner"></div>
-                        </div>
-                        <div class="text">Scopri tutti i nostri ristoranti</div>
-                    </button>
+    <div class="d-flex justify-content-center mt-5">
+        <button type="button" class="btn cube cube-hover" @click="clickutente()" :class="{prova: isProva}" style="height: 50px;">
+            <div class="bg-top">
+                <div class="bg-inner" ></div>
+            </div>
+            <div class="bg-right">
+                <div class="bg-inner" ></div>
+            </div>
+            <div class="bg">
+                <div class="bg-inner" ></div>
+            </div>
+            <div class="text">Scopri tutti i nostri ristoranti</div>
+        </button>
 
-</div>
+    </div>
 
 
     <section class="checkbox_container my-5 ">
@@ -139,15 +140,15 @@ export default {
                 <div class="text-center">
                     <img class="icon" :src="item.icon" alt="">
                 </div>
-                <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :checked="item.checked">
-                    <div class="bg-top">
-                        <div class="bg-inner"></div>
+                <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :class="{ prova: item.checked }" :checked="item.checked">
+                    <div class="bg-top " :class="{ prova: item.checked }">
+                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
-                    <div class="bg-right">
-                        <div class="bg-inner"></div>
+                    <div class="bg-right " :class="{ prova: item.checked }">
+                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
-                    <div class="bg">
-                        <div class="bg-inner"></div>
+                    <div class="bg " :class="{ prova: item.checked }">
+                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
                     <div class="text">{{ item.category_name }}</div>
                 </button>
@@ -155,17 +156,17 @@ export default {
         </div>
     </section>
 
-<div class="container mt-5">
+    <div class="container mt-5">
 
-    <div class="row rest_cards">
-        <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
-            v-for="(element, index) in restaurants" :key="index">
-            <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
-                :restaurant="element" />
+        <div class="row rest_cards">
+            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
+                v-for="(element, index) in restaurants" :key="index">
+                <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
+                    :restaurant="element" />
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
     <!-- Handle pagination -->
     <Pagination :pages="pages" @dati="getRestaurant" />
@@ -183,13 +184,17 @@ export default {
     margin: 3rem 0;
 }
 
+.prova {
+    background-color: greenyellow !important;
+}
+
 .checkbox_btn {
     max-width: 200px;
     min-width: 150px;
     margin: 0;
 }
-.rest_cards{
-     margin-top: 7rem;
- }
 
+.rest_cards {
+    margin-top: 7rem;
+}
 </style>
