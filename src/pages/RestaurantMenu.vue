@@ -4,6 +4,7 @@ import axios from 'axios';
 import PaginationDish from '../components/PaginationDish.vue';
 import Loader from '../components/Loader.vue';
 import AppJumbotronSearch from '../components/AppJumbotronSearch.vue';
+import ErrorMessage from '../components/ErrorMessage.vue';
 
 export default {
     name: 'RestaurantMenu',
@@ -11,6 +12,7 @@ export default {
         PaginationDish,
         Loader,
         AppJumbotronSearch,
+        ErrorMessage
     },
     data() {
         return {
@@ -25,11 +27,13 @@ export default {
             totalDishes: 0,
             restaurantId: 0,
             loading: false,
-            isError: false
+            isError: false,
+            errorChart: false
         }
     },
     methods: {
         updateStore(data) {
+            this.errorChart = false;
             let divElement = document.getElementById(`${data}`);//punto di riferimento è l'id della card che sarà l'id del piatto
             let dishTitle = divElement.querySelector('#dish-title').innerHTML;//dalla card ricavo il nome del piatto
             let dishPrice = parseFloat(divElement.querySelector('#dish-price').innerHTML);//e il prezzo
@@ -44,17 +48,17 @@ export default {
             }
 
             //SOLUZIONE ALLA CARLONA
-            this.store.cartArray = this.cartArray;
-            console.log(this.cartArray);
+            // this.store.cartArray = this.cartArray;
+            // console.log(this.cartArray);
 
-            if (this.store.cartArray.length === 0) {
+            if (this.store.cartArray && this.store.cartArray.length === 0) {
                 this.store.cartArray.push(dishObject);//lo inserisco nell'array
                 this.store.totalProducts += 1;//incremento i prodotti presi di uno
                 this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
 
             } else {//altrimenti
 
-                if (this.store.cartArray.some(item => item.name === dishTitle)) {
+                if (this.store.cartArray && this.store.cartArray.some(item => item.name === dishTitle)) {
                     //se nel carrello è già presente il piatto
                     let findItems = this.store.cartArray.filter(item => item['name'] === dishTitle);//cerco l'oggetto che ha come nome dishTitle (findItems risulterà un array)
                     let itemFounded = findItems[0];//lo assegno alla variabile itemFounded
@@ -62,12 +66,13 @@ export default {
                     findItems = [];//svuoto l'array
                     this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
 
-                } else if (this.store.cartArray[0].restaurant_id === dishObject.restaurant_id) {
+                } else if (this.store.cartArray && this.store.cartArray[0].restaurant_id === dishObject.restaurant_id) {
                     this.store.cartArray.push(dishObject);//lo inserisco nell'array
                     this.store.totalProducts += 1;//incremento i prodotti presi di uno
                     this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
                 } else {
                     alert('Non puoi aggiungere prodotti di un ristorante diverso')
+                    // this.errorChart = true;
                 }
             }
 
@@ -119,7 +124,11 @@ export default {
     <AppJumbotronSearch />
     <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
         <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
-
+        
+        <!-- Errore se inserisco da piu ristoranti -->
+        <!-- <div v-show="errorChart">
+            <ErrorMessage/>
+        </div> -->
         <!-- Loading page -->
         <div v-if="loading">
             <Loader />

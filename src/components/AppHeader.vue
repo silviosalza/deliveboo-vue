@@ -15,10 +15,8 @@ export default {
         }
     },
     mounted() {
-        setTimeout(() => {
-            this.getCartItems();
-        }, 1500);
-            
+        this.getCartItems();
+
     },
     methods: {
         paymentSection() {
@@ -32,11 +30,21 @@ export default {
             localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         },
-        getCartItems() {//con questa funzione inserisco i dati presenti nel localStorage nelle variabili corrispondenti
-            this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
-            this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
-            this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
+        getCartItems() {
+            const cart = localStorage.getItem('cart');
+            const total = localStorage.getItem('total');
+            const products = localStorage.getItem('products');
+
+            this.store.cartArray = JSON.parse(cart) ?? [];
+            this.store.totalPrice = JSON.parse(total) ?? 0;
+            this.store.totalProducts = JSON.parse(products) ?? 0;
         },
+
+        // getCartItems() {//con questa funzione inserisco i dati presenti nel localStorage nelle variabili corrispondenti
+        //     this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
+        //     this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
+        //     this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
+        // },
         updateCart() {
             const cartItems = JSON.stringify(this.store.cartArray); localStorage.setItem('cart', cartItems);
         },
@@ -180,7 +188,7 @@ export default {
 
 header {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 333;
     height: 120px;
     background-color: $app_color;
@@ -277,9 +285,10 @@ header {
 
     .plus,
     .minus,
-    .trash{
+    .trash {
         cursor: pointer;
     }
+
     .btn-close {
         border: 1px solid black;
         border-radius: 5px;

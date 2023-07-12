@@ -14,7 +14,11 @@ const router = createRouter({
             name: 'menu',
             component: () => import("./pages/RestaurantMenu.vue"),
         },
-
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: () => import("./components/NotFound.vue")
+        }
     ]
 });
 
