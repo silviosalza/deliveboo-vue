@@ -116,14 +116,52 @@ export default {
                 <div id="navbarNav">
                     <ul class="navbar-nav align-items-center justify-content-center gap-2">
                         <li class="nav-item" v-for="item in menuItems">
-                            <router-link :to="{ name: item.routeName }" aria-current="page">{{
-                                item.label }}</router-link>
+
+                            <button type="button" class="btn cube cube-hover" @click="clickutente()"
+                                 style="height: 50px;">
+                                <div class="bg-top">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg-right">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="text"><router-link :to="{ name: item.routeName }" aria-current="page">{{
+                                    item.label }}</router-link></div>
+                            </button>
                         </li>
+
                         <li class="nav-item">
-                            <a class="active" href="#join_us">Collabora con noi</a>
+                            <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px;">
+                                <div class="bg-top">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg-right">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="text"><a class="active" href="#join_us">Collabora con noi</a></div>
+                            </button>
                         </li>
+
                         <li class="nav-item">
-                            <a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a>
+                            <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px; width: 100px;" >
+                                <div class="bg-top">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg-right">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="bg">
+                                    <div class="bg-inner"></div>
+                                </div>
+                                <div class="text"><a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a></div>
+                            </button>
+                            
                         </li>
                         <li class="nav-item position-relative">
                             <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
