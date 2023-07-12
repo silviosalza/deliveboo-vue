@@ -184,7 +184,7 @@ export default {
             <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
                 <li class="my-4" v-for="(item, index) in store.cartArray">
-                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} CAD. 1)
+                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }}€ CAD. 1) </b>
                     <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
                         <div class="plus bg-success" @click="increaseQuantity(item)"> + </div>
                         <div class="minus bg-warning" @click="decreaseQuantity(item)"> — </div>
