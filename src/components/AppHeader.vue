@@ -99,7 +99,7 @@ export default {
                         </li>
 
                         <li class="dropdown-item text-warning">
-                            <a class="active" href="#join_us">Collabora con noi</a>
+                            <a class="active" href="#collab">Collabora con noi</a>
                         </li>
 
                         <li class="dropdown-item text-warning">
@@ -143,7 +143,7 @@ export default {
                                 <div class="bg">
                                     <div class="bg-inner"></div>
                                 </div>
-                                <div class="text"><a class="active" href="#join_us">Collabora con noi</a></div>
+                                <div class="text"><a class="active" href="#collab">Collabora con noi</a></div>
                             </button>
                         </li>
 

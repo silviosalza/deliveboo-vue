@@ -15,13 +15,22 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
+  <div class="app">
+    <AppHeader />
+  
+    <router-view></router-view>
+    <AppFooter />
 
-  <router-view></router-view>
-  <AppFooter />
+  </div>
 </template>
 
 <style lang="scss">
 @use "./styles/general.scss" as *;
 @use "./styles/utilities/variables" as *;
+
+
+// .app{
+//   // background-image: linear-gradient(to right, #ffefba, #ffffff);  
+// }
 </style>
+

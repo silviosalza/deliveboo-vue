@@ -124,7 +124,7 @@ export default {
             <div class="bg">
                 <div class="bg-inner" ></div>
             </div>
-            <div class="text">Scopri tutti i nostri ristoranti</div>
+            <a href="#rest_cards" class="text">Scopri tutti i nostri ristoranti</a>
         </button>
 
     </div>
@@ -158,7 +158,7 @@ export default {
 
     <div class="container mt-5">
 
-        <div class="row rest_cards">
+        <div id="rest_cards" class="row rest_cards">
             <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
                 v-for="(element, index) in restaurants" :key="index">
                 <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
@@ -178,6 +178,8 @@ export default {
 <style lang="scss">
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
+
+
 
 .container_categories {
     margin: 3rem 0;

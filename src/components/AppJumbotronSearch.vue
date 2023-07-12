@@ -12,7 +12,7 @@ export default {
     <div class="jumbotron d-flex flex-column justify-content-center py-5">
         
 
-        <div class="jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 mx-2 gap-3">
+        <div class="jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 gap-3">
             <div class="slide-effect title_background">
                 <div class="title_text">ORDINA </div>
                 <div class="slideDown mx-3"> APRI</div>
@@ -32,11 +32,15 @@ export default {
 .jumbotron {
     background-image: url("../assets/img/Screenshot\ \(171\).png");
     background-size: cover;
-    height: 500px;
+    height: 600px;
 }
 
 .ms-search-btn {
     background-color: #edc900;
+}
+
+.jumbo-restaurants-btn-container{
+    margin: 0 5rem;
 }
 
 .jumbo-restaurants-btn-container>.ms-btn {
@@ -53,7 +57,8 @@ export default {
 
 }
 .title_background{
-    background-color: rgb(0, 0, 0, 0.5);
+    
+    backdrop-filter: blur(10px);
     padding: 5rem 0.3rem;
 }
 
