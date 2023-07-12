@@ -17,7 +17,7 @@ export default {
             ],
             store,
             payFlag: false,
-            hostedFieldInstance: false
+            hostedFieldInstance: {}
         }
     },
     mounted() {
