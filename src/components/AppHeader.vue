@@ -1,8 +1,11 @@
 <script>
 import { store } from '../store.js';
-import braintree from 'braintree-web';
+import AppPay from './AppPay.vue';
 export default {
     name: 'AppHeader',
+    components: {
+        AppPay
+    },
     data() {
         return {
             menuItems: [
@@ -16,47 +19,11 @@ export default {
                 },
             ],
             store,
-            payFlag: false,
-            hostedFieldInstance: {}
+            payFlag: false
         }
     },
     mounted() {
         this.getCartItems();
-        //FUNZIONI PER IL PAGAMENTO
-        braintree.client.create({
-            authorization: "sandbox_ktrqpfdf_tfrvnyfh3xsz95xv"
-        })
-            .then(clientInstance => {
-                let options = {
-                    client: clientInstance,
-                    styles: {
-                        input: {
-                            'font-size': '14px',
-                            'font-family': 'Open Sans'
-                        }
-                    },
-                    fields: {
-                        number: {
-                            selector: '#creditCardNumber',
-                            placeholder: 'Enter Credit Card'
-                        },
-                        cvv: {
-                            selector: '#cvv',
-                            placeholder: 'Enter CVV'
-                        },
-                        expirationDate: {
-                            selector: '#expireDate',
-                            placeholder: '00 / 0000'
-                        }
-                    }
-                }
-                return braintree.hostedFields.create(options)
-            })
-            .then(hostedFieldInstance => {
-                this.hostedFieldInstance = hostedFieldInstance;
-            })
-            .catch(err => {
-            });
     },
     methods: {
         paymentSection() {//per l'attivazione della sezione del pagamento con carta
@@ -75,15 +42,6 @@ export default {
             this.store.cartArray = JSON.parse(localStorage.getItem('cart'));
             this.store.totalPrice = JSON.parse(localStorage.getItem('total'));
             this.store.totalProducts = JSON.parse(localStorage.getItem('products'));
-        },
-        payWithCreditCard() {//funzione dedicata per il pagamento con carta di credito
-            console.log('stai premendo questo bottone');
-            console.log(this.hostedFieldInstance);
-            if (this.hostedFieldInstance) {
-                this.hostedFieldInstance.tokenize().then(payload => {
-                    console.log(payload);
-                }).catch(err => { console.error(err) })
-            }
         }
     }
 }
@@ -177,12 +135,7 @@ export default {
             </div>
             <div v-if="payFlag">
                 <h5>Qui avverrà il pagamento</h5>
-                <!--FORM COMPILAZIONE UTENTE-->
-                <form method="post">
-
-                </form>
-                <!--FORM PAGAMENTO-->
-                <p>Qui si paga</p>
+                <AppPay />
             </div>
         </div>
     </div>
