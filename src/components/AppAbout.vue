@@ -10,15 +10,18 @@ export default {
             <div class="section image">
                 <img src="../assets/img/logo-no-backgroufvnd.png" alt="logo">
             </div>
-            <div class="section position-absolute bottom-0 start-50 translate-middle-x pb-1">
+            <div class="section position-absolute bottom-0 start-50 translate-middle-x pb-1 ms_bg">
                 <h3 class="text-start fw-bold">ABOUT US</h3>
-                <p class="text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas animi sed culpa temporibus  aspernatur
-                    consequuntur itaque labore. Culpa ad architecto incidunt dolore cum, at sint officiis nesciunt commodi non
-                    laborum molestiae fuga rerum, labore possimus cumque adipisci voluptatem dolorum sapiente unde veritatis, rem
+                <p class="text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas animi sed culpa
+                    temporibus aspernatur
+                    consequuntur itaque labore. Culpa ad architecto incidunt dolore cum, at sint officiis nesciunt commodi
+                    non
+                    laborum molestiae fuga rerum, labore possimus cumque adipisci voluptatem dolorum sapiente unde
+                    veritatis, rem
                     quam ipsa enim. Temporibus nulla aperiam aliquid?</p>
             </div>
         </div>
-        
+
     </div>
 </template>
 
@@ -39,14 +42,23 @@ export default {
         height: 200px;
     }
 
+    .ms_bg {
+        background-color: rgba(255, 255, 255, 0.13);
+        padding: 10px;
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        margin-bottom: 5px;
+    }
+
     // MEDIA QUERY
 
     @include media-breakpoint-up(md) {
 
         img {
-        padding-top: 30px;
-        height: 250px;
+            padding-top: 30px;
+            height: 250px;
         }
     }
-}
-</style>
+}</style>

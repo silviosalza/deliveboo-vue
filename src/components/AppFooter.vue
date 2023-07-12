@@ -43,9 +43,9 @@ export default {
             </div>
             <div>
                 <ul class="icons d-flex justify-content-center gap-4">
-                    <!-- <li><i class="fa-brands fa-facebook-f"></i></li>
-                    <li><i class="fa-brands fa-twitter"></i></li>
-                    <li><i class="fa-brands fa-instagram"></i></li> -->
+                    <img src="../assets/img/facebook.avif" alt="">
+                    <img src="../assets/img/instagram.webp" alt="">
+                    <img src="../assets/img/twitter.png" alt="">
                 </ul>
             </div>
         </div>
@@ -69,9 +69,11 @@ footer {
         margin: auto;
         padding: 10px;
     }
+
     .img-app {
         cursor: pointer;
     }
+
     .about {
         background-color: $footer_color;
         color: $white_text;
