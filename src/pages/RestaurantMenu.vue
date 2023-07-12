@@ -161,7 +161,7 @@ export default {
                 <!--/ Gestione visibilità -->
 
                 <div v-else>
-                    <img src="https://edicolablack.altervista.org/wp-content/uploads/2019/11/ProdottoEsaurito.png" class="card-img-top" alt="...">
+                    <img src="../assets/img/logo-white - Copia - Copia.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
