@@ -182,26 +182,7 @@ export default {
 
                 </form>
                 <!--FORM PAGAMENTO-->
-                <form action="">
-                    <div class="form-group">
-                        <label for="creditCardNumber">Credit Card Number</label>
-                        <div id="creditCardNumber" class="form-control"></div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-6">
-                                <label for="expireDate">Expire Date</label>
-                                <div id="expireDate" class="form-control"></div>
-                            </div>
-                            <div class="col-6">
-                                <label for="cvv">CVV</label>
-                                <div id="cvv" class="form-control"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit
-                        Card</button>
-                </form>
+                <p>Qui si paga</p>
             </div>
         </div>
     </div>
