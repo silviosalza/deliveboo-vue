@@ -183,12 +183,12 @@ export default {
         <div class="offcanvas-body">
             <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
-                <li v-for="(item, index) in store.cartArray">
-                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
-                    <div class="d-flex gap-3 align-items-center justify-content-center">
-                        <div class="plus" @click="increaseQuantity(item)"> + </div>
-                        <div class="minus" @click="decreaseQuantity(item)"> - </div>
-                        <div class="trash" @click="erase(item)">&#128465; </div>
+                <li class="my-4" v-for="(item, index) in store.cartArray">
+                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} CAD. 1)
+                    <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
+                        <div class="plus bg-success" @click="increaseQuantity(item)"> + </div>
+                        <div class="minus bg-warning" @click="decreaseQuantity(item)"> — </div>
+                        <div class="trash bg-danger" @click="erase(item)">&#128465; </div>
                     </div>
                 </li>
             </ul>
@@ -313,7 +313,6 @@ header {
     .cart-hover:hover {
         box-shadow: 0 0 8px 1px #212529;
     }
-
 }
 
 .offcanvas-header {
@@ -324,10 +323,37 @@ header {
     background-color: #dedede;
     box-shadow: inset 0px 7px 20px 0px #bdbdbd;
 
-    .plus,
-    .minus,
-    .trash {
-        cursor: pointer;
+    ul {
+        padding: 0 1rem;
+        li {
+            font-size: 1.5rem;
+
+                .ms-plus-minus-trash {
+                text-align: center;
+                height: fit-content;
+                padding: 10px 0;
+
+                .plus,
+                .minus,
+                .trash {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 60px;
+                    padding: 5px 10px;
+                    font-size: 2rem;
+                    border: 1px solid #212529;
+                    border-radius: 5px;
+                    color: #000000;
+                    font-weight: 500;
+
+                    &:hover {
+                        transform: scale(1.08);
+                        transition: all 100ms linear;
+                    }
+
+                }
+            }
+        }
     }
 
     .btn-close {
