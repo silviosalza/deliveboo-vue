@@ -141,16 +141,16 @@ export default {
                     <img class="icon" :src="item.icon" alt="">
                 </div>
                 <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :class="{ prova: item.checked }" :checked="item.checked">
-                    <div class="bg-top " :class="{ prova: item.checked }">
+                    <div class="bg-top  " :class="{ prova2: item.checked }">
                         <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
-                    <div class="bg-right " :class="{ prova: item.checked }">
+                    <div class="bg-right " :class="{ prova2: item.checked }">
                         <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
-                    <div class="bg " :class="{ prova: item.checked }">
+                    <div class="bg " :class="{ prova2: item.checked }">
                         <div class="bg-inner " :class="{ prova: item.checked }"></div>
                     </div>
-                    <div class="text">{{ item.category_name }}</div>
+                    <div class="text" :class="{ prova: item.checked }">{{ item.category_name }}</div>
                 </button>
             </div>
         </div>
@@ -185,7 +185,12 @@ export default {
 }
 
 .prova {
-    background-color: greenyellow !important;
+
+    color: #28282d !important;
+background: #d4af37 !important;
+}
+.prova2 {
+background: #28282d !important;
 }
 
 .checkbox_btn {
