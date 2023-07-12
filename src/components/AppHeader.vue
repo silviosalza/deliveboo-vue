@@ -86,7 +86,7 @@ export default {
                             alt=""></a>
                 </div>
 
-                <div class="btn-group dropstart d-sm-none">
+                <div class="btn-group dropstart d-md-none">
                     <button class="ms-burger-btn btn-lg border border-2 border-dark rounded" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/2048px-Hamburger_icon.svg.png"
@@ -117,8 +117,7 @@ export default {
                     <ul class="navbar-nav align-items-center justify-content-center gap-2">
                         <li class="nav-item" v-for="item in menuItems">
 
-                            <button type="button" class="btn cube cube-hover" @click="clickutente()"
-                                 style="height: 50px;">
+                            <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -134,7 +133,7 @@ export default {
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px;">
+                            <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -149,7 +148,7 @@ export default {
                         </li>
 
                         <li class="nav-item">
-                            <button type="button" class="btn cube cube-hover" @click="clickutente()" style="height: 50px; width: 100px;" >
+                            <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -184,12 +183,12 @@ export default {
         <div class="offcanvas-body">
             <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
-                <li v-for="(item, index) in store.cartArray">
-                    {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} )
-                    <div class="d-flex gap-3 align-items-center justify-content-center">
-                        <div class="plus" @click="increaseQuantity(item)"> + </div>
-                        <div class="minus" @click="decreaseQuantity(item)"> - </div>
-                        <div class="trash" @click="erase(item)">&#128465; </div>
+                <li class="my-4" v-for="(item, index) in store.cartArray">
+                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }}€ CAD. 1) </b>
+                    <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
+                        <div class="plus bg-success" @click="increaseQuantity(item)"> + </div>
+                        <div class="minus bg-warning" @click="decreaseQuantity(item)"> — </div>
+                        <div class="trash bg-danger" @click="erase(item)">&#128465; </div>
                     </div>
                 </li>
             </ul>
@@ -253,6 +252,8 @@ header {
 }
 
 .ms-btn {
+    margin-left: 10px;
+    height: 75px;
     padding: 0.9em 1.2em 0.7em 1em;
     text-align: center;
     background-color: transparent;
@@ -278,6 +279,7 @@ header {
     flex-direction: row;
     width: 504px;
     margin: 0;
+    height: 100%;
 
     .nav-item {
         display: flex;
@@ -303,14 +305,14 @@ header {
         }
     }
 
-    .nav-item:hover {
-        text-decoration: underline;
+    .cart-hover {
+        box-shadow: 0 0 0 0 #21252900;
+        transition: box-shadow 0.3s;
     }
 
     .cart-hover:hover {
-        transform: scale(1.1);
+        box-shadow: 0 0 8px 1px #212529;
     }
-
 }
 
 .offcanvas-header {
@@ -321,10 +323,37 @@ header {
     background-color: #dedede;
     box-shadow: inset 0px 7px 20px 0px #bdbdbd;
 
-    .plus,
-    .minus,
-    .trash {
-        cursor: pointer;
+    ul {
+        padding: 0 1rem;
+        li {
+            font-size: 1.5rem;
+
+                .ms-plus-minus-trash {
+                text-align: center;
+                height: fit-content;
+                padding: 10px 0;
+
+                .plus,
+                .minus,
+                .trash {
+                    cursor: pointer;
+                    width: 100px;
+                    height: 60px;
+                    padding: 5px 10px;
+                    font-size: 2rem;
+                    border: 1px solid #212529;
+                    border-radius: 5px;
+                    color: #000000;
+                    font-weight: 500;
+
+                    &:hover {
+                        transform: scale(1.08);
+                        transition: all 100ms linear;
+                    }
+
+                }
+            }
+        }
     }
 
     .btn-close {
@@ -356,24 +385,39 @@ header {
     }
 
     .btn {
+        margin-top: 11px;
         min-width: 50px;
     }
 
-    .navbar>.container {
-        justify-content: center;
+    .navbar > .container {
+        justify-content: space-between;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .navbar > .container {
+        justify-content: space-between;
     }
 
     #navbarNav {
         display: block;
 
         .navbar-nav {
+            height: 115px;
             margin-top: 15px;
             padding-bottom: 10px;
+
+            .nav-item {
+                .headernav-btn {
+                    height: 70px;
+                    width: 100%;
+                }
+            }
         }
 
         .navbar-nav>li {
             padding: 0 5px;
-            width: calc(100% / 5);
+            width: 28%;
         }
 
         .navbar-nav>li:last-child {
@@ -384,12 +428,6 @@ header {
             display: none;
             width: unset;
         }
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .navbar>.container {
-        justify-content: space-between;
     }
 
     .navbar-nav {
@@ -419,10 +457,15 @@ header {
         justify-content: end;
 
         .navbar-nav {
-            width: 730px;
+            width: 655px;
 
-            li {
+            .nav-item {
                 text-align: center;
+                justify-content: flex-end;
+                .headernav-btn {
+                    height: 70px;
+                    width: 95%;
+                }
             }
         }
     }

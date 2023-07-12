@@ -113,8 +113,8 @@ export default {
 <template>
     <AppJumbotronSearch />
     <!-- test restaurant list in homepage -->
-    <div class="d-flex justify-content-center mt-5">
-        <button type="button" class="btn cube cube-hover" @click="clickutente()" :class="{prova: isProva}" style="height: 50px;">
+    <div class="ms-restaurants-btn-container d-flex justify-content-center">
+        <button type="button" class="ms-restaurants-btn btn cube cube-hover" @click="clickutente()" :class="{prova: isProva}">
             <div class="bg-top">
                 <div class="bg-inner" ></div>
             </div>
@@ -180,17 +180,24 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 .container_categories {
-
     margin: 3rem 0;
 }
 
-.prova {
+.ms-restaurants-btn-container {
+    margin-top: 5rem;
 
+    .ms-restaurants-btn {
+        height: 90px;
+        width: 80%;
+    }
+}
+
+.prova {
     color: #28282d !important;
-background: #d4af37 !important;
+    background: #d4af37 !important;
 }
 .prova2 {
-background: #28282d !important;
+    background: #28282d !important;
 }
 
 .checkbox_btn {
@@ -201,5 +208,15 @@ background: #28282d !important;
 
 .rest_cards {
     margin-top: 7rem;
+}
+
+// MEDIA QUERIES
+@include media-breakpoint-up(lg) {
+    .ms-restaurants-btn-container {
+
+        .ms-restaurants-btn {
+            width: 60%;
+        }
+}
 }
 </style>
