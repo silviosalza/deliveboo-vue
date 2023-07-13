@@ -3,11 +3,14 @@
 import axios from 'axios';
 import braintree from 'braintree-web';
 import { store } from '../store';
-import { RouterLink } from 'vue-router';
-
+import { RouterLink, loadRouteLocation } from 'vue-router';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'PaymentForm',
+    components: {
+        Loader
+    },
     data() {
         return {
             store,
@@ -19,7 +22,8 @@ export default {
             guestAddress: '',
             guestPhone: '',
             guestMail: '',
-            productsArray: [] // solo i campi dish_id e quantity (o count)
+            productsArray: [], // solo i campi dish_id e quantity (o count)
+            isLoading: true
 
         };
     },
@@ -61,16 +65,17 @@ export default {
                                 }
                             }
                         };
-
+                        this.isLoading = false;
                         return braintree.hostedFields.create(options);
                     })
                     .then(hostedFieldInstance => {
                         console.log(hostedFieldInstance);
                         this.hostedFieldInstance = hostedFieldInstance;
-
+                        this.isLoading = false;
                     })
                     .catch(err => {
                         console.log(err);
+                        this.isLoading = false;
                     });
             })
     },
@@ -116,7 +121,10 @@ export default {
 
 <template>
     <!--New Form-->
-    <div class="container p-0 my-2">
+    <div v-if="isLoading">
+        <Loader />
+    </div>
+    <div v-else class="container p-0 my-2">
         <div class="card px-4">
             <p class="h8 py-3">Dettagli Pagamento</p>
             <form class="text-center ">
