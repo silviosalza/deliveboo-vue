@@ -267,7 +267,7 @@ p {
 
 .form-control {
     color: black;
-    background-color: #ffc107;
+    background-color: rgba(255, 193, 7, 0.5);
     border: 2px solid transparent;
     height: 60px;
     padding-left: 20px;
