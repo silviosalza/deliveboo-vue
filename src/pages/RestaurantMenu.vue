@@ -125,10 +125,6 @@ export default {
     <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
         <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
         
-        <!-- Errore se inserisco da piu ristoranti -->
-        <!-- <div v-show="errorChart">
-            <ErrorMessage/>
-        </div> -->
         <!-- Loading page -->
         <div v-if="loading">
             <Loader />

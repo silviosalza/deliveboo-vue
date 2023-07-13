@@ -30,14 +30,15 @@ export default {
 
 <style lang="scss" scoped>
 .load {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    z-index: 999;
+    position: relative;
+    // transform: translate(-50%, -50%);
+    // top: 90%;
+    left: 40%;
+    margin: 100px 0;
+    // z-index: 999;
 
     h1 {
-        text-align: center;
+        // text-align: center;
         margin-top: 15px;
         font-family: 'Pacifico', cursive;
         color: white;

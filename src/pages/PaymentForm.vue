@@ -90,7 +90,7 @@ export default {
                     console.log(payload.nonce);
                     axios.post(`${this.myUrl}/api/make/payment`, {
                         "products": this.productsArray,
-                        "token": "fake-valid-nonce",
+                        "token": payload.nonce,
                         "guest_name": this.guestName,
                         "guest_lastname": this.guestLastname,
                         "guest_phone": this.guestPhone,

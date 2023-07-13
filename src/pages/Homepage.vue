@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router';
 import { store } from '../store';
 import RestaurantCard from '../components/RestaurantCard.vue';
 import Pagination from '../components/Pagination.vue';
+import Loader from '../components/Loader.vue';
 
 
 export default {
@@ -15,6 +16,7 @@ export default {
         AppMain,
         Pagination,
         RestaurantCard,
+        Loader
     },
 
     data() {
@@ -31,11 +33,13 @@ export default {
                 lastPage: null,
             },
             totalRestaurants: 0,
+            loading:false
         }
     },
     methods: {
 
         getRestaurant(pageNumber = 1) {
+            this.loading=true;
             console.log(this.categoriesArray);
             let params;
             if (this.categoriesArray) {
@@ -59,16 +63,21 @@ export default {
                     console.log(this.pages.currentPage);
                     console.log(this.pages.lastPage);
                     console.log(this.totalRestaurants);
+                    this.loading=false;
                 })
                 .catch(error => {
                     console.error(error);
                 });
         },
         getCategory() {
+            this.loading=true;
+
             axios
                 .get(`${this.myUrl}/api/categories`)
                 .then(resp => {
                     this.totalCategory = resp.data.results;
+                    this.loading=false;
+
                 })
                 .catch(error => {
                     console.error(error);
@@ -113,65 +122,76 @@ export default {
 <template>
     <AppJumbotronSearch />
     <!-- test restaurant list in homepage -->
-    <div class="ms-restaurants-btn-container d-flex justify-content-center">
-        <button type="button" class="ms-restaurants-btn btn cube cube-hover" @click="clickutente()" :class="{prova: isProva}">
-            <div class="bg-top">
-                <div class="bg-inner" ></div>
-            </div>
-            <div class="bg-right">
-                <div class="bg-inner" ></div>
-            </div>
-            <div class="bg">
-                <div class="bg-inner" ></div>
-            </div>
-            <a href="#rest_cards" class="text">Scopri tutti i nostri ristoranti</a>
-        </button>
 
+    <!-- Loading page -->
+    <div v-if="true">
+        <Loader />
     </div>
 
+    <div v-else>
 
-    <section class="checkbox_container my-5 ">
-
-        <div class="categ justify-content-center d-flex row row-cols-4">
-            <div class="checkbox_btn col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column"
-                v-for="item, index in totalCategory" :key="index">
-                <label for="{{ item.id }}"></label>
-                <!-- <input type="checkbox" class="m-3" id="{{ item.id }}" @click="clickutente(item.id)" :checked="item.checked"> -->
-                <div class="text-center">
-                    <img class="icon" :src="item.icon" alt="">
+        <div class="ms-restaurants-btn-container d-flex justify-content-center">
+            <button type="button" class="ms-restaurants-btn btn cube cube-hover" @click="clickutente()"
+                :class="{ prova: isProva }">
+                <div class="bg-top">
+                    <div class="bg-inner"></div>
                 </div>
-                <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)" :class="{ prova: item.checked }" :checked="item.checked">
-                    <div class="bg-top  " :class="{ prova2: item.checked }">
-                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
-                    </div>
-                    <div class="bg-right " :class="{ prova2: item.checked }">
-                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
-                    </div>
-                    <div class="bg " :class="{ prova2: item.checked }">
-                        <div class="bg-inner " :class="{ prova: item.checked }"></div>
-                    </div>
-                    <div class="text" :class="{ prova: item.checked }">{{ item.category_name }}</div>
-                </button>
-            </div>
-        </div>
-    </section>
+                <div class="bg-right">
+                    <div class="bg-inner"></div>
+                </div>
+                <div class="bg">
+                    <div class="bg-inner"></div>
+                </div>
+                <a href="#rest_cards" class="text">Scopri tutti i nostri ristoranti</a>
+            </button>
 
-    <div class="container mt-5">
-
-        <div id="rest_cards" class="row rest_cards">
-            <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
-                v-for="(element, index) in restaurants" :key="index">
-                <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
-                    :restaurant="element" />
-            </div>
         </div>
 
+
+        <section class="checkbox_container my-5 ">
+
+            <div class="categ justify-content-center d-flex row row-cols-4">
+                <div class="checkbox_btn col-6 col-md-3 col-sm-6 d-flex justify-content-center flex-column"
+                    v-for="item, index in totalCategory" :key="index">
+                    <label for="{{ item.id }}"></label>
+                    <!-- <input type="checkbox" class="m-3" id="{{ item.id }}" @click="clickutente(item.id)" :checked="item.checked"> -->
+                    <div class="text-center">
+                        <img class="icon" :src="item.icon" alt="">
+                    </div>
+                    <button type="button" class="btn cube cube-hover" @click="clickutente(item.id)"
+                        :class="{ prova: item.checked }" :checked="item.checked">
+                        <div class="bg-top  " :class="{ prova2: item.checked }">
+                            <div class="bg-inner " :class="{ prova: item.checked }"></div>
+                        </div>
+                        <div class="bg-right " :class="{ prova2: item.checked }">
+                            <div class="bg-inner " :class="{ prova: item.checked }"></div>
+                        </div>
+                        <div class="bg " :class="{ prova2: item.checked }">
+                            <div class="bg-inner " :class="{ prova: item.checked }"></div>
+                        </div>
+                        <div class="text" :class="{ prova: item.checked }">{{ item.category_name }}</div>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-5">
+
+            <div id="rest_cards" class="row rest_cards">
+                <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
+                    v-for="(element, index) in restaurants" :key="index">
+                    <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
+                        :restaurant="element" />
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Handle pagination -->
+        <Pagination :pages="pages" @dati="getRestaurant" />
+        <!-- /Handle pagination -->
+        <AppMain />
     </div>
-
-    <!-- Handle pagination -->
-    <Pagination :pages="pages" @dati="getRestaurant" />
-    <!-- /Handle pagination -->
-    <AppMain />
 </template>
 
 
@@ -198,6 +218,7 @@ export default {
     color: #28282d !important;
     background: #d4af37 !important;
 }
+
 .prova2 {
     background: #28282d !important;
 }
@@ -219,6 +240,6 @@ export default {
         .ms-restaurants-btn {
             width: 60%;
         }
-}
+    }
 }
 </style>
