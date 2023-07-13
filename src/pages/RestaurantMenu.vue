@@ -136,10 +136,10 @@ export default {
                 :id="product.id">
 
                 <!-- Gestione visibilità -->
-                <div v-if="product.is_available">
-                    <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="card-img-top"
+                <div class="ms-card" v-if="product.is_available">
+                    <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="ms-card-img"
                         alt="...">
-                    <img v-else src="../assets/img/logo-white.png" class="card-img-top" alt="...">
+                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     <div class="card-body">
                         <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
@@ -156,8 +156,8 @@ export default {
                 </div>
                 <!--/ Gestione visibilità -->
 
-                <div v-else>
-                    <img src="../assets/img/logo-white - Copia - Copia.png" class="card-img-top" alt="...">
+                <div class="ms-card" v-else>
+                    <img src="../assets/img/logo-white - Copia - Copia.png" class="ms-card-img" alt="...">
                     <div class="card-body">
                         <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
@@ -182,7 +182,14 @@ export default {
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
 
+.ms-card {
+    border-radius: 10px;
+    box-shadow: 0 0 2px 1px #000000;
 
+    .ms-card-img {
+        border-radius: 10px;
+    }
+}
 .card {
 
     img {
