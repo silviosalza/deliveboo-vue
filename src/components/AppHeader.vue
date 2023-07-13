@@ -178,7 +178,7 @@ export default {
             </div>
         </nav>
     </header>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+    <div class="offcanvas offcanvas-resp offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
         <div class="offcanvas-header bg-warning bg-gradient">
             <h5 class="offcanvas-title" id="offcanvasEndLabel"><b>Carrello</b></h5>
             <button type="button" class="btn-close bg-danger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -223,6 +223,9 @@ export default {
 @media (max-width: 575px) {
     .container {
         max-width: 350px;
+    }
+    .offcanvas-resp{
+        width: 95vw !important;
     }
 }
 
