@@ -156,7 +156,7 @@ export default {
                                 required minlength="3" maxlength="20">
                         </div>
                     </div>
-                    <h2 class="h8">Dati Bancari</h2>
+                    <h2 class="h8 my-3">Dati Bancari</h2>
                     <div>
                         <div class="form-group">
                             <label class="text"> Numero di carta di credito <span class="need">*</span> </label>
@@ -175,12 +175,12 @@ export default {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 my-3">
                         <div v-if="store.totalPrice <= 0" class="bg-danger mb-3">
                             <span class="ps-3">Carrello vuoto, effettua un ordine.</span>
                             <span class="fas fa-arrow-right"></span>
                         </div>
-                        <div v-else class="btn btn-primary mb-3" @click.prevent="payWithCard">
+                        <div v-else class="btn btn-warning mb-3" @click.prevent="payWithCard">
                             <span class="ps-3">Pay €{{ store.totalPrice }}</span>
                             <span class="fas fa-arrow-right"></span>
                         </div>
@@ -229,14 +229,14 @@ p {
     text-align: center;
 }
 
-.btn.btn-primary {
+.btn.btn-warning {
     width: 100%;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 15px;
-    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(230, 190, 105, 0.575) 70%, rgba(253, 187, 45, 1) 100%);
     border: none;
     transition: 0.5s;
     background-size: 200% auto;
