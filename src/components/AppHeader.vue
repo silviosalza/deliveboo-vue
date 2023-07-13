@@ -189,9 +189,9 @@ export default {
                 <li class="my-4" v-for="(item, index) in store.cartArray">
                     <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} € CAD. 1) </b>
                     <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
-                        <div class="plus bg-success" @click="increaseQuantity(item)"> + </div>
-                        <div class="minus bg-warning" @click="decreaseQuantity(item)"> — </div>
-                        <div class="trash bg-danger" @click="erase(item)">&#128465; </div>
+                        <div class="plus" @click="increaseQuantity(item)"> + </div>
+                        <div class="minus" @click="decreaseQuantity(item)"> — </div>
+                        <div class="trash d-flex justify-content-center align-items-center" @click="erase(item)"><img class="trash-img" src="../assets/img/Trash_can_icon.png" alt="trash-can.png"></div>
                     </div>
                 </li>
             </ul>
@@ -353,12 +353,39 @@ header {
                     border-radius: 5px;
                     color: #000000;
                     font-weight: 500;
+                    box-shadow: 0 2px 0 0 #1e1e18;
+
+                    transform: translateY(0);
+                    transition: all 100ms ease-in;
 
                     &:hover {
-                        transform: scale(1.08);
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 0 0 #1e1e18;
                         transition: all 100ms linear;
                     }
 
+                    &:active {
+                        box-shadow: 0 1px 0 0 #1e1e18;
+                        transform: translateY(2px);
+                        transition: all 100ms ease-out;
+                    }
+                }
+
+                .plus {
+                    background-color: #79dd51;
+                }
+                .minus {
+                    background-color: #dbdd51;
+                }
+                .trash {
+                    background-color: #f2655b;
+                    font-weight: 100;
+
+                    .trash-img {
+                        width: 30%;
+                        height: 50%;
+                        opacity: 0.75;
+                    }
                 }
 
                 .trash {
@@ -449,7 +476,6 @@ header {
 }
 
 @include media-breakpoint-up(lg) {
-
     header {
         height: 180px;
 
@@ -482,4 +508,5 @@ header {
             }
         }
     }
-}</style>
+}
+</style>
