@@ -187,11 +187,14 @@ export default {
     font-style: italic;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    box-shadow: 0 0 2px 2px #1a1a1a46;
     padding-top: 1px;
+
+    box-shadow: 0 0 2px 2px #1a1a1a46;
+    transition: box-shadow 0.25s ease-in;
 
     &:hover {
         box-shadow: 0 0 15px 5px #463c009b;
+        transition: box-shadow 0.25s ease-out;
     }
 
     .ms-card-img {
