@@ -225,7 +225,8 @@ export default {
         max-width: 350px;
     }
     .offcanvas-resp{
-        width: 95vw !important;
+        width: 100vw !important;
+        height: 85vh !important;
     }
 }
 
