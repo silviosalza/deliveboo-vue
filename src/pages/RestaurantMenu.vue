@@ -131,17 +131,17 @@ export default {
         </div>
 
         <!-- Card Ristoranti -->
-        <div v-else class="container d-flex flex-wrap gap-2 my-4 justify-content-center">
+        <div v-else class="container d-flex flex-wrap gap-3 my-4 justify-content-center">
             <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-6"
                 :id="product.id">
 
                 <!-- Gestione visibilità -->
-                <div class="ms-card" v-if="product.is_available">
+                <div class="ms-card d-flex flex-column align-items-center" v-if="product.is_available">
                     <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="ms-card-img"
                         alt="...">
                     <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
-                    <div class="card-body">
-                        <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                    <div class="card-body w-100 paper-effect">
+                        <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
                             <span>€</span>
@@ -149,17 +149,17 @@ export default {
                         <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
                         <p id="dish-id" class="d-none">{{ product.id }}</p>
                         <div class="d-flex justify-content-center">
-                            <span class="button d-flex align-items-center px-4"
+                            <span class="button d-flex align-items-center px-4 ms-add-btn"
                                 @click="updateStore(product.id)">Aggiungi</span>
                         </div>
                     </div>
                 </div>
                 <!--/ Gestione visibilità -->
 
-                <div class="ms-card" v-else>
+                <div class="ms-card d-flex flex-column align-items-center" v-else>
                     <img src="../assets/img/logo-white - Copia - Copia.png" class="ms-card-img" alt="...">
-                    <div class="card-body">
-                        <h5 id="dish-title" class="card-title text-center">{{ product.dish_name }}</h5>
+                    <div class="card-body w-100 paper-effect">
+                        <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
                             <span>€</span>
@@ -167,7 +167,7 @@ export default {
                         <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
                         <p id="dish-id" class="d-none">{{ product.id }}</p>
                         <div class="d-flex justify-content-center">
-                            <span class="button d-flex align-items-center px-4 text-decoration-line-through">Aggiungi</span>
+                            <span class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
                         </div>
                     </div>
                 </div>
@@ -183,14 +183,49 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 .ms-card {
-    border-radius: 10px;
-    box-shadow: 0 0 2px 1px #000000;
+    cursor: pointer;
+    font-style: italic;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 0 2px 2px #1a1a1a46;
+    padding-top: 1px;
+
+    &:hover {
+        box-shadow: 0 0 15px 5px #1a1a1a8c;
+    }
 
     .ms-card-img {
-        border-radius: 10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom: 3px solid #00808038;
+
+        width: 98%;
+    }
+
+    .paper-effect {
+        height: 100%;
+        background-image: repeating-linear-gradient(white 0px, white 30px, #00808038 35px);
+    }
+
+    .ms-add-btn {
+        background-color: #d4ea98;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .ms-add-btn-unavailable {
+        background-color: #eac198;
+        margin-bottom: 10px;
+        border-radius: 5px;
     }
 }
 .card {
+    border: 0;
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    transform: scale(1);
+    transition: all 0.25s ease-in-out;
 
     img {
         height: 200px;
@@ -202,14 +237,13 @@ export default {
         font-size: 1.4rem;
     }
 
-    height: 10rem;
-    width: 14rem;
-    margin-bottom: 13rem;
-    box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+    height: fit-content;
+    width: 80%;
+    margin-bottom: 1.5rem;
 
     &:hover {
-        transform: scale(1.02);
-        transition: all .2s ease-in-out;
+        transform: scale(1.05);
+        transition: all 0.25s ease-in-out;
     }
 
     .card-body {
@@ -220,10 +254,10 @@ export default {
     .button {
         cursor: pointer;
         height: 60px;
-        margin-top: 10px;
-        border: 1px solid rgb(224, 204, 24);
+        margin-top: 7px;
+        border: 1px solid #837600;
         transition: all .2s;
-        box-shadow: 5px 5px 2px 1px rgba(224, 204, 24, .2);
+        box-shadow: 1px 1px 2px 1px #443e0074;
         letter-spacing: 0.1em;
         font-family: monospace;
         font-size: 1.5rem;
@@ -233,6 +267,35 @@ export default {
             box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
             color: $app_color;
         }
+    }
+}
+
+// MEDIA QUERIES
+@include media-breakpoint-up(sm) {
+    .card {
+        width: calc(100% / 2 - 15px);
+    }
+    .paper-effect {
+        background-image: repeating-linear-gradient(white 0px, white 33px, #008080 34px);
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .card {
+        width: calc(100% / 3 - 25px);
+    }
+    .paper-effect {
+        background-image: repeating-linear-gradient(white 0px, white 33px, #00808038 34px);
+    }
+}
+
+@include media-breakpoint-up(lg) {
+
+    .card {
+        width: calc(100% / 4 - 25px);
+    }
+    .paper-effect {
+        background-image: repeating-linear-gradient(white 0px, white 33px, #00808038 34px);
     }
 }
 </style>
