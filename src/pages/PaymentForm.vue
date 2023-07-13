@@ -189,7 +189,7 @@ export default {
                             <span class="fas fa-arrow-right"></span>
                         </div>
                         <div v-else class="btn btn-warning mb-3" @click.prevent="payWithCard">
-                            <span class="ps-3">Pay €{{ store.totalPrice }}</span>
+                            <span class="ps-3">Pay €{{ store.totalPrice.toFixed(2) }}</span>
                             <span class="fas fa-arrow-right"></span>
                         </div>
                     </div>
