@@ -27,57 +27,64 @@ export default {
         const productsArray = JSON.parse(localStorage.getItem('cart'));
         productsArray.forEach(element => {
             const quantity = element.count;
-            const dish_id  = element.dish_id;
+            const dish_id = element.dish_id;
             this.productsArray.push({ quantity, dish_id });   // mi salvo le coppie chiavi valori che interessano
         });
 
         axios
-        .get(`${this.myUrl}/api/generate/token`)
-        .then(resp => {  //richiamo funzione generate/token del backend x generarmi il token
-            braintree.client.create({
-                authorization: resp.data.token                          //che metto nell autorizzazione
+            .get(`${this.myUrl}/api/generate/token`)
+            .then(resp => {  //richiamo funzione generate/token del backend x generarmi il token
+                braintree.client.create({
+                    authorization: resp.data.token                          //che metto nell autorizzazione
+                })
+                    .then(clientInstance => {
+                        let options = {
+                            client: clientInstance,
+                            styles: {
+                                input: {
+                                    'font-size': '14px',
+                                    'font-family': 'Open Sans'
+                                }
+                            },
+                            fields: {
+                                number: {
+                                    selector: '#creditCardNumber',
+                                    placeholder: 'Inserisci numero carta'
+                                },
+                                cvv: {
+                                    selector: '#cvv',
+                                    placeholder: 'Inserisci CVV'
+                                },
+                                expirationDate: {
+                                    selector: '#expireDate',
+                                    placeholder: 'MM / AAAA'
+                                }
+                            }
+                        };
+
+                        return braintree.hostedFields.create(options);
+                    })
+                    .then(hostedFieldInstance => {
+                        console.log(hostedFieldInstance);
+                        this.hostedFieldInstance = hostedFieldInstance;
+
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
             })
-                .then(clientInstance => {
-                    let options = {
-                        client: clientInstance,
-                        styles: {
-                            input: {
-                                'font-size': '14px',
-                                'font-family': 'Open Sans'
-                            }
-                        },
-                        fields: {
-                            number: {
-                                selector: '#creditCardNumber',
-                                placeholder: 'Inserisci numero carta'
-                            },
-                            cvv: {
-                                selector: '#cvv',
-                                placeholder: 'Inserisci CVV'
-                            },
-                            expirationDate: {
-                                selector: '#expireDate',
-                                placeholder: 'MM / AAAA'
-                            }
-                        }
-                    };
-
-                    return braintree.hostedFields.create(options);
-                })
-                .then(hostedFieldInstance => {
-                    console.log(hostedFieldInstance);
-                    this.hostedFieldInstance = hostedFieldInstance;
-
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        })
     },
     methods: {
+        clearCart() {
+            this.store.cartArray = [];
+            this.store.totalPrice = 0;
+            this.store.totalProducts = 0;
+            localStorage.setItem('cart', JSON.stringify(this.store.cartArray));//invio al localStorage ogni nuova versione aggiornata di cartArray
+            localStorage.setItem('total', this.store.totalPrice);//stessa cosa per il totale dell'ordine
+            localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
+        },
         payWithCard() {
-            if (this.hostedFieldInstance)
-             {
+            if (this.hostedFieldInstance) {
                 this.error = "";
                 this.hostedFieldInstance.tokenize().then(payload => {
                     console.log(payload.nonce);
@@ -96,6 +103,7 @@ export default {
                     }).catch(err => {
                         console.log(err);
                     }).finally(() => {
+                        this.clearCart();
                         this.$router.push('/thankyou');
                     });
                 })
@@ -111,34 +119,34 @@ export default {
         COMPARIRA FORM compilazione dati utente e carta
         <form class="text-center ">
 
-            <label class="info col-md-4 col-form-label" for="restaurant_name">Nome : <span class="need">*</span></label>
+            <label class="info col-md-4 col-form-label" for="guest_name">Nome : <span class="need">*</span></label>
             <div class="col-md-6 div-input mx-auto">
-                <input v-model="guestName" class="form-control" type="text" name="restaurant_name" id="restaurant_name"
+                <input v-model="guestName" class="form-control" type="text" name="guest_name" id="guest_name"
                     required minlength="3" maxlength="20">
 
             </div>
-            <label class="info col-md-4 col-form-label" for="restaurant_name">Cognome : <span class="need">*</span></label>
+            <label class="info col-md-4 col-form-label" for="guest_lastname">Cognome : <span class="need">*</span></label>
             <div class="col-md-6 div-input mx-auto">
-                <input v-model="guestLastname" class="form-control" type="text" name="restaurant_name" id="restaurant_name"
+                <input v-model="guestLastname" class="form-control" type="text" name="guest_lastname" id="guest_lastname"
                     required minlength="3" maxlength="20">
 
             </div>
-            <label class="info col-md-4 col-form-label" for="restaurant_name">Indirizzo : <span
+            <label class="info col-md-4 col-form-label" for="guest_address">Indirizzo : <span
                     class="need">*</span></label>
             <div class="col-md-6 div-input mx-auto">
-                <input v-model="guestAddress" class="form-control" type="text" name="restaurant_name" id="restaurant_name"
+                <input v-model="guestAddress" class="form-control" type="text" name="guest_address" id="guest_address"
                     required minlength="3" maxlength="20">
 
             </div>
-            <label class="info col-md-4 col-form-label" for="restaurant_name">Telefono : <span class="need">*</span></label>
+            <label class="info col-md-4 col-form-label" for="guest_phone">Telefono : <span class="need">*</span></label>
             <div class="col-md-6 div-input mx-auto">
-                <input v-model="guestPhone" class="form-control" type="text" name="restaurant_name" id="restaurant_name"
+                <input v-model="guestPhone" class="form-control" type="text" name="guest_phone" id="guest_phone"
                     required minlength="3" maxlength="20">
 
             </div>
-            <label class="info col-md-4 col-form-label" for="restaurant_name">Email : <span class="need">*</span></label>
+            <label class="info col-md-4 col-form-label" for="guest_mail">Email : <span class="need">*</span></label>
             <div class="col-md-6 div-input mx-auto my-5">
-                <input v-model="guestMail" class="form-control" type="text" name="restaurant_name" id="restaurant_name"
+                <input v-model="guestMail" class="form-control" type="text" name="guest_mail" id="guest_mail"
                     required minlength="3" maxlength="20">
 
             </div>

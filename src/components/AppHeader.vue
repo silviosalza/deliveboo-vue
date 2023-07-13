@@ -62,9 +62,11 @@ export default {
         erase(item) {
             const index = this.store.cartArray.indexOf(item);
             if (index !== -1) {
+                const removedQuantity = item.count; // Salva la quantità dell'articolo da rimuovere
+                const removedPrice = item.price * removedQuantity; // Calcola il prezzo totale da sottrarre
                 this.store.cartArray.splice(index, 1); // Rimuovi l'elemento dal carrello
                 this.updateCart(); // Aggiorna il Local Storage
-                this.updateTotalPrice(-item.price); // Aggiorna il prezzo totale
+                this.updateTotalPrice(-removedPrice); // Aggiorna il prezzo totale sottraendo il prezzo dell'articolo rimosso
 
                 if (this.store.cartArray.length === 0) {
                     this.clearCart(); // Azzera il totale se il carrello è vuoto
@@ -158,9 +160,10 @@ export default {
                                 <div class="bg">
                                     <div class="bg-inner"></div>
                                 </div>
-                                <div class="text"><a class="active" href="http://localhost:8000/" target="_blank">Area Riservata</a></div>
+                                <div class="text"><a class="active" href="http://localhost:8000/" target="_blank">Area
+                                        Riservata</a></div>
                             </button>
-                            
+
                         </li>
                         <li class="nav-item position-relative">
                             <button class="cart-hover ms-btn border border-2 border-dark rounded" type="button"
@@ -194,7 +197,9 @@ export default {
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
-                <router-link @click="paymentSection"  class="btn btn-warning d-flex justify-content-center align-items-center" :to="{ name: 'payment' }" aria-current="page">Vai al checkout</router-link>
+                <router-link @click="paymentSection"
+                    class="btn btn-warning d-flex justify-content-center align-items-center" :to="{ name: 'payment' }"
+                    aria-current="page">Vai al checkout</router-link>
                 <!-- <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     Vai al checkout
                 </button> -->
@@ -205,7 +210,7 @@ export default {
             <div v-else>
                 <h5 class="text-danger">Non hai ancora effettuato un ordine.</h5>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -323,10 +328,11 @@ header {
 
     ul {
         padding: 0 1rem;
+
         li {
             font-size: 1.5rem;
 
-                .ms-plus-minus-trash {
+            .ms-plus-minus-trash {
                 text-align: center;
                 height: fit-content;
                 padding: 10px 0;
@@ -387,13 +393,13 @@ header {
         min-width: 50px;
     }
 
-    .navbar > .container {
+    .navbar>.container {
         justify-content: space-between;
     }
 }
 
 @include media-breakpoint-up(md) {
-    .navbar > .container {
+    .navbar>.container {
         justify-content: space-between;
     }
 
@@ -460,6 +466,7 @@ header {
             .nav-item {
                 text-align: center;
                 justify-content: flex-end;
+
                 .headernav-btn {
                     height: 70px;
                     width: 95%;
@@ -467,5 +474,4 @@ header {
             }
         }
     }
-}
-</style>
+}</style>
