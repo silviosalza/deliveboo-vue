@@ -33,13 +33,13 @@ export default {
                 lastPage: null,
             },
             totalRestaurants: 0,
-            loading:false
+            loading: false
         }
     },
     methods: {
 
         getRestaurant(pageNumber = 1) {
-            this.loading=true;
+            this.loading = true;
             console.log(this.categoriesArray);
             let params;
             if (this.categoriesArray) {
@@ -63,20 +63,20 @@ export default {
                     console.log(this.pages.currentPage);
                     console.log(this.pages.lastPage);
                     console.log(this.totalRestaurants);
-                    this.loading=false;
+                    this.loading = false;
                 })
                 .catch(error => {
                     console.error(error);
                 });
         },
         getCategory() {
-            this.loading=true;
+            this.loading = true;
 
             axios
                 .get(`${this.myUrl}/api/categories`)
                 .then(resp => {
                     this.totalCategory = resp.data.results;
-                    this.loading=false;
+                    this.loading = false;
 
                 })
                 .catch(error => {
