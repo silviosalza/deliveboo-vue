@@ -191,7 +191,7 @@ export default {
     padding-top: 1px;
 
     &:hover {
-        box-shadow: 0 0 15px 5px #1a1a1a8c;
+        box-shadow: 0 0 15px 5px #463c009b;
     }
 
     .ms-card-img {
@@ -279,7 +279,7 @@ export default {
         cursor: pointer;
         height: 60px;
         margin-top: 7px;
-        border: 1px solid #837600;
+        border: 1px solid #2a2600;
         transition: all .2s;
         box-shadow: 0 4px 0 2px #2a2600;
         letter-spacing: 0.1em;
