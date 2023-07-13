@@ -171,7 +171,7 @@ export default {
                             <div id="creditCardNumber" class="form-control"> </div>
                         </div>
                         <div class="form-group">
-                            <div class="riga">
+                            <div class="riga d-flex">
                                 <div class="col-6">
                                     <label class="text"> Data di scadenza <span class="need">*</span></label>
                                     <div id="expireDate" class="form-control"> </div>

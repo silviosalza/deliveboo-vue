@@ -360,6 +360,10 @@ header {
                     }
 
                 }
+
+                .trash {
+                    color: white;
+                }
             }
         }
     }
