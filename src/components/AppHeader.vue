@@ -194,9 +194,10 @@ export default {
             </ul>
             <h4>Totale: {{ store.totalPrice.toFixed(2) }} €</h4>
             <div v-if="store.totalPrice > 0" class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
+                <router-link @click="paymentSection"  class="btn btn-warning d-flex justify-content-center align-items-center" :to="{ name: 'payment' }" aria-current="page">Vai al checkout</router-link>
+                <!-- <button class="btn btn-warning d-flex justify-content-center align-items-center" @click="paymentSection">
                     Vai al checkout
-                </button>
+                </button> -->
                 <button class="btn btn-danger text-dark" @click="clearCart">
                     Svuota carrello
                 </button>
@@ -204,10 +205,7 @@ export default {
             <div v-else>
                 <h5 class="text-danger">Non hai ancora effettuato un ordine.</h5>
             </div>
-            <div v-if="payFlag">
-                <h5>Qui avverrà il pagamento</h5>
-
-            </div>
+            
         </div>
     </div>
 </template>

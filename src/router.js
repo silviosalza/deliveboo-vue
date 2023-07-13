@@ -15,6 +15,19 @@ const router = createRouter({
             component: () => import("./pages/RestaurantMenu.vue"),
         },
         {
+
+            path: '/payment',
+            name: 'payment',
+            component: () => import("./pages/PaymentForm.vue"),
+
+        },
+        {
+
+            path: '/thankyou',
+            name: 'thanks',
+            component: () => import("./pages/Thanks.vue"),
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'not-found',
             component: () => import("./components/NotFound.vue")

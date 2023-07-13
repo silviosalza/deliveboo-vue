@@ -180,22 +180,14 @@ export default {
             </text>
         </svg>
         <a class="btn_home" href="/"> Go HOME </a>
-        <div class="aboutMe">
-            <a href="https://codepen.io/BlackStar1991/pens/public/" target="_new">
-                <div class="fa fa-codepen"> my other Pens </div>
-            </a>
-        </div>
     </div>
 </template>
 
 
 <style lang="scss" scoped>
 .bl_wrapper {
-    margin: 10px auto;
+    margin: 0 auto;
     max-width: 60vw;
-    height: calc(100vh - 400px);
-    position: fixed;
-    z-index: 777;
 
     #svg_tramp {
         display: block;
