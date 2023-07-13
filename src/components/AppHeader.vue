@@ -96,7 +96,7 @@ export default {
                     </button>
                     <ul class="dropdown-menu bg-dark">
                         <li class="dropdown-item text-warning" v-for="item in menuItems">
-                            <router-link :to="{ name: item.routeName }" aria-current="page">{{
+                            <router-link :to="{ name: 'home' }" aria-current="page">{{
                                 item.label }}</router-link>
                         </li>
 
@@ -187,7 +187,7 @@ export default {
             <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
                 <li class="my-4" v-for="(item, index) in store.cartArray">
-                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }}€ CAD. 1) </b>
+                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} € CAD. 1) </b>
                     <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
                         <div class="plus bg-success" @click="increaseQuantity(item)"> + </div>
                         <div class="minus bg-warning" @click="decreaseQuantity(item)"> — </div>
