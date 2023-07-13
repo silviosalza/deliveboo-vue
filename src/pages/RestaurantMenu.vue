@@ -209,13 +209,33 @@ export default {
 
     .ms-add-btn {
         background-color: #d4ea98;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-radius: 5px;
+        box-shadow: 0 4px 0 2px #2a2600;
+        
+        transform: translateY(0);
+        transition: transform 0.1s ease-out;
+
+        &:active {
+            box-shadow: 0 2px 0 1px #2a2600;
+            background-color: #9de85f;
+
+            transform: translateY(2px);
+            transition: transform 0.05s ease-in;
+            transition: background-color 0.05s ease-out;
+
+        }
     }
     .ms-add-btn-unavailable {
         background-color: #eac198;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-radius: 5px;
+        box-shadow: 0 4px 0 2px #2a2600;
+
+        &:active {
+            background-color: #e34141;
+            transition: background-color 0.05s ease-out;
+        }
     }
 }
 .card {
@@ -246,6 +266,10 @@ export default {
         transition: all 0.25s ease-in-out;
     }
 
+    &:active {
+        transform: scale(1.05);
+    }
+
     .card-body {
         padding: 0;
         background-color: rgb(237, 201, 0, 0.1);
@@ -257,14 +281,13 @@ export default {
         margin-top: 7px;
         border: 1px solid #837600;
         transition: all .2s;
-        box-shadow: 1px 1px 2px 1px #443e0074;
+        box-shadow: 0 4px 0 2px #2a2600;
         letter-spacing: 0.1em;
         font-family: monospace;
         font-size: 1.5rem;
         font-weight: bold;
 
         .button:hover {
-            box-shadow: -5px 5px 2px -1px rgba(224, 204, 24, .2);
             color: $app_color;
         }
     }
