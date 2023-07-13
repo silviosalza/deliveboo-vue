@@ -124,7 +124,7 @@ export default {
     <!-- test restaurant list in homepage -->
 
     <!-- Loading page -->
-    <div v-if="true">
+    <div v-if="loading">
         <Loader />
     </div>
 
