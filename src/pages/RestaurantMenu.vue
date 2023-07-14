@@ -182,12 +182,16 @@ export default {
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
 
+.card-dish {
+    background-color: #d4ea98;
+}
 .ms-card {
+    background-color: #fffbda;
     cursor: pointer;
     font-style: italic;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    padding-top: 1px;
+    padding-top: 2px;
 
     box-shadow: 0 0 2px 2px #1a1a1a46;
     transition: box-shadow 0.25s ease-in;
@@ -242,6 +246,7 @@ export default {
     }
 }
 .card {
+    background-color: #fffbda;
     border: 0;
     border-radius: 0;
     border-top-left-radius: 10px;
@@ -275,7 +280,7 @@ export default {
 
     .card-body {
         padding: 0;
-        background-color: rgb(237, 201, 0, 0.1);
+        background-color: #fffbda;
     }
 
     .button {
@@ -302,7 +307,7 @@ export default {
         width: calc(100% / 2 - 15px);
     }
     .paper-effect {
-        background-image: repeating-linear-gradient(white 0px, white 33px, #008080 34px);
+        background-image: repeating-linear-gradient(#fffbda 10px, #fffbda 32px, #008080 34px);
     }
 }
 
@@ -310,18 +315,12 @@ export default {
     .card {
         width: calc(100% / 3 - 25px);
     }
-    .paper-effect {
-        background-image: repeating-linear-gradient(white 0px, white 33px, #00808038 34px);
-    }
 }
 
 @include media-breakpoint-up(lg) {
 
     .card {
         width: calc(100% / 4 - 25px);
-    }
-    .paper-effect {
-        background-image: repeating-linear-gradient(white 0px, white 33px, #00808038 34px);
     }
 }
 </style>

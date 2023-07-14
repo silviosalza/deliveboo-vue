@@ -177,8 +177,8 @@ export default {
 
         <div class="container mt-5">
 
-            <div id="rest_cards" class="row rest_cards">
-                <div class="col-6 col-md-4 col-lg-3 col-xl-2 col-sm-6 my-1 d-flex justify-content-center"
+            <div id="rest_cards" class="rest_cards d-flex flex-wrap justify-content-center gap-5">
+                <div class="d-flex justify-content-center card-container"
                     v-for="(element, index) in restaurants" :key="index">
                     <RestaurantCard @esegui-getDishes="getDishes(element.id)" :categoryIcon="totalCategory"
                         :restaurant="element" />
@@ -198,8 +198,6 @@ export default {
 <style lang="scss">
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
-
-
 
 .container_categories {
     margin: 3rem 0;
@@ -230,16 +228,31 @@ export default {
 }
 
 .rest_cards {
-    margin-top: 7rem;
+    margin-top: 5rem;
 }
 
 // MEDIA QUERIES
+@include media-breakpoint-up(sm) {
+    .card-container {
+        width: calc(100% / 2 - 25px);
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .card-container {
+        width: calc(100% / 3 - 33px);
+    }
+}
+
 @include media-breakpoint-up(lg) {
     .ms-restaurants-btn-container {
 
-        .ms-restaurants-btn {
-            width: 60%;
-        }
+    .ms-restaurants-btn {
+        width: 60%;
+    }
+}
+    .card-container {
+        width: calc(100% / 4 - 38px);
     }
 }
 </style>
