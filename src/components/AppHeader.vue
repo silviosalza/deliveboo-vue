@@ -21,6 +21,10 @@ export default {
     methods: {
         paymentSection() {
             this.payFlag = true;
+            const offCanvas = document.getElementById('offcanvasEnd');
+            const offCanvasOpacity = document.querySelector('.offcanvas-backdrop.show');
+            offCanvas.classList.remove('show');
+            offCanvasOpacity.style.opacity = '0';
         },
         clearCart() {
             this.store.cartArray = [];
