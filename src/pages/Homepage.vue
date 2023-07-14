@@ -71,7 +71,6 @@ export default {
         },
         getCategory() {
             this.loading = true;
-
             axios
                 .get(`${this.myUrl}/api/categories`)
                 .then(resp => {

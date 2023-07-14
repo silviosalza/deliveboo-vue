@@ -37,7 +37,7 @@ export default {
         </div>
         <h4 class="pt-2">{{ restaurant.restaurant_name }}</h4>
         <div class="card-body d-flex justify-content-center">
-            <div v-for="(element, index) in restaurant.categories" :key="index">
+            <div v-for="(element, index) in restaurant.categories" :key="index" >
                 <img v-if="element.icon" class="rest_icon" :src="element.icon" alt="">
             </div>
         </div>
@@ -80,7 +80,7 @@ export default {
 
 
     .rest_icon {
-        width: 50px;
+        max-width: 30px;
     }
 
     .button {
