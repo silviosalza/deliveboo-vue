@@ -5,15 +5,11 @@ export default {
 </script>
 
 <template>
-    <div id="collab" class="section-collab d-md-flex align-items-md-center">
-        <div class="container ms_container d-md-flex flex-md-row align-items-sm-center">
+ <div id="collab" class="section-collab d-md-flex align-items-md-center">
+        <div class="container ms_container d-md-flex flex-md-row align-items-sm-center justify-content-evenly">
             <h2 class="text-light text-center pt-2">SEI UN RISTORATORE? COLLABORA CON NOI!</h2>
-            <button class="text-light btn btn-outline-warning container btn-sm hidden1" type="submit">ENTRA IN DELIVEBOO
-            </button>
-        </div>
-        <div class="container hidden2">
-            <button class="text-light btn btn-outline-warning container btn-sm hidden2" type="submit">ENTRA IN DELIVEBOO
-            </button>
+            <a href="http://localhost:8000/" target="_blank"><button class="d-flex justify-content-center align-items-center text-light btn btn-outline-warning container btn-sm hidden1" type="submit">ENTRA IN DELIVEBOO
+            </button></a>
         </div>
     </div>
 </template>

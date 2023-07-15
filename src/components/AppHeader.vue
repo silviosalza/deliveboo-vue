@@ -124,6 +124,7 @@ export default {
                         <li class="nav-item" v-for="item in menuItems">
 
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
+                                <router-link :to="{ name: item.routeName }" aria-current="page">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -133,13 +134,17 @@ export default {
                                 <div class="bg">
                                     <div class="bg-inner"></div>
                                 </div>
-                                <div class="text"><router-link :to="{ name: item.routeName }" aria-current="page">{{
-                                    item.label }}</router-link></div>
+                                <div class="text">
+                                    {{
+                                    item.label }}
+                                </div>
+                            </router-link>
                             </button>
                         </li>
 
                         <li class="nav-item">
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
+                                <a class="active" href="#collab">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -149,12 +154,16 @@ export default {
                                 <div class="bg">
                                     <div class="bg-inner"></div>
                                 </div>
-                                <div class="text"><a class="active" href="#collab">Collabora con noi</a></div>
+                                <div class="text">
+                                        Collabora con noi
+                                    </div>
+                                </a>
                             </button>
                         </li>
 
                         <li class="nav-item">
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
+                                <a class="active" href="http://localhost:8000/" target="_blank">
                                 <div class="bg-top">
                                     <div class="bg-inner"></div>
                                 </div>
@@ -164,8 +173,11 @@ export default {
                                 <div class="bg">
                                     <div class="bg-inner"></div>
                                 </div>
-                                <div class="text"><a class="active" href="http://localhost:8000/" target="_blank">Area
-                                        Riservata</a></div>
+                                <div class="text">
+                                        Area
+                                        Riservata
+                                    </div>
+                                </a>
                             </button>
 
                         </li>

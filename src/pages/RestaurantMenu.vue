@@ -46,6 +46,7 @@ export default {
                 restaurant_id: dishRestaurantId,
                 dish_id: dishId
             }
+            console.log(dishId);
 
             //SOLUZIONE ALLA CARLONA
             // this.store.cartArray = this.cartArray;

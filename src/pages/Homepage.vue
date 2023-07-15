@@ -59,10 +59,6 @@ export default {
                     this.pages.currentPage = response.data.results.current_page;
                     this.pages.lastPage = response.data.results.last_page;
                     this.totalRestaurants = response.data.results.total;
-                    console.log(this.restaurants);
-                    console.log(this.pages.currentPage);
-                    console.log(this.pages.lastPage);
-                    console.log(this.totalRestaurants);
                     this.loading = false;
                 })
                 .catch(error => {
@@ -112,7 +108,7 @@ export default {
 
     mounted() {
         this.getCategory();
-        // this.clickutente();
+        this.clickutente();
 
     }
 }
