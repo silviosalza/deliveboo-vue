@@ -123,8 +123,8 @@ export default {
 <template>
     <AppJumbotronSearch />
     <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
-        <h2 v-show="isError">ERRORE, NON HAI CARICATO NULLA!!!!</h2>
-        
+        <h2 v-show="isError">Ci spiace, attualmente non ci sono piatti nel menu, riprova più tardi</h2>
+
         <!-- Loading page -->
         <div v-if="loading">
             <Loader />
@@ -136,9 +136,12 @@ export default {
                 :id="product.id">
 
                 <!-- Gestione visibilità -->
-                <div class="ms-card d-flex flex-column align-items-center" v-if="product.is_available">
-                    <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`" class="ms-card-img"
-                        alt="...">
+                <div v-if="product.is_available" class="ms-card d-flex flex-column align-items-center">
+                    <div v-if="product.img">
+                        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
+                            class="ms-card-img" alt="...">
+                    </div>
+
                     <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     <div class="card-body w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
@@ -146,8 +149,10 @@ export default {
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
                             <span>€</span>
                         </div>
-                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                        <p id="dish-id" class="d-none">{{ product.id }}</p>
+                        <p class="ingredients text-center">{{ product.ingredients }}</p>
+                        <p class="text-center">{{ product.description }}</p>
+                        <!-- <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p> -->
+                        <!-- <p id="dish-id" class="d-none">{{ product.id }}</p> -->
                         <div class="d-flex justify-content-center">
                             <span class="button d-flex align-items-center px-4 ms-add-btn"
                                 @click="updateStore(product.id)">Aggiungi</span>
@@ -156,18 +161,26 @@ export default {
                 </div>
                 <!--/ Gestione visibilità -->
 
-                <div class="ms-card d-flex flex-column align-items-center" v-else>
-                    <img src="../assets/img/logo-white - Copia - Copia.png" class="ms-card-img" alt="...">
+
+                <div v-else class="ms-card d-flex flex-column align-items-center">
+                    <div v-if="product.img">
+                        <img :src="`${myUrl}/storage/${product.img}`" class="ms-card-img" alt="...">
+                    </div>
+                    <img v-else src="../assets/img/logo-white - Copia - Copia.png" class="ms-card-img" alt="...">
                     <div class="card-body w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
                             <span>€</span>
                         </div>
-                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                        <p id="dish-id" class="d-none">{{ product.id }}</p>
+                        <p class="ingredients text-center">{{ product.ingredients }}</p>
+                        <p class="text-center">{{ product.description }}</p>
+
+                        <!-- <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p> -->
+                        <!-- <p id="dish-id" class="d-none">{{ product.id }}</p> -->
                         <div class="d-flex justify-content-center">
-                            <span class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
+                            <span
+                                class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
                         </div>
                     </div>
                 </div>
@@ -184,7 +197,9 @@ export default {
 
 .card-dish {
     background-color: #d4ea98;
+    position: relative;
 }
+
 .ms-card {
     background-color: #fffbda;
     cursor: pointer;
@@ -219,7 +234,7 @@ export default {
         margin-bottom: 15px;
         border-radius: 5px;
         box-shadow: 0 4px 0 2px #2a2600;
-        
+
         transform: translateY(0);
         transition: transform 0.1s ease-out;
 
@@ -233,6 +248,7 @@ export default {
 
         }
     }
+
     .ms-add-btn-unavailable {
         background-color: #eac198;
         margin-bottom: 15px;
@@ -245,6 +261,7 @@ export default {
         }
     }
 }
+
 .card {
     background-color: #fffbda;
     border: 0;
@@ -282,7 +299,7 @@ export default {
         padding: 0;
         background-color: #fffbda;
     }
-
+    
     .button {
         cursor: pointer;
         height: 60px;
@@ -306,6 +323,7 @@ export default {
     .card {
         width: calc(100% / 2 - 15px);
     }
+
     .paper-effect {
         background-image: repeating-linear-gradient(#fffbda 10px, #fffbda 32px, #008080 34px);
     }
