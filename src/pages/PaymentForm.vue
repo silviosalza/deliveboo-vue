@@ -95,7 +95,7 @@ export default {
                     console.log(payload.nonce);
                     axios.post(`${this.myUrl}/api/make/payment`, {
                         "products": this.productsArray,
-                        "token": payload.nonce,
+                        "token": 'fake-valid-nonce',
                         "guest_name": this.guestName,
                         "guest_lastname": this.guestLastname,
                         "guest_phone": this.guestPhone,
@@ -152,7 +152,7 @@ export default {
                     </div>
                     <div class="col-12">
                         <div class="d-flex flex-column">
-                            <label for="guest_address" class="text mb-1">E-Mail <span class="need">*</span></label>
+                            <label for="guest_mail" class="text mb-1">E-Mail <span class="need">*</span></label>
                             <input class="form-control mb-3" type="email" v-model="guestMail" name="guest_mail"
                                 id="guest_mail" required minlength="3" maxlength="20">
                         </div>
@@ -160,8 +160,8 @@ export default {
                     <div class="col-12">
                         <div class="d-flex flex-column">
                             <label class="text mb-1" for="guest_phone">Telefono : <span class="need">*</span></label>
-                            <input v-model="guestPhone" class="form-control" type="text" name="guest_phone" id="guest_phone"
-                                required minlength="3" maxlength="20">
+                            <input v-model="guestPhone" class="form-control no-number-spinners" type="text" name="guest_phone" id="guest_phone"
+                                required minlength="3" maxlength="20" >
                         </div>
                     </div>
                     <h2 class="h8 my-3">Dati Bancari</h2>
@@ -272,7 +272,19 @@ p {
     height: 60px;
     padding-left: 20px;
     vertical-align: middle;
+    
 }
+
+.no-number-spinners::-webkit-inner-spin-button,
+.no-number-spinners::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+}
+
+.no-number-spinners {
+    -moz-appearance: textfield;
+}
+
 
 // .form-control:focus {
 //     // background-color: #0C4160;

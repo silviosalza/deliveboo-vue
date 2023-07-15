@@ -46,7 +46,7 @@ export default {
                 restaurant_id: dishRestaurantId,
                 dish_id: dishId
             }
-            console.log(dishId);
+            // console.log(dishId);
 
             //SOLUZIONE ALLA CARLONA
             // this.store.cartArray = this.cartArray;
@@ -136,14 +136,17 @@ export default {
             <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-6"
                 :id="product.id">
 
-                <!-- Gestione visibilità -->
+                <!-- Prodotto disponibile -->
                 <div v-if="product.is_available" class="ms-card d-flex flex-column align-items-center">
-                    <div v-if="product.img">
+                    <!-- Gestione visibilità immagine -->
+                    <div v-if="product.img" class="text-center">
                         <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
                             class="ms-card-img" alt="...">
+                        <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     </div>
-
                     <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
+                    <!-- /Gestione visibilità immagine -->
+
                     <div class="card-body w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
@@ -152,23 +155,26 @@ export default {
                         </div>
                         <p class="ingredients text-center">{{ product.ingredients }}</p>
                         <p class="text-center">{{ product.description }}</p>
-                        <!-- <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p> -->
-                        <!-- <p id="dish-id" class="d-none">{{ product.id }}</p> -->
+                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                        <p id="dish-id" class="d-none">{{ product.id }}</p>
                         <div class="d-flex justify-content-center">
                             <span class="button d-flex align-items-center px-4 ms-add-btn"
                                 @click="updateStore(product.id)">Aggiungi</span>
                         </div>
                     </div>
                 </div>
-                <!--/ Gestione visibilità -->
+                <!--/ Prodotto disponibilità -->
 
+
+                <!-- Prodotto non disponibile -->
 
                 <div v-else class="ms-card d-flex flex-column align-items-center">
-                    <div v-if="product.img">
-                        <img :src="`${myUrl}/storage/${product.img}`" class="ms-card-img" alt="...">
+                    <div v-if="product.img" class="text-center">
+                        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
+                            class="ms-card-img" alt="...">
+                        <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     </div>
-                    <img v-else src="../assets/img/logo-white - Copia - Copia.png" class="ms-card-img" alt="...">
-                    <div class="card-body w-100 paper-effect">
+                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">  <div class="card-body w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
@@ -177,8 +183,8 @@ export default {
                         <p class="ingredients text-center">{{ product.ingredients }}</p>
                         <p class="text-center">{{ product.description }}</p>
 
-                        <!-- <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p> -->
-                        <!-- <p id="dish-id" class="d-none">{{ product.id }}</p> -->
+                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                        <p id="dish-id" class="d-none">{{ product.id }}</p>
                         <div class="d-flex justify-content-center">
                             <span
                                 class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
@@ -300,7 +306,7 @@ export default {
         padding: 0;
         background-color: #fffbda;
     }
-    
+
     .button {
         cursor: pointer;
         height: 60px;
