@@ -147,7 +147,7 @@ export default {
                     <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     <!-- /Gestione visibilità immagine -->
 
-                    <div class="card-body w-100 paper-effect">
+                    <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
@@ -174,7 +174,8 @@ export default {
                             class="ms-card-img" alt="...">
                         <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
                     </div>
-                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">  <div class="card-body w-100 paper-effect">
+                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="..."> 
+                     <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
                         <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
                         <div class="d-flex justify-content-center price">
                             <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
@@ -214,7 +215,7 @@ export default {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding-top: 2px;
-
+    height: 500px;
     box-shadow: 0 0 2px 2px #1a1a1a46;
     transition: box-shadow 0.25s ease-in;
 

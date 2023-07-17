@@ -6,7 +6,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$router.push('/');
-    }, 4000);
+    }, 40000000000000);
 
   }
 
@@ -18,7 +18,7 @@ export default {
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-6 offset-md-3 text-center d-flex flex-column justify-content-center align-items-center">
+      <div class="thanks col-md-6 offset-md-3 text-center d-flex flex-column justify-content-center align-items-center">
         <h1 class="mb-4">Grazie per l'acquisto e buon appetito!</h1>
         <img src="src\img\delivering.gif" alt="Delivery Guy">
       </div>
@@ -28,7 +28,11 @@ export default {
   
   
 <style lang="scss" scoped>
-img {
-  max-width: 200px;
+
+.thanks{
+  margin: 250px 0;
+  img {
+    max-width: 200px;
+  }
 }
 </style>

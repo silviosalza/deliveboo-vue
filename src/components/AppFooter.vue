@@ -23,10 +23,23 @@ export default {
                     <ul>
                         <li class="pb-1">
                             <h5>Scopri Deliveboo</h5>
+                        
                         </li>
-                        <li>Chi siamo</li>
-                        <li>Ristoranti</li>
-                        <li>Diventa nostro partner</li>
+                        <li>
+                            <a href="/">
+                                Chi siamo
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/">
+                                Ristoranti
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://localhost:8000/" target="_blank">
+                                Diventa nostro partner
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="text-end text-sm-start ms-5 medium">
@@ -34,9 +47,56 @@ export default {
                         <li class="pb-1">
                             <h5>Note Legali</h5>
                         </li>
-                        <li>Termini e Condizioni</li>
-                        <li>Informativa sulla privacy</li>
-                        <li>Metodi di pagamento</li>
+                        <li>
+                            <a href="">
+                                Termini e Condizioni
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Informativa sulla privacy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                Metodi di pagamento
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="team-1">
+                    <ul>
+                        <li> <h5>Powered by:</h5></li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/marianita-d-00b2561b5/">
+                                <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
+                                Marianita Di Leo
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/claudio-leone-3bbbba123/">
+                                <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
+                                Claudio Leone   
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/simone-lorenzo-viaggi/">
+                                <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
+                                Simone Lorenzo Viaggi
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/silvio-filippo-salza-608079281/">
+                                <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
+                                Silvio Salza
+                            </a>
+                        </li>
+                        <li>
+                            <a href="www.linkedin.com/in/federico-ceteroni-dev">
+                                <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
+                                Federico Ceteroni
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

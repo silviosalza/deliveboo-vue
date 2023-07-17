@@ -33,9 +33,9 @@ export default {
     position: relative;
     // transform: translate(-50%, -50%);
     // top: 90%;
-    left: 40%;
-    margin: 100px 0;
     // z-index: 999;
+    left: 40%;
+    margin: 300px 0 50px 0;
 
     h1 {
         // text-align: center;

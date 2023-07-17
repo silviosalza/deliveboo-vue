@@ -61,7 +61,6 @@ export default {
     cursor: pointer;
     font-style: italic;
     padding-top: 2px;
-
     box-shadow: 0 0 2px 2px #1a1a1a46;
     transition: box-shadow 0.25s ease-in;
 
@@ -130,7 +129,7 @@ export default {
     border-radius: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-
+    
     transform: scale(1);
     transition: all 0.25s ease-in-out;
 

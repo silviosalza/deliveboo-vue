@@ -83,7 +83,7 @@ export default {
 </script>
 
 <template>
-    <header>
+    <header >
         <nav class="navbar navbar-expand-lg h-100 bg-warning">
             <div class="container d-flex align-items-center ph-3">
 
@@ -247,7 +247,9 @@ export default {
 }
 
 header {
-    position: sticky;
+    position: fixed;
+    left: 0;
+    right: 0;
     top: 0;
     z-index: 333;
     height: 120px;

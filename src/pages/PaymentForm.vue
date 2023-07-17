@@ -90,6 +90,7 @@ export default {
         },
         payWithCard() {
             if (this.hostedFieldInstance) {
+                this.loading = true;
                 this.error = "";
                 this.hostedFieldInstance.tokenize().then(payload => {
                     console.log(payload.nonce);
@@ -102,12 +103,14 @@ export default {
                         "guest_address": this.guestAddress,
                         "guest_mail": this.guestMail,
                     }).then(resp => {
+                        this.loading = false;
                         console.log(resp);
                         // alert("Payment successful!");
 
                     }).catch(err => {
                         console.log(err);
                     }).finally(() => {
+                        this.loading = false;
                         this.clearCart();
                         this.$router.push('/thankyou');
                     });
@@ -121,10 +124,10 @@ export default {
 
 <template>
     <!--New Form-->
-    <div v-if="isLoading">
+    <div class="loading" v-if="loading">
         <Loader />
     </div>
-    <div v-else class="container p-0 my-2">
+    <div v-else class="container payment p-0">
         <div class="card px-4">
             <p class="h8 py-3">Dettagli Pagamento</p>
             <form class="text-center ">
@@ -160,8 +163,8 @@ export default {
                     <div class="col-12">
                         <div class="d-flex flex-column">
                             <label class="text mb-1" for="guest_phone">Telefono : <span class="need">*</span></label>
-                            <input v-model="guestPhone" class="form-control no-number-spinners" type="text" name="guest_phone" id="guest_phone"
-                                required minlength="3" maxlength="20" >
+                            <input v-model="guestPhone" class="form-control no-number-spinners" type="text"
+                                name="guest_phone" id="guest_phone" required minlength="3" maxlength="20">
                         </div>
                     </div>
                     <h2 class="h8 my-3">Dati Bancari</h2>
@@ -203,21 +206,25 @@ export default {
 @use '../styles/general.scss' as *;
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
+// * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+//     font-family: 'Montserrat', sans-serif;
+// }
 
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #0C4160;
+// body {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     min-height: 100vh;
+//     background-color: #0C4160;
 
-    padding: 30px 10px;
+//     padding: 30px 10px;
+// }
+
+.payment {
+    margin: 250px;
 }
 
 .card {
@@ -272,7 +279,7 @@ p {
     height: 60px;
     padding-left: 20px;
     vertical-align: middle;
-    
+
 }
 
 .no-number-spinners::-webkit-inner-spin-button,
