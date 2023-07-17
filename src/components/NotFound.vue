@@ -187,7 +187,7 @@ export default {
 
 <style lang="scss" scoped>
 .bl_wrapper {
-    margin: 0 auto;
+    margin: 180px auto 0;
     max-width: 60vw;
 
     #svg_tramp {
