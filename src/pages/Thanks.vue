@@ -6,7 +6,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$router.push('/');
-    }, 40000000000000);
+    }, 2000);
 
   }
 
@@ -28,9 +28,9 @@ export default {
   
   
 <style lang="scss" scoped>
-
-.thanks{
+.thanks {
   margin: 250px 0;
+
   img {
     max-width: 200px;
   }
