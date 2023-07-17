@@ -33,7 +33,6 @@ export default {
     },
     methods: {
         updateStore(data) {
-            this.errorChart = true;
             let divElement = document.getElementById(`${data}`);//punto di riferimento è l'id della card che sarà l'id del piatto
             let dishTitle = divElement.querySelector('#dish-title').innerHTML;//dalla card ricavo il nome del piatto
             let dishPrice = parseFloat(divElement.querySelector('#dish-price').innerHTML);//e il prezzo
@@ -105,7 +104,7 @@ export default {
                     });
             }
         },
-        daje() {
+        closeModal() {
             this.errorChart = false;
         }
     },
@@ -140,17 +139,18 @@ export default {
             <section v-else class="restaurant-card ">
 
                 <!-- MODALE -->
-                <div v-if="errorChart" class="modale w-25">
+                <div v-if="errorChart" class="modale  w-25">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">ATTENZIONE</h5>
+                                <h5 class="modal-title fw-bold">ATTENZIONE <span class="fs-2">⚠</span> </h5>
                             </div>
                             <div class="modal-body">
-                                <p>Non puoi acquistare da ristornati diversi <span id="dish-name"></span>?</p>
+                                <p class="fs-5">Non puoi acquistare da ristornati diversi <span id="dish-name"></span>?</p>
                             </div>
                             <div class="modal-footer">
-                                <button id="action-delete" type="button" class="btn btn-danger" @click="daje">OK</button>
+                                <button id="action-delete" type="button" class="btn btn-danger" @click="closeModal"> <span
+                                        class="fs-4">OK</span> </button>
                             </div>
                         </div>
                     </div>
@@ -240,163 +240,166 @@ export default {
 
         .modale {
             position: fixed;
-            background-color: rgb(140, 126, 126);
+            background-color: #ffc107;
             z-index: 33;
             top: 50%;
             left: 40%;
             border-radius: 10px;
-            padding: 13px 23px;
-            button{
-                background-color: red;
+            padding: 2em 2em;
+
+            button {
+                background-color: black;
+                color: #ffc107;
+                width: 50px;
             }
         }
 
-    .card-dish {
-        background-color: #d4ea98;
-        position: relative;
-    }
-
-    .ms-card {
-        background-color: #fffbda;
-        cursor: pointer;
-        font-style: italic;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        padding-top: 2px;
-        height: 500px;
-        box-shadow: 0 0 2px 2px #1a1a1a46;
-        transition: box-shadow 0.25s ease-in;
-
-        &:hover {
-            box-shadow: 0 0 15px 5px #463c009b;
-            transition: box-shadow 0.25s ease-out;
+        .card-dish {
+            background-color: #d4ea98;
+            position: relative;
         }
 
-        .ms-card-img {
+        .ms-card {
+            background-color: #fffbda;
+            cursor: pointer;
+            font-style: italic;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
-            border-bottom: 3px solid #00808038;
+            padding-top: 2px;
+            height: 500px;
+            box-shadow: 0 0 2px 2px #1a1a1a46;
+            transition: box-shadow 0.25s ease-in;
 
-            width: 98%;
+            &:hover {
+                box-shadow: 0 0 15px 5px #463c009b;
+                transition: box-shadow 0.25s ease-out;
+            }
+
+            .ms-card-img {
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                border-bottom: 3px solid #00808038;
+
+                width: 98%;
+            }
+
+            .paper-effect {
+                height: 100%;
+                background-image: repeating-linear-gradient(white 0px, white 30px, #00808038 35px);
+            }
+
+            .ms-add-btn {
+                background-color: #d4ea98;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                box-shadow: 0 4px 0 2px #2a2600;
+
+                transform: translateY(0);
+                transition: transform 0.1s ease-out;
+
+                &:active {
+                    box-shadow: 0 2px 0 1px #2a2600;
+                    background-color: #9de85f;
+
+                    transform: translateY(2px);
+                    transition: transform 0.05s ease-in;
+                    transition: background-color 0.05s ease-out;
+
+                }
+            }
+
+            .ms-add-btn-unavailable {
+                background-color: #eac198;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                box-shadow: 0 4px 0 2px #2a2600;
+
+                &:active {
+                    background-color: #e34141;
+                    transition: background-color 0.05s ease-out;
+                }
+            }
+        }
+    }
+
+    .card {
+        background-color: #fffbda;
+        border: 0;
+        border-radius: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        transform: scale(1);
+        transition: all 0.25s ease-in-out;
+
+        img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-title,
+        .price {
+            font-size: 1.4rem;
+        }
+
+        height: fit-content;
+        width: 80%;
+        margin-bottom: 1.5rem;
+
+        &:hover {
+            transform: scale(1.05);
+            transition: all 0.25s ease-in-out;
+        }
+
+        &:active {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 0;
+            background-color: #fffbda;
+        }
+
+        .button {
+            cursor: pointer;
+            height: 60px;
+            margin-top: 7px;
+            border: 1px solid #2a2600;
+            transition: all .2s;
+            box-shadow: 0 4px 0 2px #2a2600;
+            letter-spacing: 0.1em;
+            font-family: monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+
+            .button:hover {
+                color: $app_color;
+            }
+        }
+    }
+
+    // MEDIA QUERIES
+    @include media-breakpoint-up(sm) {
+        .card {
+            width: calc(100% / 2 - 15px);
         }
 
         .paper-effect {
-            height: 100%;
-            background-image: repeating-linear-gradient(white 0px, white 30px, #00808038 35px);
-        }
-
-        .ms-add-btn {
-            background-color: #d4ea98;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 4px 0 2px #2a2600;
-
-            transform: translateY(0);
-            transition: transform 0.1s ease-out;
-
-            &:active {
-                box-shadow: 0 2px 0 1px #2a2600;
-                background-color: #9de85f;
-
-                transform: translateY(2px);
-                transition: transform 0.05s ease-in;
-                transition: background-color 0.05s ease-out;
-
-            }
-        }
-
-        .ms-add-btn-unavailable {
-            background-color: #eac198;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            box-shadow: 0 4px 0 2px #2a2600;
-
-            &:active {
-                background-color: #e34141;
-                transition: background-color 0.05s ease-out;
-            }
+            background-image: repeating-linear-gradient(#fffbda 10px, #fffbda 32px, #008080 34px);
         }
     }
-}
 
-.card {
-    background-color: #fffbda;
-    border: 0;
-    border-radius: 0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-
-    transform: scale(1);
-    transition: all 0.25s ease-in-out;
-
-    img {
-        height: 200px;
-        object-fit: cover;
-    }
-
-    .card-title,
-    .price {
-        font-size: 1.4rem;
-    }
-
-    height: fit-content;
-    width: 80%;
-    margin-bottom: 1.5rem;
-
-    &:hover {
-        transform: scale(1.05);
-        transition: all 0.25s ease-in-out;
-    }
-
-    &:active {
-        transform: scale(1.05);
-    }
-
-    .card-body {
-        padding: 0;
-        background-color: #fffbda;
-    }
-
-    .button {
-        cursor: pointer;
-        height: 60px;
-        margin-top: 7px;
-        border: 1px solid #2a2600;
-        transition: all .2s;
-        box-shadow: 0 4px 0 2px #2a2600;
-        letter-spacing: 0.1em;
-        font-family: monospace;
-        font-size: 1.5rem;
-        font-weight: bold;
-
-        .button:hover {
-            color: $app_color;
+    @include media-breakpoint-up(md) {
+        .card {
+            width: calc(100% / 3 - 25px);
         }
     }
-}
 
-// MEDIA QUERIES
-@include media-breakpoint-up(sm) {
-    .card {
-        width: calc(100% / 2 - 15px);
+    @include media-breakpoint-up(lg) {
+
+        .card {
+            width: calc(100% / 4 - 25px);
+        }
     }
-
-    .paper-effect {
-        background-image: repeating-linear-gradient(#fffbda 10px, #fffbda 32px, #008080 34px);
-    }
-}
-
-@include media-breakpoint-up(md) {
-    .card {
-        width: calc(100% / 3 - 25px);
-    }
-}
-
-@include media-breakpoint-up(lg) {
-
-    .card {
-        width: calc(100% / 4 - 25px);
-    }
-}
 }
 </style>
