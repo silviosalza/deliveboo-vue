@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         updateStore(data) {
-            this.errorChart = false;
+            this.errorChart = true;
             let divElement = document.getElementById(`${data}`);//punto di riferimento è l'id della card che sarà l'id del piatto
             let dishTitle = divElement.querySelector('#dish-title').innerHTML;//dalla card ricavo il nome del piatto
             let dishPrice = parseFloat(divElement.querySelector('#dish-price').innerHTML);//e il prezzo
@@ -72,8 +72,8 @@ export default {
                     this.store.totalProducts += 1;//incremento i prodotti presi di uno
                     this.store.totalPrice = this.store.totalPrice + dishPrice;//calcola il totale
                 } else {
-                    alert('Non puoi aggiungere prodotti di un ristorante diverso')
-                    // this.errorChart = true;
+                    // alert('Non puoi aggiungere prodotti di un ristorante diverso')
+                    this.errorChart = true;
                 }
             }
 
@@ -97,18 +97,16 @@ export default {
                         this.pagesDishes.currentPage = response.data.results.current_page;
                         this.pagesDishes.lastPage = response.data.results.last_page;
                         this.totalDishes = response.data.results.total;
-                        console.log(this.dishesArray);
-                        console.log(this.pagesDishes.currentPage);
-                        console.log(this.pagesDishes.lastPage);
-                        console.log(this.totalDishes);
                         this.loading = false;
                     })
                     .catch(error => {
-                        console.error(error);
                         this.loading = false;
                         this.isError = true;
                     });
             }
+        },
+        daje() {
+            this.errorChart = false;
         }
     },
     mounted() {
@@ -122,150 +120,201 @@ export default {
 
 
 <template>
-    <AppJumbotronSearch />
-    <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
-        <h2 v-show="isError">Ci spiace, attualmente non ci sono piatti nel menu, riprova più tardi</h2>
+    <section class="restaurant-menu">
 
-        <!-- Loading page -->
-        <div v-if="loading">
-            <Loader />
-        </div>
-
-        <!-- Card Ristoranti -->
-        <div v-else class="container d-flex flex-wrap gap-3 my-4 justify-content-center">
-            <div v-for="(product, index) in dishesArray" :key="index" class="card card-dish col-lg-2 col-md-4 col-sm-6"
-                :id="product.id">
-
-                <!-- Prodotto disponibile -->
-                <div v-if="product.is_available" class="ms-card d-flex flex-column align-items-center">
-                    <!-- Gestione visibilità immagine -->
-                    <div v-if="product.img" class="text-center">
-                        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
-                            class="ms-card-img" alt="...">
-                        <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
-                    </div>
-                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
-                    <!-- /Gestione visibilità immagine -->
-
-                    <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
-                        <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
-                        <div class="d-flex justify-content-center price">
-                            <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
-                            <span>€</span>
-                        </div>
-                        <p class="ingredients text-center">{{ product.ingredients }}</p>
-                        <p class="text-center">{{ product.description }}</p>
-                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                        <p id="dish-id" class="d-none">{{ product.id }}</p>
-                        <div class="d-flex justify-content-center">
-                            <span class="button d-flex align-items-center px-4 ms-add-btn"
-                                @click="updateStore(product.id)">Aggiungi</span>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Prodotto disponibilità -->
+        <AppJumbotronSearch />
 
 
-                <!-- Prodotto non disponibile -->
+        <section class="d-flex justify-content-center flex-wrap gap-2 my-4">
+            <h2 v-show="isError">Ci spiace, attualmente non ci sono piatti nel menu, riprova più tardi</h2>
 
-                <div v-else class="ms-card d-flex flex-column align-items-center">
-                    <div v-if="product.img" class="text-center">
-                        <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
-                            class="ms-card-img" alt="...">
-                        <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
-                    </div>
-                    <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="..."> 
-                     <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
-                        <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
-                        <div class="d-flex justify-content-center price">
-                            <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
-                            <span>€</span>
-                        </div>
-                        <p class="ingredients text-center">{{ product.ingredients }}</p>
-                        <p class="text-center">{{ product.description }}</p>
 
-                        <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
-                        <p id="dish-id" class="d-none">{{ product.id }}</p>
-                        <div class="d-flex justify-content-center">
-                            <span
-                                class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
-                        </div>
-                    </div>
-                </div>
+            <!-- Loading page -->
+            <div v-if="loading">
+                <Loader />
             </div>
-        </div>
-    </section>
 
-    <PaginationDish v-if="!loading" :pagesDishes="pagesDishes" @dati="getDishes" />
+
+
+            <!-- Card Ristoranti -->
+            <section v-else class="restaurant-card ">
+
+                <!-- MODALE -->
+                <div v-if="errorChart" class="modale w-25">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">ATTENZIONE</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>Non puoi acquistare da ristornati diversi <span id="dish-name"></span>?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="action-delete" type="button" class="btn btn-danger" @click="daje">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Modale -->
+                <div class="container d-flex flex-wrap gap-3 my-4 justify-content-center">
+
+                    <div v-for="(product, index) in dishesArray" :key="index"
+                        class="card card-dish col-lg-2 col-md-4 col-sm-6" :id="product.id">
+
+                        <!-- Prodotto disponibile -->
+                        <div v-if="product.is_available" class="ms-card d-flex flex-column align-items-center">
+                            <!-- Gestione visibilità immagine -->
+                            <div v-if="product.img" class="text-center">
+                                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
+                                    class="ms-card-img" alt="...">
+                                <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
+                            </div>
+                            <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
+                            <!-- /Gestione visibilità immagine -->
+
+                            <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
+                                <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
+                                <div class="d-flex justify-content-center price">
+                                    <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                                    <span>€</span>
+                                </div>
+                                <p class="ingredients text-center">{{ product.ingredients }}</p>
+                                <p class="text-center">{{ product.description }}</p>
+                                <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                                <p id="dish-id" class="d-none">{{ product.id }}</p>
+                                <div class="d-flex justify-content-center">
+                                    <span class="button d-flex align-items-center px-4 ms-add-btn"
+                                        @click="updateStore(product.id)">Aggiungi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/ Prodotto disponibilità -->
+
+
+                        <!-- Prodotto non disponibile -->
+
+                        <div v-else class="ms-card d-flex flex-column align-items-center">
+                            <div v-if="product.img" class="text-center">
+                                <img v-if="!product.img.includes('http')" :src="`${myUrl}/storage/${product.img}`"
+                                    class="ms-card-img" alt="...">
+                                <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
+                            </div>
+                            <img v-else src="../assets/img/logo-white.png" class="ms-card-img" alt="...">
+                            <div class="card-body d-flex flex-column justify-content-between w-100 paper-effect">
+                                <h5 id="dish-title" class="card-title text-center pt-1">{{ product.dish_name }}</h5>
+                                <div class="d-flex justify-content-center price">
+                                    <p id="dish-price" class="card-text">{{ product.price.toFixed(2) }}</p>
+                                    <span>€</span>
+                                </div>
+                                <p class="ingredients text-center">{{ product.ingredients }}</p>
+                                <p class="text-center">{{ product.description }}</p>
+
+                                <p id="dish-restaurant-id" class="d-none">{{ product.restaurant_id }}</p>
+                                <p id="dish-id" class="d-none">{{ product.id }}</p>
+                                <div class="d-flex justify-content-center">
+                                    <span
+                                        class="button d-flex align-items-center px-4 text-decoration-line-through ms-add-btn-unavailable">Aggiungi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <PaginationDish v-if="!loading" :pagesDishes="pagesDishes" @dati="getDishes" />
+    </section>
 </template>
 
 <style scoped lang="scss">
 @use "../styles/general.scss" as *;
 @use "../styles/utilities/variables" as *;
 
-.card-dish {
-    background-color: #d4ea98;
+.restaurant-menu {
     position: relative;
-}
 
-.ms-card {
-    background-color: #fffbda;
-    cursor: pointer;
-    font-style: italic;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    padding-top: 2px;
-    height: 500px;
-    box-shadow: 0 0 2px 2px #1a1a1a46;
-    transition: box-shadow 0.25s ease-in;
 
-    &:hover {
-        box-shadow: 0 0 15px 5px #463c009b;
-        transition: box-shadow 0.25s ease-out;
+
+    .restaurant-card {
+        position: relative;
+
+        .modale {
+            position: fixed;
+            background-color: rgb(140, 126, 126);
+            z-index: 33;
+            top: 50%;
+            left: 40%;
+            border-radius: 10px;
+            padding: 13px 23px;
+            button{
+                background-color: red;
+            }
+        }
+
+    .card-dish {
+        background-color: #d4ea98;
+        position: relative;
     }
 
-    .ms-card-img {
+    .ms-card {
+        background-color: #fffbda;
+        cursor: pointer;
+        font-style: italic;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        border-bottom: 3px solid #00808038;
+        padding-top: 2px;
+        height: 500px;
+        box-shadow: 0 0 2px 2px #1a1a1a46;
+        transition: box-shadow 0.25s ease-in;
 
-        width: 98%;
-    }
-
-    .paper-effect {
-        height: 100%;
-        background-image: repeating-linear-gradient(white 0px, white 30px, #00808038 35px);
-    }
-
-    .ms-add-btn {
-        background-color: #d4ea98;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        box-shadow: 0 4px 0 2px #2a2600;
-
-        transform: translateY(0);
-        transition: transform 0.1s ease-out;
-
-        &:active {
-            box-shadow: 0 2px 0 1px #2a2600;
-            background-color: #9de85f;
-
-            transform: translateY(2px);
-            transition: transform 0.05s ease-in;
-            transition: background-color 0.05s ease-out;
-
+        &:hover {
+            box-shadow: 0 0 15px 5px #463c009b;
+            transition: box-shadow 0.25s ease-out;
         }
-    }
 
-    .ms-add-btn-unavailable {
-        background-color: #eac198;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        box-shadow: 0 4px 0 2px #2a2600;
+        .ms-card-img {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom: 3px solid #00808038;
 
-        &:active {
-            background-color: #e34141;
-            transition: background-color 0.05s ease-out;
+            width: 98%;
+        }
+
+        .paper-effect {
+            height: 100%;
+            background-image: repeating-linear-gradient(white 0px, white 30px, #00808038 35px);
+        }
+
+        .ms-add-btn {
+            background-color: #d4ea98;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 0 2px #2a2600;
+
+            transform: translateY(0);
+            transition: transform 0.1s ease-out;
+
+            &:active {
+                box-shadow: 0 2px 0 1px #2a2600;
+                background-color: #9de85f;
+
+                transform: translateY(2px);
+                transition: transform 0.05s ease-in;
+                transition: background-color 0.05s ease-out;
+
+            }
+        }
+
+        .ms-add-btn-unavailable {
+            background-color: #eac198;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 0 2px #2a2600;
+
+            &:active {
+                background-color: #e34141;
+                transition: background-color 0.05s ease-out;
+            }
         }
     }
 }
@@ -348,5 +397,6 @@ export default {
     .card {
         width: calc(100% / 4 - 25px);
     }
+}
 }
 </style>
