@@ -124,7 +124,7 @@ export default {
 
 <template>
     <!--New Form-->
-    <div class="loading" v-if="loading">
+    <div class="loading" v-if="isLoading">
         <Loader />
     </div>
     <div v-else class="container payment p-0">
@@ -206,22 +206,22 @@ export default {
 @use '../styles/general.scss' as *;
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 
-// * {
-//     margin: 0;
-//     padding: 0;
-//     box-sizing: border-box;
-//     font-family: 'Montserrat', sans-serif;
-// }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
 
-// body {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     min-height: 100vh;
-//     background-color: #0C4160;
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0C4160;
 
-//     padding: 30px 10px;
-// }
+    padding: 30px 10px;
+}
 
 .payment {
     margin: 250px;
