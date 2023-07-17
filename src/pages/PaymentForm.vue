@@ -23,9 +23,37 @@ export default {
             guestPhone: '',
             guestMail: '',
             productsArray: [], // solo i campi dish_id e quantity (o count)
-            isLoading: true
+            isLoading: true,
+            error:{}
 
         };
+    },
+    computed: {
+        isGuestNameValid() {
+            return this.guestName.length >= 3 && this.guestName.length <= 20;
+        },
+        isGuestLastnameValid() {
+            return this.guestLastname.length >= 3 && this.guestLastname.length <= 20;
+        },
+        isGuestAddressValid() {
+            return this.guestAddress.length >= 3 && this.guestAddress.length <= 20;
+        },
+        isGuestPhoneValid() {
+            return this.guestPhone.length >= 3 && this.guestPhone.length <= 20;
+        },
+        isGuestMailValid() {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(this.guestMail);
+        },
+        isFormValid() {
+            return (
+                this.isGuestNameValid &&
+                this.isGuestLastnameValid &&
+                this.isGuestAddressValid &&
+                this.isGuestPhoneValid &&
+                this.isGuestMailValid
+            );
+        },
     },
     mounted() {
         const productsArray = JSON.parse(localStorage.getItem('cart'));
@@ -89,6 +117,22 @@ export default {
             localStorage.setItem('products', this.store.totalProducts);// e per il numero di prodotti
         },
         payWithCard() {
+            if (
+                this.guestName === '' ||
+                this.guestLastname === '' ||
+                this.guestAddress === '' ||
+                this.guestPhone === '' ||
+                this.guestMail === ''
+            ) {
+                this.error = {
+                    guestName: this.guestName === '' ? 'Inserisci il nome' : '',
+                    guestLastname: this.guestLastname === '' ? 'Inserisci il cognome' : '',
+                    guestAddress: this.guestAddress === '' ? 'Inserisci l\'indirizzo' : '',
+                    guestPhone: this.guestPhone === '' ? 'Inserisci il telefono' : '',
+                    guestMail: this.guestMail === '' ? 'Inserisci l\'email' : '',
+                };
+                return;
+            }
             if (this.hostedFieldInstance) {
                 this.loading = true;
                 this.error = "";
@@ -133,38 +177,43 @@ export default {
             <form class="text-center ">
                 <div class="row gx-3">
                     <div class="col-12">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex  my-3 flex-column">
                             <label for="guest_name" class="text mb-1">Nome <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestName" type="text" name="guest_name"
                                 id="guest_name" required minlength="3" maxlength="20">
+                                <span style="color: red;" class="error-message" v-if="error.guestName">{{ error.guestName }}</span>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex  my-3 flex-column">
                             <label for="guest_lastname" class="text mb-1">Cognome <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestLastname" type="text" name="guest_lastname"
                                 id="guest_lastname" required minlength="3" maxlength="20">
+                                <span style="color: red;" class="error-message" v-if="error.guestLastname">{{ error.guestLastname }}</span>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex  my-3 flex-column">
                             <label for="guest_address" class="text mb-1">Indirizzo <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestAddress" type="text" name="guest_address"
                                 id="guest_address" required minlength="3" maxlength="20">
+                                <span style="color: red;" class="error-message" v-if="error.guestAddress">{{ error.guestAddress }}</span>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex  my-3 flex-column">
                             <label for="guest_mail" class="text mb-1">E-Mail <span class="need">*</span></label>
                             <input class="form-control mb-3" type="email" v-model="guestMail" name="guest_mail"
                                 id="guest_mail" required minlength="3" maxlength="30">
+                                <span style="color: red;" class="error-message" v-if="error.guestMail">{{ error.guestMail }}</span>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="d-flex flex-column">
+                        <div class="d-flex my-3  flex-column">
                             <label class="text mb-1" for="guest_phone">Telefono : <span class="need">*</span></label>
                             <input v-model="guestPhone" class="form-control no-number-spinners" type="text"
                                 name="guest_phone" id="guest_phone" required minlength="3" maxlength="20">
+                                <span style="color: red;" class="error-message" v-if="error.guestPhone">{{ error.guestPhone }}</span>
                         </div>
                     </div>
                     <h2 class="h8 my-3">Dati Bancari</h2>

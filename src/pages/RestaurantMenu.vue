@@ -146,7 +146,7 @@ export default {
                                 <h5 class="modal-title fw-bold">ATTENZIONE <span class="fs-2">⚠</span> </h5>
                             </div>
                             <div class="modal-body">
-                                <p class="fs-5">Non puoi acquistare da ristornati diversi <span id="dish-name"></span>?</p>
+                                <p class="fs-5">Non puoi acquistare da ristoranti diversi <span id="dish-name"></span>?</p>
                             </div>
                             <div class="modal-footer">
                                 <button id="action-delete" type="button" class="btn btn-danger" @click="closeModal"> <span

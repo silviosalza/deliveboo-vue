@@ -6,24 +6,24 @@ export default {
 
 <template>
     <footer>
-        <div class="app">
-            <h3 class="fw-bold">SCARICA LA NOSTRA APP E PORTACI SEMPRE CON TE!</h3>
-            <div class="img-app d-flex flex-colum align-items-center justify-content-center flex-sm-row">
-                <div class="img1">
-                    <img src="../assets/img/App-Store.png" alt="app">
-                </div>
-                <div class="img2">
-                    <img src="../assets/img/gplay.png" alt="app">
-                </div>
+        <!-- <div class="app"> -->
+        <h3 class="fw-bold">SCARICA LA NOSTRA APP E PORTACI SEMPRE CON TE!</h3>
+        <div class="img-app d-flex flex-colum align-items-center justify-content-center flex-sm-row">
+            <div class="img1">
+                <img src="../assets/img/App-Store.png" alt="app">
+            </div>
+            <div class="img2">
+                <img src="../assets/img/gplay.png" alt="app">
             </div>
         </div>
+        <!-- </div> -->
         <div class="about">
             <div class="d-flex justify-content-around container-sm">
                 <div class="text-start">
                     <ul>
                         <li class="pb-1">
                             <h5>Scopri Deliveboo</h5>
-                        
+
                         </li>
                         <li>
                             <a href="/">
@@ -66,7 +66,9 @@ export default {
                 </div>
                 <div class="team-1">
                     <ul>
-                        <li> <h5>Powered by:</h5></li>
+                        <li>
+                            <h5>Powered by:</h5>
+                        </li>
                         <li>
                             <a href="https://www.linkedin.com/in/marianita-d-00b2561b5/">
                                 <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
@@ -76,7 +78,7 @@ export default {
                         <li>
                             <a href="https://www.linkedin.com/in/claudio-leone-3bbbba123/">
                                 <!-- <img width="20px" height="5px" src="../assets/img/logo-linkedin-2.png" alt="">  -->
-                                Claudio Leone   
+                                Claudio Leone
                             </a>
                         </li>
                         <li>
@@ -118,6 +120,7 @@ export default {
 @use "../styles/utilities/variables" as *;
 
 footer {
+    margin-top: 220px;
 
     img {
         height: 35px;
@@ -204,5 +207,4 @@ footer {
     .app {
         height: 150px;
     }
-}
-</style>
+}</style>

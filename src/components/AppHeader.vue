@@ -83,7 +83,7 @@ export default {
 </script>
 
 <template>
-    <header >
+    <header>
         <nav class="navbar navbar-expand-lg h-100 bg-warning">
             <div class="container d-flex align-items-center ph-3">
 
@@ -124,37 +124,37 @@ export default {
                         <li class="nav-item" v-for="item in menuItems">
 
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
-                                <router-link :to="{ name: item.routeName }" aria-current="page">
-                                <div class="bg-top">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg-right">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="text">
-                                    {{
-                                    item.label }}
-                                </div>
-                            </router-link>
+                                <a href="#">
+                                    <div class="bg-top">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg-right">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="text">
+                                        {{
+                                            item.label }}
+                                    </div>
+                                </a>
                             </button>
                         </li>
 
                         <li class="nav-item">
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
                                 <a class="active" href="#collab">
-                                <div class="bg-top">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg-right">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="text">
+                                    <div class="bg-top">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg-right">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="text">
                                         Collabora con noi
                                     </div>
                                 </a>
@@ -164,16 +164,16 @@ export default {
                         <li class="nav-item">
                             <button type="button" class="headernav-btn btn cube cube-hover" @click="clickutente()">
                                 <a class="active" href="http://localhost:8000/" target="_blank">
-                                <div class="bg-top">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg-right">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="bg">
-                                    <div class="bg-inner"></div>
-                                </div>
-                                <div class="text">
+                                    <div class="bg-top">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg-right">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="bg">
+                                        <div class="bg-inner"></div>
+                                    </div>
+                                    <div class="text">
                                         Area
                                         Riservata
                                     </div>
@@ -203,11 +203,13 @@ export default {
             <!-- <i class="fa-solid fa-cart-shopping ms-cart-bg"></i> -->
             <ul>
                 <li class="my-4" v-for="(item, index) in store.cartArray">
-                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} € CAD. 1) </b>
+                    <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} € CAD. 1)
+                    </b>
                     <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
                         <div class="plus" @click="increaseQuantity(item)"> + </div>
                         <div class="minus" @click="decreaseQuantity(item)"> — </div>
-                        <div class="trash d-flex justify-content-center align-items-center" @click="erase(item)"><img class="trash-img" src="../assets/img/Trash_can_icon.png" alt="trash-can.png"></div>
+                        <div class="trash d-flex justify-content-center align-items-center" @click="erase(item)"><img
+                                class="trash-img" src="../assets/img/Trash_can_icon.png" alt="trash-can.png"></div>
                     </div>
                 </li>
             </ul>
@@ -240,7 +242,8 @@ export default {
     .container {
         max-width: 350px;
     }
-    .offcanvas-resp{
+
+    .offcanvas-resp {
         width: 100vw !important;
         height: 85vh !important;
     }
@@ -392,9 +395,11 @@ header {
                 .plus {
                     background-color: #79dd51;
                 }
+
                 .minus {
                     background-color: #dbdd51;
                 }
+
                 .trash {
                     background-color: #f2655b;
                     font-weight: 100;
@@ -526,5 +531,4 @@ header {
             }
         }
     }
-}
-</style>
+}</style>
