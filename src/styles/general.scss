@@ -7,6 +7,9 @@
 
 body {
   font-family: $main-font;
+  #app{
+    overflow-x: hidden;
+  }
 }
 
 a {

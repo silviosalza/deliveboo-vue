@@ -154,7 +154,7 @@ export default {
                         <div class="d-flex flex-column">
                             <label for="guest_mail" class="text mb-1">E-Mail <span class="need">*</span></label>
                             <input class="form-control mb-3" type="email" v-model="guestMail" name="guest_mail"
-                                id="guest_mail" required minlength="3" maxlength="20">
+                                id="guest_mail" required minlength="3" maxlength="30">
                         </div>
                     </div>
                     <div class="col-12">
