@@ -8,7 +8,8 @@ export default {
 
 <template>
     <div class="bl_wrapper container">
-        <a class="btn_home mt-5" href="/"> Go HOME </a>
+        <!-- <a class="btn_home mt-5" href="/"> Go HOME </a> -->
+        <router-link class="btn_home mt-5" :to="{ name: 'home' }" > Go HOME</router-link>
 
         <svg id="svg_tramp" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
             <path

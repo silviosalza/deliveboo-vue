@@ -221,16 +221,22 @@ export default {
                         <div class="form-group">
                             <label class="text"> Numero di carta di credito <span class="need">*</span> </label>
                             <div id="creditCardNumber" class="form-control"> </div>
+                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire numeri carta</span>
+
                         </div>
                         <div class="form-group">
                             <div class="riga d-flex">
                                 <div class="col-6">
                                     <label class="text"> Data di scadenza <span class="need">*</span></label>
                                     <div id="expireDate" class="form-control"> </div>
+                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire data di scadenza</span>
+
                                 </div>
                                 <div class="col-6">
                                     <label class="text"> CVV <span class="need">*</span></label>
                                     <div id="cvv" class="form-control"> </div>
+                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire CVV</span>
+
                                 </div>
                             </div>
                         </div>

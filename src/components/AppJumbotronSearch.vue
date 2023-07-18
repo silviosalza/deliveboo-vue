@@ -14,9 +14,9 @@ export default {
 
         <div class="jumbo-restaurants-btn-container d-flex flex-wrap justify-content-between my-4 gap-3">
             <div class="slide-effect title_background">
-                <div class="title_text">ORDINA </div>
-                <div class="slideDown mx-3"> APRI</div>
-                <div class="slideUp"> E GUSTA!</div>
+                <p class="title_text">ORDINA </p>
+                <p class="slideDown mx-3"> APRI</p>
+                <p class="slideUp"> E GUSTA!</p>
             </div>
         </div>
 
@@ -139,7 +139,7 @@ export default {
     .title_text,
     .slideDown,
     .slideUp {
-        font-size: 1.5rem;
+        font-size: .9rem;
     }
 }
 
@@ -168,7 +168,7 @@ export default {
     .title_text,
     .slideDown,
     .slideUp {
-        font-size: 2.3rem;
+        font-size: .9rem;
     }
 }
 
@@ -181,7 +181,7 @@ export default {
     .title_text,
     .slideDown,
     .slideUp {
-        font-size: 3rem;
+        font-size: .9rem;
     }
 }
 </style>

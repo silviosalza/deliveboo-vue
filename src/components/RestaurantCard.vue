@@ -63,6 +63,7 @@ export default {
     padding-top: 2px;
     box-shadow: 0 0 2px 2px #1a1a1a46;
     transition: box-shadow 0.25s ease-in;
+    height: 420px;
 
     &:hover {
         box-shadow: 0 0 15px 5px #463c009b;
@@ -119,6 +120,9 @@ export default {
 }
 .paper-effect {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
     background-image: repeating-linear-gradient(#fffef2 7px, #fffef2 37px, #ff000061 40px);
 }
 
