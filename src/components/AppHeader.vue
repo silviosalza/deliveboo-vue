@@ -206,8 +206,8 @@ export default {
                     <b> {{ item.count }} x <span style="color: red;">{{ item.name }}</span> ( {{ item.price }} € CAD. 1)
                     </b>
                     <div class="ms-plus-minus-trash d-flex gap-3 align-items-center justify-content-center">
-                        <div class="plus" @click="increaseQuantity(item)"> + </div>
                         <div class="minus" @click="decreaseQuantity(item)"> — </div>
+                        <div class="plus" @click="increaseQuantity(item)"> + </div>
                         <div class="trash d-flex justify-content-center align-items-center" @click="erase(item)"><img
                                 class="trash-img" src="../assets/img/Trash_can_icon.png" alt="trash-can.png"></div>
                     </div>

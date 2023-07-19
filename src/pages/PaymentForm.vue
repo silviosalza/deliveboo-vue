@@ -24,7 +24,8 @@ export default {
             guestMail: '',
             productsArray: [], // solo i campi dish_id e quantity (o count)
             isLoading: true,
-            error:{}
+            error: {},
+            payLoad: false
 
         };
     },
@@ -134,6 +135,7 @@ export default {
                 return;
             }
             if (this.hostedFieldInstance) {
+                this.payLoad = true;
                 this.loading = true;
                 this.error = "";
                 this.hostedFieldInstance.tokenize().then(payload => {
@@ -154,6 +156,7 @@ export default {
                     }).catch(err => {
                         console.log(err);
                     }).finally(() => {
+                        this.payLoad = false;
                         this.loading = false;
                         this.clearCart();
                         this.$router.push('/thankyou');
@@ -181,7 +184,8 @@ export default {
                             <label for="guest_name" class="text mb-1">Nome <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestName" type="text" name="guest_name"
                                 id="guest_name" required minlength="3" maxlength="20">
-                                <span style="color: red;" class="error-message" v-if="error.guestName">{{ error.guestName }}</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestName">{{ error.guestName
+                            }}</span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -189,7 +193,8 @@ export default {
                             <label for="guest_lastname" class="text mb-1">Cognome <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestLastname" type="text" name="guest_lastname"
                                 id="guest_lastname" required minlength="3" maxlength="20">
-                                <span style="color: red;" class="error-message" v-if="error.guestLastname">{{ error.guestLastname }}</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestLastname">{{
+                                error.guestLastname }}</span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -197,7 +202,8 @@ export default {
                             <label for="guest_address" class="text mb-1">Indirizzo <span class="need">*</span></label>
                             <input class="form-control mb-3" v-model="guestAddress" type="text" name="guest_address"
                                 id="guest_address" required minlength="3" maxlength="20">
-                                <span style="color: red;" class="error-message" v-if="error.guestAddress">{{ error.guestAddress }}</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestAddress">{{ error.guestAddress
+                            }}</span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -205,7 +211,8 @@ export default {
                             <label for="guest_mail" class="text mb-1">E-Mail <span class="need">*</span></label>
                             <input class="form-control mb-3" type="email" v-model="guestMail" name="guest_mail"
                                 id="guest_mail" required minlength="3" maxlength="30">
-                                <span style="color: red;" class="error-message" v-if="error.guestMail">{{ error.guestMail }}</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestMail">{{ error.guestMail
+                            }}</span>
                         </div>
                     </div>
                     <div class="col-12">
@@ -213,7 +220,8 @@ export default {
                             <label class="text mb-1" for="guest_phone">Telefono : <span class="need">*</span></label>
                             <input v-model="guestPhone" class="form-control no-number-spinners" type="text"
                                 name="guest_phone" id="guest_phone" required minlength="3" maxlength="20">
-                                <span style="color: red;" class="error-message" v-if="error.guestPhone">{{ error.guestPhone }}</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestPhone">{{ error.guestPhone
+                            }}</span>
                         </div>
                     </div>
                     <h2 class="h8 my-3">Dati Bancari</h2>
@@ -221,7 +229,8 @@ export default {
                         <div class="form-group">
                             <label class="text"> Numero di carta di credito <span class="need">*</span> </label>
                             <div id="creditCardNumber" class="form-control"> </div>
-                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire numeri carta</span>
+                            <span style="color: red;" class="error-message" v-if="error.guestName">Inserire numeri
+                                carta</span>
 
                         </div>
                         <div class="form-group">
@@ -229,13 +238,15 @@ export default {
                                 <div class="col-6">
                                     <label class="text"> Data di scadenza <span class="need">*</span></label>
                                     <div id="expireDate" class="form-control"> </div>
-                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire data di scadenza</span>
+                                    <span style="color: red;" class="error-message" v-if="error.guestName">Inserire data di
+                                        scadenza</span>
 
                                 </div>
                                 <div class="col-6">
                                     <label class="text"> CVV <span class="need">*</span></label>
                                     <div id="cvv" class="form-control"> </div>
-                                <span style="color: red;" class="error-message" v-if="error.guestName">Inserire CVV</span>
+                                    <span style="color: red;" class="error-message" v-if="error.guestName">Inserire
+                                        CVV</span>
 
                                 </div>
                             </div>
@@ -248,7 +259,11 @@ export default {
                         </div>
                         <div v-else class="btn btn-warning mb-3" @click.prevent="payWithCard">
                             <span class="ps-3">Pay €{{ store.totalPrice.toFixed(2) }}</span>
-                            <span class="fas fa-arrow-right"></span>
+                            <div v-show="payLoad" class="cell">
+                                <div class="wrapper">
+                                    <div class="spinner spinner1"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -280,6 +295,30 @@ body {
 
 .payment {
     margin: 250px;
+}
+
+.spinner {
+    // Common styles
+    width: 4rem;
+    height: 4rem;
+
+    // Individual styles
+    &.spinner1 {
+        border: 3px solid rgba($white, .25);
+        border-top-color: rgba($black, .5);
+        border-radius: 50%;
+        animation: rotation .8s ease infinite;
+    }
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
 }
 
 .card {
